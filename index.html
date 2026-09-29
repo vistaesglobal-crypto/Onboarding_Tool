@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VISTA Engg Solutions Private Limited - Enterprise Onboarding Portal</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #F4F6F9;
+      margin: 0;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 9999px; }
+    ::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+  </style>
+</head>
+<body class="bg-[#F4F6F9] text-slate-800 min-h-screen">
+
+  <!-- Toast Notification -->
+  <div id="toast" class="hidden fixed top-5 right-5 z-50 bg-[#0F2042] text-white text-xs font-semibold px-4 py-3 rounded-xl shadow-2xl border border-slate-700 flex items-center gap-2">
+    <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+    <span id="toast-text">Message</span>
+  </div>
+
+  <div class="flex h-screen overflow-hidden font-sans">
+    
+    <!-- SIDEBAR NAVIGATION -->
+    <aside class="w-72 bg-[#0F2042] text-white flex flex-col justify-between shrink-0 shadow-2xl z-20">
+      <div>
+        <!-- VISTA Official Logo -->
+        <div class="p-5 border-b border-slate-700/60 bg-[#0B1833]">
+          <svg viewBox="0 0 460 210" class="h-10 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="140" r="8" fill="#8E2A74" />
+            <circle cx="55" cy="115" r="7.8" fill="#982D7C" />
+            <circle cx="68" cy="95" r="7.5" fill="#A23184" />
+            <circle cx="86" cy="78" r="7.2" fill="#94378A" />
+            <circle cx="108" cy="65" r="7.0" fill="#843E94" />
+            <circle cx="132" cy="56" r="6.7" fill="#72479E" />
+            <circle cx="158" cy="52" r="6.4" fill="#5E50A6" />
+            <circle cx="184" cy="53" r="6.0" fill="#4B5CAE" />
+            <circle cx="210" cy="59" r="5.5" fill="#3A6BB4" />
+            <circle cx="234" cy="70" r="5.0" fill="#2E7EB7" />
+            <circle cx="254" cy="85" r="4.6" fill="#2592B5" />
+            <circle cx="270" cy="103" r="4.0" fill="#1DA5AD" />
+            <circle cx="282" cy="123" r="3.5" fill="#18B39F" />
+            <circle cx="70" cy="148" r="7.5" fill="#7B3A92" />
+            <circle cx="76" cy="128" r="7.2" fill="#75439C" />
+            <circle cx="88" cy="110" r="6.8" fill="#664EA6" />
+            <circle cx="106" cy="96" r="6.5" fill="#545CB1" />
+            <circle cx="126" cy="86" r="6.0" fill="#416BB8" />
+            <circle cx="148" cy="80" r="5.6" fill="#307CBF" />
+            <circle cx="171" cy="78" r="5.2" fill="#238DC0" />
+            <circle cx="194" cy="82" r="4.8" fill="#189DBB" />
+            <circle cx="215" cy="91" r="4.3" fill="#13ABAE" />
+            <circle cx="233" cy="104" r="3.8" fill="#12B79C" />
+            <circle cx="248" cy="120" r="3.4" fill="#18BF88" />
+            <circle cx="92" cy="158" r="7.0" fill="#525EB2" />
+            <circle cx="102" cy="140" r="6.5" fill="#426FBB" />
+            <circle cx="118" cy="125" r="6.0" fill="#3182C2" />
+            <circle cx="136" cy="114" r="5.5" fill="#2195C3" />
+            <circle cx="156" cy="107" r="5.0" fill="#15A6BE" />
+            <circle cx="176" cy="106" r="4.5" fill="#10B3B0" />
+            <circle cx="194" cy="112" r="4.0" fill="#15BC9C" />
+            <circle cx="210" cy="122" r="3.6" fill="#22C485" />
+            <circle cx="222" cy="136" r="3.2" fill="#36CA6F" />
+            <text x="145" y="118" font-family="'Plus Jakarta Sans', sans-serif" font-weight="900" font-size="76" fill="#0C1B33" letter-spacing="-3">VISTA</text>
+            <text x="375" y="78" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="20" fill="#0C1B33">TM</text>
+            <text x="268" y="152" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="22" fill="#000000" letter-spacing="0.5">Innovation</text>
+            <text x="306" y="179" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="22" fill="#000000" letter-spacing="0.5">@ work</text>
+          </svg>
+          <p class="text-[10px] text-slate-400 mt-2 font-medium tracking-wide uppercase">Enterprise Onboarding Suite</p>
+        </div>
+
+        <!-- Sidebar Navigation -->
+        <nav class="p-4 space-y-1.5">
+          <button onclick="switchTab('dashboard')" id="nav-dashboard" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-blue-600 text-white shadow-md transition-all">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+              <span>Dashboard</span>
+            </div>
+          </button>
+
+          <button onclick="switchTab('candidates')" id="nav-candidates" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
+            <div class="flex items-center gap-3 min-w-0">
+              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+              <span class="truncate whitespace-nowrap">Candidates & Onboarding</span>
+            </div>
+            <span class="ml-2 px-2 py-0.5 text-[10px] font-semibold bg-emerald-500/20 text-emerald-300 rounded-full border border-emerald-500/30 shrink-0">Active</span>
+          </button>
+
+          <button onclick="switchTab('documents')" id="nav-documents" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+              <span>Documents & Export</span>
+            </div>
+            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded-full text-slate-400">Review</span>
+          </button>
+
+          <button onclick="switchTab('bgv')" id="nav-bgv" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+              <span>BGV Pipeline</span>
+            </div>
+            <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full">5 Stages</span>
+          </button>
+
+          <button onclick="switchTab('employees')" id="nav-employees" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+              <span>Active Employees</span>
+            </div>
+          </button>
+
+          <!-- Admin Tab -->
+          <button onclick="switchTab('admin')" id="nav-admin" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
+            <div class="flex items-center gap-3">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              <span>User & Role Admin</span>
+            </div>
+            <span class="text-[10px] bg-indigo-500/30 text-indigo-300 px-2 py-0.5 rounded-full font-bold">Admin</span>
+          </button>
+        </nav>
+      </div>
+
+      <!-- User Profile & Sign Out Footer -->
+      <div class="p-4 border-t border-slate-800/80 bg-[#0B1833] flex items-center justify-between">
+        <div class="flex items-center gap-2.5 min-w-0">
+          <div id="user-avatar" class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs ring-2 ring-blue-400/30">SJ</div>
+          <div class="min-w-0">
+            <p id="user-name" class="text-xs font-semibold text-white truncate">Sarah Jenkins</p>
+            <p id="user-role" class="text-[10px] text-slate-400">HR Operations Lead</p>
+          </div>
+        </div>
+        <button onclick="handleSignOut()" class="p-1.5 text-slate-400 hover:text-rose-400 hover:bg-slate-800/80 rounded-lg transition-colors" title="Sign Out">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg>
+        </button>
+      </div>
+    </aside>
+
+    <!-- MAIN CONTENT VIEWPORT -->
+    <main class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+      
+      <!-- Top Enterprise Header -->
+      <header class="h-16 bg-white border-b border-slate-200/80 flex items-center justify-between px-8 sticky top-0 z-10 shadow-sm">
+        <div class="flex items-center gap-3">
+          <h1 class="text-base font-bold text-slate-800">VISTA Engg Solutions Private Limited</h1>
+          <span id="role-badge" class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">HR Operations</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="relative">
+            <input type="text" placeholder="Global search..." class="w-64 pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:bg-white focus:outline-none" />
+            <svg class="w-3.5 h-3.5 absolute left-2.5 top-2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+          </div>
+          <button onclick="handleSignOut()" class="text-xs font-semibold text-rose-600 hover:text-rose-700 flex items-center gap-1">
+            <span>Sign Out</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- ======================================================== -->
+      <!-- TAB 1: EXACT MATCH HR DASHBOARD -->
+      <!-- ======================================================== -->
+      <div id="tab-dashboard" class="p-8 space-y-6">
+        <!-- 4 Top KPI Cards -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <p class="text-xs font-semibold text-slate-600">New Hires Today</p>
+            <h3 class="text-3xl font-extrabold text-slate-900 mt-2">0</h3>
+            <p class="text-[11px] text-slate-400 mt-1">Today's induction queue</p>
+          </div>
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="flex justify-between items-start">
+              <p class="text-xs font-semibold text-slate-600">New Hires This Month</p>
+              <span class="p-1 px-2 text-[10px] font-bold text-emerald-700 bg-emerald-50 rounded-lg border border-emerald-200">Active</span>
+            </div>
+            <h3 class="text-3xl font-extrabold text-slate-900 mt-2">2</h3>
+            <p class="text-[11px] text-emerald-600 mt-1">2 candidates in final stretch</p>
+          </div>
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <p class="text-xs font-semibold text-slate-600">New Hires Last Month</p>
+            <h3 class="text-3xl font-extrabold text-slate-900 mt-2">20</h3>
+            <p class="text-[11px] text-slate-400 mt-1">100% statutory clearance</p>
+          </div>
+          <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+            <p class="text-xs font-semibold text-slate-600">Employees on File</p>
+            <h3 class="text-3xl font-extrabold text-[#0F2042] mt-2">807</h3>
+            <p class="text-[11px] text-slate-400 mt-1">Active verified headcount</p>
+          </div>
+        </div>
+
+        <!-- MY PENDING ACTIONS & ONBOARDING STATUS -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <h4 class="text-sm font-bold text-slate-900 uppercase">MY PENDING ACTIONS</h4>
+            <p class="text-xs text-slate-500 mt-0.5">Please complete your pending tasks before due</p>
+            <div class="mt-4 space-y-3">
+              <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                <div>
+                  <p class="text-xs font-semibold text-slate-800">New Hire to Onboard</p>
+                  <p class="text-[11px] text-slate-500">Awaiting dossier review</p>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-sm font-bold text-slate-900">41</span>
+                  <button onclick="switchTab('candidates')" class="text-xs font-bold text-blue-600 hover:underline">[Review Now]</button>
+                </div>
+              </div>
+              <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                <div>
+                  <p class="text-xs font-semibold text-slate-800">Incomplete Onboarding Records</p>
+                  <p class="text-[11px] text-slate-500">Document uploads pending</p>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-sm font-bold text-slate-900">624</span>
+                  <button onclick="switchTab('documents')" class="text-xs font-bold text-blue-600 hover:underline">[Review Now]</button>
+                </div>
+              </div>
+              <div class="flex items-center justify-between p-3.5 rounded-xl bg-emerald-50/50 border border-emerald-100">
+                <div>
+                  <p class="text-xs font-semibold text-slate-800">Convert to Employee</p>
+                  <p class="text-[11px] text-emerald-700">100% eligible for enrollment</p>
+                </div>
+                <div class="flex items-center gap-3">
+                  <span class="text-sm font-bold text-emerald-700">16</span>
+                  <button onclick="switchTab('candidates')" class="text-xs font-bold text-emerald-700 hover:underline">[Convert Now]</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <h4 class="text-sm font-bold text-slate-900 uppercase">ONBOARDING STATUS</h4>
+            <p class="text-xs text-slate-500 mt-0.5">Quick glance on your onboarding summary status</p>
+            <div class="mt-4 space-y-3">
+              <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                <span class="text-xs font-semibold text-slate-700">New Hires in Queue</span>
+                <div class="flex items-center gap-2">
+                  <span class="text-xs font-bold text-slate-900">24</span>
+                  <span class="px-2 py-0.5 text-[10px] font-bold bg-slate-200 text-slate-700 rounded-md">NOT STARTED</span>
+                </div>
+              </div>
+              <div class="flex items-center justify-between p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                <span class="text-xs font-semibold text-slate-700">Incomplete Onboarding Records</span>
+                <span class="text-xs font-bold text-slate-900">487</span>
+              </div>
+              <div class="flex items-center justify-between p-3.5 rounded-xl bg-rose-50 border border-rose-100">
+                <span class="text-xs font-semibold text-rose-700">Past Due</span>
+                <span class="text-xs font-bold text-rose-700">80</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- NEW HIRES THIS MONTH & MONTHLY GRAPH -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="flex items-center justify-between mb-4">
+              <div>
+                <h4 class="text-sm font-bold text-slate-900">NEW HIRES THIS MONTH</h4>
+                <p class="text-xs text-slate-500">Live tracker for ongoing enrollments</p>
+              </div>
+              <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded-md">2 Records</span>
+            </div>
+            <table class="w-full text-left text-xs border-collapse">
+              <thead>
+                <tr class="border-b border-slate-200 text-slate-500 font-semibold">
+                  <th class="pb-2">Name</th>
+                  <th class="pb-2">Location</th>
+                  <th class="pb-2">Progress</th>
+                  <th class="pb-2 text-center">Action</th>
+                </tr>
+              </thead>
+              <tbody id="dashboard-hires-body" class="divide-y divide-slate-100">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm">
+            <div class="flex items-center justify-between mb-2">
+              <div>
+                <h4 class="text-sm font-bold text-slate-900">Monthly Offers & Hires</h4>
+                <p class="text-[11px] text-slate-500">Click any bar to see who joined that month</p>
+              </div>
+              <div class="flex items-center gap-3 text-xs font-semibold">
+                <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 bg-blue-900 rounded-sm"></span> Hired</span>
+                <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 bg-teal-500 rounded-sm"></span> Joined</span>
+              </div>
+            </div>
+            <div class="h-56 w-full flex items-end justify-between gap-3 pt-6 pb-2 px-2 border-b border-slate-100">
+              <div onclick="openGraphModal('SEP')" class="flex-1 flex flex-col items-center gap-1 h-full justify-end cursor-pointer group hover:bg-slate-50 p-1 rounded-xl transition-all">
+                <div class="flex items-end gap-1.5 w-full justify-center h-full">
+                  <div class="flex flex-col items-center justify-end h-full w-4"><span class="text-[9px] font-bold text-blue-900">29</span><div class="w-full bg-blue-900 h-28 rounded-t-sm"></div></div>
+                  <div class="flex flex-col items-center justify-end h-full w-4"><span class="text-[9px] font-bold text-teal-600">27</span><div class="w-full bg-teal-500 h-24 rounded-t-sm"></div></div>
+                </div>
+                <span class="text-[10px] font-bold text-slate-600 mt-1">SEP</span>
+              </div>
+              <div onclick="openGraphModal('OCT')" class="flex-1 flex flex-col items-center gap-1 h-full justify-end cursor-pointer group hover:bg-slate-50 p-1 rounded-xl transition-all">
+                <div class="flex items-end gap-1.5 w-full justify-center h-full">
+                  <div class="flex flex-col items-center justify-end h-full w-4"><span class="text-[9px] font-bold text-blue-900">30</span><div class="w-full bg-blue-900 h-30 rounded-t-sm"></div></div>
+                  <div class="flex flex-col items-center justify-end h-full w-4"><span class="text-[9px] font-bold text-teal-600">24</span><div class="w-full bg-teal-500 h-22 rounded-t-sm"></div></div>
+                </div>
+                <span class="text-[10px] font-bold text-slate-600 mt-1">OCT</span>
+              </div>
+              <div onclick="openGraphModal('NOV')" class="flex-1 flex flex-col items-center gap-1 h-full justify-end cursor-pointer group hover:bg-slate-50 p-1 rounded-xl transition-all">
+                <div class="flex items-end gap-1.5 w-full justify-center h-full">
+                  <div class="flex flex-col items-center justify-end h-full w-4"><span class="text-[9px] font-bold text-blue-900">49</span><div class="w-full bg-blue-900 h-44 rounded-t-sm"></div></div>
+                  <div class="flex flex-col items-center justify-end h-full w-4"><span class="text-[9px] font-bold text-teal-600">23</span><div class="w-full bg-teal-500 h-20 rounded-t-sm"></div></div>
+                </div>
+                <span class="text-[10px] font-bold text-slate-600 mt-1">NOV</span>
+              </div>
+              <div onclick="openGraphModal('DEC')" class="flex-1 flex flex-col items-center gap-1 h-full justify-end cursor-pointer group hover:bg-slate-50 p-1 rounded-xl transition-all">
+                <div class="flex items-end gap-1.5 w-full justify-center h-full">
+                  <div class="flex flex-col items-center justify-end h-full w-4"><span class="text-[9px] font-bold text-blue-900">32</span><div class="w-full bg-blue-900 h-32 rounded-t-sm"></div></div>
+                  <div class="flex flex-col items-center justify-end h-full w-4"><span class="text-[9px] font-bold text-teal-600">16</span><div class="w-full bg-teal-500 h-14 rounded-t-sm"></div></div>
+                </div>
+                <span class="text-[10px] font-bold text-slate-600 mt-1">DEC</span>
+              </div>
+              <div onclick="openGraphModal('JAN')" class="flex-1 flex flex-col items-center gap-1 h-full justify-end cursor-pointer group hover:bg-slate-50 p-1 rounded-xl transition-all">
+                <div class="flex items-end gap-1.5 w-full justify-center h-full">
+                  <div class="flex flex-col items-center justify-end h-full w-4"><span class="text-[9px] font-bold text-blue-900">44</span><div class="w-full bg-blue-900 h-40 rounded-t-sm"></div></div>
+                  <div class="flex flex-col items-center justify-end h-full w-4"><span class="text-[9px] font-bold text-teal-600">24</span><div class="w-full bg-teal-500 h-22 rounded-t-sm"></div></div>
+                </div>
+                <span class="text-[10px] font-bold text-slate-600 mt-1">JAN</span>
+              </div>
+              <div onclick="openGraphModal('FEB')" class="flex-1 flex flex-col items-center gap-1 h-full justify-end cursor-pointer group hover:bg-slate-50 p-1 rounded-xl transition-all">
+                <div class="flex items-end gap-1.5 w-full justify-center h-full">
+                  <div class="flex flex-col items-center justify-end h-full w-4"><span class="text-[9px] font-bold text-blue-900">12</span><div class="w-full bg-blue-900 h-16 rounded-t-sm"></div></div>
+                  <div class="flex flex-col items-center justify-end h-full w-4"><span class="text-[9px] font-bold text-teal-600">10</span><div class="w-full bg-teal-500 h-12 rounded-t-sm"></div></div>
+                </div>
+                <span class="text-[10px] font-bold text-slate-600 mt-1">FEB</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- TAB 2: CANDIDATE DIRECTORY & CONVERSION GATEWAY -->
+      <!-- ======================================================== -->
+      <div id="tab-candidates" class="hidden p-8 space-y-6">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Candidate Directory & Conversion Gateway</h3>
+              <p class="text-xs text-slate-500 mt-0.5">Initiate new joiner profiles or convert to employees upon 100% compliance.</p>
+            </div>
+            <button onclick="openCreateCandidateModal()" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow-sm flex items-center gap-2 active:scale-95 transition-all">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
+              <span>+ New Candidate Onboarding</span>
+            </button>
+          </div>
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="border-b border-slate-200 bg-slate-50/70 text-slate-600 font-semibold">
+                  <th class="py-3 px-6">Candidate Name</th>
+                  <th class="py-3 px-4">Designation & BU</th>
+                  <th class="py-3 px-4">Location</th>
+                  <th class="py-3 px-4">Cohort</th>
+                  <th class="py-3 px-4">Progress</th>
+                  <th class="py-3 px-4 text-center">Documents</th>
+                  <th class="py-3 px-4 text-center">Delete</th>
+                  <th class="py-3 px-6 text-right">Onboard Action</th>
+                </tr>
+              </thead>
+              <tbody id="candidates-full-table-body" class="divide-y divide-slate-100">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- TAB 3: DOCUMENTS & STATUTORY VERIFICATION (ONE-BY-ONE) -->
+      <!-- ======================================================== -->
+      <div id="tab-documents" class="hidden p-8 space-y-6">
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <h3 class="text-base font-bold text-slate-900">Statutory Documents Verification & Export</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Inspect documents one by one to verify authenticity. The master schedule unlocks only when 100% of candidate documents are verified.</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <span id="statutory-global-status" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">
+              Auditing in progress
+            </span>
+          </div>
+        </div>
+
+        <!-- 10-Item Document Checklist Review Matrix -->
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-3">
+            <div class="flex items-center gap-3">
+              <label class="text-xs font-bold text-slate-700">Inspect Candidate Checklist:</label>
+              <select id="inspected-candidate-select" onchange="changeInspectedCandidate(this.value)" class="text-xs border border-slate-300 rounded-lg p-2 font-semibold text-slate-800 bg-slate-50 focus:bg-white">
+                <!-- Dynamically populated -->
+              </select>
+            </div>
+            <div class="flex items-center gap-2">
+              <span id="verified-counter-badge" class="text-xs font-bold text-slate-700 font-mono">10 OF 10 VERIFIED</span>
+              <span id="inspected-cohort-badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200">EXPERIENCED</span>
+            </div>
+          </div>
+
+          <!-- Document List Rows (Clean layout with View Doc only) -->
+          <div id="document-checklist-container" class="space-y-3">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Candidate Batch Selection Table with GATED DOWNLOAD -->
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="p-4 bg-slate-50 border-b border-slate-200 font-bold text-xs text-slate-700 flex justify-between">
+            <span>SELECT CANDIDATES FOR STATUTORY REPORT</span>
+            <span id="selected-count-badge">0 of 4 Selected</span>
+          </div>
+
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="border-b border-slate-200 text-slate-600 font-semibold bg-slate-50/50">
+                <th class="py-3 px-4 w-12 text-center">
+                  <input type="checkbox" id="select-all-checkbox" onchange="toggleSelectAll(this.checked)" class="cursor-pointer rounded text-blue-600">
+                </th>
+                <th class="py-3 px-4">Candidate Name</th>
+                <th class="py-3 px-4">VISTA EMP ID</th>
+                <th class="py-3 px-4">DOB</th>
+                <th class="py-3 px-4">PAN Number</th>
+                <th class="py-3 px-4">Verification State</th>
+                <th class="py-3 px-4">Voter ID / Matched Address</th>
+              </tr>
+            </thead>
+            <tbody id="candidates-table-body" class="divide-y divide-slate-100">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+
+          <!-- GATED DOWNLOAD BUTTON ON BOTTOM RIGHT -->
+          <div class="p-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
+            <p id="download-gate-message" class="text-xs text-slate-500">Download requires all documents for selected candidates to be 100% verified.</p>
+            <button id="download-schedule-btn" disabled onclick="downloadSelectedSchedule()" class="px-5 py-2.5 text-xs font-semibold rounded-xl shadow-sm flex items-center gap-2 bg-slate-200 text-slate-400 border border-slate-300 cursor-not-allowed transition-all">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+              <span id="download-btn-label">Download Statutory Schedule (50-Col)</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- TAB 4: BGV PIPELINE -->
+      <!-- ======================================================== -->
+      <div id="tab-bgv" class="hidden p-8 space-y-6">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm p-6 space-y-4">
+          <h3 class="text-base font-bold text-slate-900">Background Verification Pipeline</h3>
+          <div class="grid grid-cols-5 gap-2 text-center text-xs font-bold pb-2">
+            <div class="p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700">1. BGV Initiated</div>
+            <div class="p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700">2. Documents Submitted</div>
+            <div class="p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700">3. Verification In Progress</div>
+            <div class="p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700">4. Clarification Required</div>
+            <div class="p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700">5. BGV Cleared</div>
+          </div>
+          <div id="bgv-pipeline-list" class="space-y-3">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- TAB 5: DECONGESTED ACTIVE EMPLOYEES DIRECTORY -->
+      <!-- ======================================================== -->
+      <div id="tab-employees" class="hidden p-8 space-y-6">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+          <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Active Employee Directory & Separation Gateway</h3>
+              <p class="text-xs text-slate-500 mt-0.5">Consecutive employee IDs (`VISTA1854`, `VISTA1855`, `VISTA1856`...), joining records, and milestone dispatches.</p>
+            </div>
+            <span class="text-xs font-bold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-lg border">Headcount: 807</span>
+          </div>
+
+          <!-- Structured, Spacious Data Table (Decongested layout) -->
+          <div class="overflow-x-auto">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead>
+                <tr class="border-b border-slate-200 bg-slate-50 text-slate-600 font-semibold">
+                  <th class="py-3 px-6">Employee Details</th>
+                  <th class="py-3 px-4">Permanent Code</th>
+                  <th class="py-3 px-4">Role & Business Unit</th>
+                  <th class="py-3 px-4">Date of Joining (DOJ)</th>
+                  <th class="py-3 px-4">Experience / Tenure</th>
+                  <th class="py-3 px-4">Milestone</th>
+                  <th class="py-3 px-6 text-right">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="active-employees-table-body" class="divide-y divide-slate-100">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- TAB 6: ADMIN USER MANAGEMENT & PASSWORD RESET -->
+      <!-- ======================================================== -->
+      <div id="tab-admin" class="hidden p-8 space-y-6">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          
+          <!-- Create New User ID Form -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+            <h3 class="text-sm font-bold text-slate-900">Create System User / HR ID</h3>
+            <p class="text-xs text-slate-500">Provision portal access credentials for internal HR operations and administrative personnel.</p>
+            
+            <div class="space-y-3 text-xs">
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Full Name</label>
+                <input id="admin-new-name" type="text" placeholder="e.g. David Vance" class="w-full border border-slate-300 rounded-lg p-2.5" />
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Corporate Email</label>
+                <input id="admin-new-email" type="email" placeholder="d.vance@vistaengg.com" class="w-full border border-slate-300 rounded-lg p-2.5" />
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Assigned Role</label>
+                <select id="admin-new-role" class="w-full border border-slate-300 rounded-lg p-2.5">
+                  <option value="HR">HR / Onboarding Team</option>
+                  <option value="ADMIN">System Administrator</option>
+                </select>
+              </div>
+              <div>
+                <label class="block font-semibold text-slate-700 mb-1">Temporary Password</label>
+                <input id="admin-new-pass" type="password" value="Vista@2026" class="w-full border border-slate-300 rounded-lg p-2.5 font-mono" />
+              </div>
+              <button onclick="adminCreateUser()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-sm transition-all">
+                Provision System User
+              </button>
+            </div>
+          </div>
+
+          <!-- Manage Users & Password Reset -->
+          <div class="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-4">
+            <h3 class="text-sm font-bold text-slate-900">Active System Users & Password Reset Gateway</h3>
+            <p class="text-xs text-slate-500">Admins can audit all credentials and initiate cryptographic password resets.</p>
+
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse text-xs">
+                <thead>
+                  <tr class="border-b border-slate-200 bg-slate-50 text-slate-600 font-semibold">
+                    <th class="py-2.5 px-3">User Name</th>
+                    <th class="py-2.5 px-3">Role</th>
+                    <th class="py-2.5 px-3">Email ID</th>
+                    <th class="py-2.5 px-3 text-right">Reset Access</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-users-table-body" class="divide-y divide-slate-100">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ======================================================== -->
+  <!-- MODAL: ONE-CLICK IN-APP DOCUMENT VIEWER WITH ZOOM & APPROVAL -->
+  <!-- ======================================================== -->
+  <div id="doc-preview-modal" class="hidden fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-3xl w-full shadow-2xl overflow-hidden border border-slate-200 flex flex-col max-h-[92vh]">
+      <!-- Header with Zoom Controls -->
+      <div class="p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50 shrink-0">
+        <div>
+          <h4 id="modal-doc-title" class="text-sm font-bold text-slate-900">Document Title</h4>
+          <p id="modal-doc-subtitle" class="text-[11px] text-slate-500">Candidate Info</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <!-- Zoom Controls -->
+          <div class="flex items-center bg-white border border-slate-200 rounded-lg px-2 py-1 text-xs gap-1.5">
+            <button onclick="changeZoom(-20)" class="p-1 hover:bg-slate-100 rounded text-slate-700 font-bold" title="Zoom Out">−</button>
+            <span id="zoom-level-label" class="font-mono font-bold text-[11px] w-12 text-center">100%</span>
+            <button onclick="changeZoom(20)" class="p-1 hover:bg-slate-100 rounded text-slate-700 font-bold" title="Zoom In">+</button>
+            <button onclick="resetZoom()" class="p-1 hover:bg-slate-100 rounded text-slate-500 text-[10px] ml-1 border-l border-slate-200 pl-1.5" title="Reset Zoom">Reset</button>
+          </div>
+
+          <button onclick="downloadCurrentAsset()" class="p-1.5 bg-white border border-slate-200 hover:bg-slate-100 rounded-lg text-slate-700 flex items-center gap-1 text-xs font-semibold px-2.5">
+            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+            Download Asset
+          </button>
+          <button onclick="closeDocPreviewModal()" class="text-slate-400 hover:text-slate-700 font-bold text-base px-2">✕</button>
+        </div>
+      </div>
+
+      <!-- Zoomable Document Canvas -->
+      <div class="flex-1 overflow-auto p-6 bg-slate-100 flex items-center justify-center min-h-[380px]">
+        <div id="zoomable-doc-card" class="bg-white rounded-xl shadow-lg border border-slate-300 w-[540px] p-8 text-xs space-y-4 relative transition-transform duration-150">
+          <div id="modal-watermark" class="absolute right-6 top-6 border-2 border-emerald-600 text-emerald-700 font-bold px-3 py-1 rounded text-[11px] uppercase tracking-wider rotate-[-8deg]">
+            ✓ VISTA VERIFIED
+          </div>
+          <div class="border-b pb-4">
+            <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Official Statutory Archive</span>
+            <h2 id="modal-canvas-header" class="text-base font-extrabold text-slate-900 mt-1">DOCUMENT VERIFICATION RECORD</h2>
+            <p id="modal-canvas-id" class="text-[11px] text-slate-500">Issuer: Statutory Verification Board</p>
+          </div>
+          <div class="grid grid-cols-2 gap-3 py-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
+            <div>
+              <p class="text-slate-400 text-[10px] uppercase font-bold">Candidate Name</p>
+              <p id="modal-canvas-name" class="font-bold text-slate-800">-</p>
+            </div>
+            <div>
+              <p class="text-slate-400 text-[10px] uppercase font-bold">Candidate ID / Code</p>
+              <p id="modal-canvas-code" class="font-bold text-slate-800 font-mono">-</p>
+            </div>
+            <div>
+              <p class="text-slate-400 text-[10px] uppercase font-bold">Date of Birth</p>
+              <p id="modal-canvas-dob" class="font-semibold text-slate-800">-</p>
+            </div>
+            <div>
+              <p class="text-slate-400 text-[10px] uppercase font-bold">PAN Number</p>
+              <p id="modal-canvas-pan" class="font-semibold text-slate-800 font-mono">-</p>
+            </div>
+          </div>
+          <div class="space-y-1.5">
+            <p class="text-slate-400 text-[10px] uppercase font-bold">Matched Registered Address</p>
+            <p id="modal-canvas-address" class="text-slate-700 bg-slate-50 p-2.5 rounded border border-slate-200 leading-relaxed">-</p>
+          </div>
+          <div class="pt-3 border-t text-[10px] text-slate-400 flex justify-between">
+            <span>SHA256: 7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d</span>
+            <span>Encrypted Enterprise Blob</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Footer: Approve / Reject Controls -->
+      <div class="p-4 border-t border-slate-200 bg-white shrink-0 space-y-3">
+        <div class="flex items-center gap-2">
+          <input id="rejection-input" type="text" placeholder="Rejection feedback if requesting re-upload..." class="flex-1 text-xs border border-slate-300 rounded-lg p-2 focus:ring-1 focus:ring-blue-500 focus:outline-none" />
+          <button onclick="rejectActiveDoc()" class="px-3.5 py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-300 rounded-lg text-xs font-bold transition-all">
+            Reject & Request Re-upload
+          </button>
+        </div>
+        <div class="flex items-center justify-between pt-1">
+          <span class="text-xs text-slate-500 font-medium">Document Status: <strong id="modal-status-badge" class="text-emerald-700 font-bold">VERIFIED</strong></span>
+          <div class="flex items-center gap-2">
+            <button onclick="closeDocPreviewModal()" class="px-4 py-2 border border-slate-300 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-100">Close</button>
+            <button onclick="approveActiveDoc()" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-sm transition-all flex items-center gap-1.5">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+              Approve & Verify Document
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: CREATE CANDIDATE -->
+  <div id="create-candidate-modal" class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden border border-slate-200">
+      <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+        <h4 class="text-sm font-bold text-slate-800">New Candidate Onboarding</h4>
+        <button onclick="closeCreateCandidateModal()" class="text-slate-400 hover:text-slate-700 text-sm font-bold">✕</button>
+      </div>
+      <div class="p-6 text-xs space-y-4">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-600 mb-1">First Name (as per SSLC)</label>
+            <input id="cand-new-fn" placeholder="e.g. Ramesh" class="w-full border border-slate-300 rounded-lg p-2" />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-600 mb-1">Last Name</label>
+            <input id="cand-new-ln" placeholder="e.g. Kumar" class="w-full border border-slate-300 rounded-lg p-2" />
+          </div>
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-600 mb-1">Personal Email</label>
+          <input id="cand-new-email" placeholder="ramesh.k@gmail.com" class="w-full border border-slate-300 rounded-lg p-2" />
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-600 mb-1">Business Unit</label>
+            <select id="cand-new-bu" class="w-full border border-slate-300 rounded-lg p-2">
+              <option value="Engineering">Engineering</option>
+              <option value="AI/ML Data Annotation">AI/ML Data Annotation</option>
+              <option value="Invoice Processing">Invoice Processing</option>
+              <option value="Talent Acquisition">Talent Acquisition</option>
+              <option value="Operations">Operations</option>
+              <option value="Admin">Admin</option>
+              <option value="Information Technology">Information Technology</option>
+            </select>
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-600 mb-1">Hiring Cohort</label>
+            <select id="cand-new-cohort" class="w-full border border-slate-300 rounded-lg p-2">
+              <option value="FRESHER">FRESHER</option>
+              <option value="EXPERIENCED">EXPERIENCED</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-600 mb-1">Designation</label>
+          <input id="cand-new-role" value="Associate Software Engineer" class="w-full border border-slate-300 rounded-lg p-2" />
+        </div>
+      </div>
+      <div class="p-4 border-t border-slate-100 bg-slate-50 flex items-center justify-end gap-2">
+        <button onclick="closeCreateCandidateModal()" class="px-3.5 py-1.5 border border-slate-300 rounded-lg text-slate-700 font-semibold">Cancel</button>
+        <button onclick="submitNewCandidate()" class="px-4 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-bold">Create Candidate</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: GRAPH MONTH ROSTER -->
+  <div id="graph-modal" class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full shadow-2xl overflow-hidden border border-slate-200">
+      <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+        <h4 id="graph-modal-title" class="text-sm font-bold text-slate-800">Joined Employees</h4>
+        <button onclick="closeGraphModal()" class="text-slate-400 hover:text-slate-700 font-bold">✕</button>
+      </div>
+      <div id="graph-modal-body" class="p-5 space-y-3 max-h-72 overflow-y-auto text-xs"></div>
+      <div class="p-4 border-t border-slate-100 bg-slate-50 flex justify-end">
+        <button onclick="closeGraphModal()" class="px-4 py-2 bg-slate-800 text-white font-semibold rounded-xl text-xs">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT APPLICATION CORE -->
+  <script>
+    // System Users for Admin Management
+    let systemUsers = [
+      { id: "USR-01", name: "Sarah Jenkins", role: "HR", email: "sarah.j@vistaengg.com" },
+      { id: "USR-02", name: "David Vance", role: "ADMIN", email: "david.vance@vistaengg.com" },
+      { id: "USR-03", name: "Lavanya Mohan", role: "HR", email: "lavanya.m@vistaengg.com" }
+    ];
+
+    let currentUser = systemUsers[0];
+
+    // Candidates Master Dataset
+    let candidates = [
+      {
+        id: "VISTA-2026-8812", firstName: "Carl", lastName: "Jacobs", name: "Carl Jacobs",
+        role: "Associate Software Engineer", bu: "Engineering", location: "Charlotte, NC, USA",
+        progress: 0, type: "FRESHER", status: "NOT_STARTED", targetDOJ: "2026-10-15",
+        doj: "2026-10-15", totalExp: "Fresher (0 Yrs)", email: "carl.j@gmail.com", phone: "+91 98450 12345",
+        empCode: "", officialEmail: "", bgvStatus: "BGV Initiated",
+        allDocsVerified: false,
+        onboardingData: {
+          dob: "2003-04-12", gender: "Male", nationality: "Indian", panNumber: "ABCDE1234F",
+          idType: "Election Commission Photo ID", idNumber: "TN/02/123456",
+          houseStreet: "Flat 402, Green Glen Layout", landMark: "Near Outer Ring Road",
+          city: "Bengaluru", state: "Karnataka", postalCode: "560103", sameAsResident: true,
+          sslcBoard: "State Board", sslcInstitution: "National Public School", sslcYear: "2019",
+          sslcPercentage: "84.5%", sslcMode: "Regular", higherQualification: "B.Tech",
+          higherSpecialization: "Computer Science", higherInstitution: "PSG College of Technology",
+          higherYear: "2025", higherPercentage: "82.0%", higherMode: "Regular",
+          totalExp: "0", relevantExp: "0", prevWorkedBGSW: "No", bloodGroup: "O+ve",
+          parentName: "Arthur Jacobs", parentPhone: "+91 98450 99881"
+        }
+      },
+      {
+        id: "VISTA-2026-8794", firstName: "Robert", lastName: "Jones", name: "Robert Jones",
+        role: "Senior Full Stack Consultant", bu: "AI/ML Data Annotation", location: "Charlotte, NC, USA",
+        progress: 27, type: "EXPERIENCED", status: "IN_PROGRESS", targetDOJ: "2026-10-05",
+        doj: "2026-10-05", totalExp: "4.5 Years", email: "robert.jones@outlook.com", phone: "+91 97891 37258",
+        empCode: "", officialEmail: "", bgvStatus: "Documents Submitted",
+        allDocsVerified: false,
+        onboardingData: {
+          dob: "1998-11-23", gender: "Male", nationality: "Indian", panNumber: "XYZPQ9876K",
+          idType: "Election Commission Photo ID", idNumber: "TN/04/998877",
+          houseStreet: "24/B, Avinashi Road, Peelamedu", landMark: "Opposite Fun Mall",
+          city: "Coimbatore", state: "Tamil Nadu", postalCode: "641004", sameAsResident: true,
+          sslcBoard: "Matriculation", sslcInstitution: "Stanes Anglo Indian School", sslcYear: "2014",
+          sslcPercentage: "88.2%", sslcMode: "Regular", higherQualification: "B.E.",
+          higherSpecialization: "Information Technology", higherInstitution: "CIT Coimbatore",
+          higherYear: "2020", higherPercentage: "79.5%", higherMode: "Regular",
+          totalExp: "4.5 Years", relevantExp: "4.0 Years", prevWorkedBGSW: "No", bloodGroup: "B+ve",
+          parentName: "Richard Jones", parentPhone: "+91 97891 11223"
+        }
+      },
+      {
+        id: "VISTA-2026-8699", firstName: "Andan", lastName: "Karinson", name: "Andan Karinson",
+        role: "Embedded Systems Specialist", bu: "Engineering", location: "Bengaluru, KA, India",
+        progress: 100, type: "EXPERIENCED", status: "ONBOARDED", targetDOJ: "2026-09-10",
+        doj: "2024-09-29", totalExp: "5.0 Years (2 Yrs at VISTA)", email: "andan.k@gmail.com",
+        phone: "+91 94432 88776", empCode: "VISTA1854", officialEmail: "andan.karinson@vistaengg.com",
+        bgvStatus: "BGV Cleared",
+        allDocsVerified: true,
+        onboardingData: {
+          dob: "1997-07-15", gender: "Male", nationality: "Indian", panNumber: "AAAPK4433D",
+          idType: "Election Commission Photo ID", idNumber: "KA/01/554433",
+          houseStreet: "12, 4th Cross, Indiranagar", landMark: "Near Metro Pillar 42",
+          city: "Bengaluru", state: "Karnataka", postalCode: "560038", sameAsResident: true,
+          sslcBoard: "State Board", sslcInstitution: "Bishop Cotton Boys School", sslcYear: "2013",
+          sslcPercentage: "91.0%", sslcMode: "Regular", higherQualification: "B.Tech",
+          higherSpecialization: "ECE", higherInstitution: "RV College of Engineering",
+          higherYear: "2019", higherPercentage: "85.2%", higherMode: "Regular",
+          totalExp: "5.0 Years", relevantExp: "5.0 Years", prevWorkedBGSW: "No", bloodGroup: "A+ve",
+          parentName: "Karinson S", parentPhone: "+91 94432 11002"
+        }
+      },
+      {
+        id: "VISTA-2026-8650", firstName: "Ananya", lastName: "Sharma", name: "Ananya Sharma",
+        role: "Lead Cloud Architect", bu: "Engineering", location: "Bengaluru, KA, India",
+        progress: 100, type: "EXPERIENCED", status: "ONBOARDED", targetDOJ: "2026-09-01",
+        doj: "2023-09-29", totalExp: "7.2 Years (3 Yrs at VISTA)", email: "ananya.s@cloudmail.com",
+        phone: "+91 98840 55667", empCode: "VISTA1855", officialEmail: "ananya.sharma@vistaengg.com",
+        bgvStatus: "BGV Cleared",
+        allDocsVerified: true,
+        onboardingData: {
+          dob: "1995-05-19", gender: "Female", nationality: "Indian", panNumber: "CKLPS7788R",
+          idType: "Election Commission Photo ID", idNumber: "KA/03/991122",
+          houseStreet: "704, Skyline Towers, Bellandur", landMark: "EcoSpace Central Gate",
+          city: "Bengaluru", state: "Karnataka", postalCode: "560103", sameAsResident: true,
+          sslcBoard: "ICSE", sslcInstitution: "Clarence High School", sslcYear: "2011",
+          sslcPercentage: "94.0%", sslcMode: "Regular", higherQualification: "M.Tech",
+          higherSpecialization: "Software Engineering", higherInstitution: "IIIT Bangalore",
+          higherYear: "2017", higherPercentage: "88.6%", higherMode: "Regular",
+          totalExp: "7.2 Years", relevantExp: "7.0 Years", prevWorkedBGSW: "No", bloodGroup: "O+ve",
+          parentName: "Vivek Sharma", parentPhone: "+91 98840 00991"
+        }
+      }
+    ];
+
+    let inspectedCandidateId = "VISTA-2026-8650";
+    let selectedCandidateIds = [];
+    let currentZoom = 100;
+    let activeDocObj = null;
+
+    let docChecklist = [
+      { id: "sslc", name: "1. First Name & SSLC / 10th Marks Sheet", category: "EDUCATION", status: "VERIFIED", date: "2026-09-12" },
+      { id: "dob", name: "2. Date of Birth Proof", category: "IDENTITY", status: "VERIFIED", date: "2026-09-12" },
+      { id: "pan", name: "3. PAN Card Copy", category: "FINANCIAL", status: "VERIFIED", date: "2026-09-13" },
+      { id: "voter", name: "4. Election Commission Photo ID (Voter ID)", category: "IDENTITY", status: "VERIFIED", date: "2026-09-14" },
+      { id: "address", name: "5. House & Street Address Proof (Matched as per Voter ID)", category: "IDENTITY", status: "VERIFIED", date: "2026-09-14" },
+      { id: "degree", name: "6. Degree Certificate / Consolidated Marksheets", category: "EDUCATION", status: "VERIFIED", date: "2026-09-15" },
+      { id: "service", name: "7. Relieving & Service Certificates", category: "EXPERIENCE", status: "VERIFIED", date: "2026-09-15" },
+      { id: "payslips", name: "8. Last 3 Months Payslips & Form 16", category: "FINANCIAL", status: "UNDER_REVIEW", date: "2026-09-16" },
+      { id: "bgsw", name: "9. Previous BGSW Declaration (Past Year: No)", category: "COMPLIANCE", status: "VERIFIED", date: "2026-09-16" },
+      { id: "medical", name: "10. Blood Group & Medical Fitness", category: "MEDICAL", status: "VERIFIED", date: "2026-09-17" }
+    ];
+
+    const monthlyRecords = {
+      SEP: [{ name: "Ananya Sharma", role: "Lead Cloud Architect" }, { name: "Andan Karinson", role: "Embedded Systems Specialist" }],
+      OCT: [{ name: "Robert Jones", role: "Senior Full Stack Consultant" }, { name: "Carl Jacobs", role: "Associate Software Engineer" }],
+      NOV: [{ name: "Vikram Rathore", role: "DevOps Engineer" }],
+      DEC: [{ name: "Suresh Menon", role: "QA Automation Lead" }],
+      JAN: [{ name: "Harish V", role: "Backend Developer" }],
+      FEB: [{ name: "Kiran Kumar", role: "IT Admin Specialist" }]
+    };
+
+    function showToast(msg) {
+      const toast = document.getElementById("toast");
+      document.getElementById("toast-text").innerText = msg;
+      toast.classList.remove("hidden");
+      setTimeout(() => toast.classList.add("hidden"), 4000);
+    }
+
+    function switchTab(tabName) {
+      ['dashboard', 'candidates', 'documents', 'bgv', 'employees', 'admin'].forEach(t => {
+        const el = document.getElementById(`tab-${t}`);
+        const nav = document.getElementById(`nav-${t}`);
+        if (el) el.classList.add("hidden");
+        if (nav) {
+          nav.classList.remove("bg-blue-600", "text-white", "shadow-md");
+          nav.classList.add("text-slate-300");
+        }
+      });
+      const activeEl = document.getElementById(`tab-${tabName}`);
+      const activeNav = document.getElementById(`nav-${tabName}`);
+      if (activeEl) activeEl.classList.remove("hidden");
+      if (activeNav) {
+        activeNav.classList.add("bg-blue-600", "text-white", "shadow-md");
+        activeNav.classList.remove("text-slate-300");
+      }
+    }
+
+    // SIGN OUT & USER SWITCHER
+    function handleSignOut() {
+      const nextUser = currentUser.id === "USR-01" ? systemUsers[1] : systemUsers[0];
+      currentUser = nextUser;
+      document.getElementById("user-name").innerText = currentUser.name;
+      document.getElementById("user-role").innerText = currentUser.role === "ADMIN" ? "System Administrator" : "HR Operations Lead";
+      document.getElementById("user-avatar").innerText = currentUser.name.split(" ").map(n=>n[0]).join("");
+      document.getElementById("role-badge").innerText = currentUser.role === "ADMIN" ? "System Admin Suite" : "HR Operations";
+      showToast(`Signed out. Switched session to: ${currentUser.name} (${currentUser.role})`);
+    }
+
+    // RENDER: DASHBOARD HIRES TABLE
+    function renderDashboardHires() {
+      const tbody = document.getElementById("dashboard-hires-body");
+      tbody.innerHTML = candidates.map(c => `
+        <tr class="hover:bg-slate-50">
+          <td class="py-2.5 font-semibold text-slate-900">${c.name}</td>
+          <td class="py-2.5 text-slate-600">${c.location}</td>
+          <td class="py-2.5">
+            <span class="text-[10px] font-bold">${c.progress}%</span>
+            <div class="w-24 bg-slate-100 h-1.5 rounded-full overflow-hidden mt-0.5">
+              <div class="h-full ${c.progress === 100 ? 'bg-emerald-500' : 'bg-blue-600'}" style="width: ${c.progress}%"></div>
+            </div>
+          </td>
+          <td class="py-2.5 text-center">
+            <button onclick="inspectFromDashboard('${c.id}')" class="px-2 py-1 text-[10px] font-bold text-blue-600 bg-blue-50 rounded-md hover:bg-blue-100">Inspect</button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function inspectFromDashboard(id) {
+      inspectedCandidateId = id;
+      populateCandidateDropdown();
+      renderChecklist();
+      switchTab('documents');
+    }
+
+    // RENDER: CANDIDATES MAIN DIRECTORY
+    function renderCandidatesMainList() {
+      const tbody = document.getElementById("candidates-full-table-body");
+      tbody.innerHTML = candidates.map(cand => `
+        <tr class="hover:bg-slate-50/60">
+          <td class="py-3.5 px-6 font-semibold text-slate-900">
+            <div>${cand.name}</div>
+            <div class="text-[10px] text-slate-400 font-mono">${cand.id}</div>
+          </td>
+          <td class="py-3.5 px-4">
+            <div class="font-medium text-slate-800">${cand.role}</div>
+            <div class="text-[10px] text-slate-500">${cand.bu}</div>
+          </td>
+          <td class="py-3.5 px-4 text-slate-600">${cand.location}</td>
+          <td class="py-3.5 px-4">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold ${cand.type === 'FRESHER' ? 'bg-purple-50 text-purple-700 border border-purple-200' : 'bg-blue-50 text-blue-700 border border-blue-200'}">${cand.type}</span>
+          </td>
+          <td class="py-3.5 px-4">
+            <div class="w-28">
+              <span class="text-[10px] font-bold mb-1">${cand.progress}%</span>
+              <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                <div class="h-full rounded-full ${cand.progress === 100 ? 'bg-emerald-500' : 'bg-blue-600'}" style="width: ${cand.progress}%"></div>
+              </div>
+            </div>
+          </td>
+          <td class="py-3.5 px-4 text-center">
+            <button onclick="inspectFromDashboard('${cand.id}')" class="px-2.5 py-1 text-[11px] font-semibold rounded-md border border-slate-200 hover:bg-slate-100 text-slate-700">View Dossier</button>
+          </td>
+          <td class="py-3.5 px-4 text-center">
+            <button onclick="deleteCandidate('${cand.id}', '${cand.name}')" class="p-1 text-slate-400 hover:text-rose-600 rounded">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+            </button>
+          </td>
+          <td class="py-3.5 px-6 text-right">
+            ${cand.status === 'ONBOARDED' 
+              ? `<span class="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">✓ Active (${cand.empCode})</span>` 
+              : `<button onclick="convertCandidate('${cand.id}')" ${cand.progress === 100 ? '' : 'disabled'} class="px-3 py-1.5 rounded-lg text-xs font-semibold ${cand.progress === 100 ? 'bg-emerald-600 text-white cursor-pointer hover:bg-emerald-700' : 'bg-slate-100 text-slate-400 cursor-not-allowed border border-slate-200'}">${cand.progress === 100 ? 'Onboard Now' : (100 - cand.progress) + '% Remaining'}</button>`
+            }
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function deleteCandidate(id, name) {
+      if (confirm(`Remove candidate ${name}? You can re-add them at any point.`)) {
+        candidates = candidates.filter(c => c.id !== id);
+        renderCandidatesMainList();
+        renderDashboardHires();
+        renderCandidateSelectionTable();
+        populateCandidateDropdown();
+        showToast(`Candidate ${name} removed from roster.`);
+      }
+    }
+
+    function convertCandidate(id) {
+      const cand = candidates.find(c => c.id === id);
+      if (!cand) return;
+      const existingCodes = candidates.map(c => c.empCode).filter(Boolean).map(code => parseInt(code.replace("VISTA", ""), 10)).filter(n => !isNaN(n));
+      const nextId = existingCodes.length > 0 ? Math.max(...existingCodes) + 1 : 1856;
+      cand.status = "ONBOARDED";
+      cand.progress = 100;
+      cand.empCode = `VISTA${nextId}`;
+      cand.doj = new Date().toISOString().split("T")[0];
+      cand.officialEmail = `${cand.firstName.toLowerCase()}.${cand.lastName.toLowerCase()}@vistaengg.com`;
+      renderCandidatesMainList();
+      renderActiveEmployeesTable();
+      showToast(`Enrolled ${cand.name} with code VISTA${nextId}`);
+    }
+
+    // RENDER: DOCUMENT CHECKLIST (ONE BY ONE INSPECTION)
+    function renderChecklist() {
+      const container = document.getElementById("document-checklist-container");
+      const cand = candidates.find(c => c.id === inspectedCandidateId) || candidates[0];
+      
+      const verifiedCount = docChecklist.filter(d => d.status === "VERIFIED").length;
+      document.getElementById("verified-counter-badge").innerText = `${verifiedCount} OF 10 VERIFIED`;
+      document.getElementById("inspected-cohort-badge").innerText = cand.type;
+
+      container.innerHTML = docChecklist.map((doc, idx) => `
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-xs gap-3 hover:bg-slate-50 transition-colors">
+          <div class="flex items-center gap-3.5">
+            <span class="font-mono text-slate-400 font-bold text-xs">${idx + 1}.</span>
+            <div>
+              <p class="font-bold text-slate-900">${doc.name}</p>
+              <div class="flex items-center gap-2 mt-0.5">
+                <span class="text-[10px] text-slate-400 font-mono uppercase">${doc.category}</span>
+                <span class="text-[10px] text-slate-400">• Submitted: ${doc.date}</span>
+              </div>
+            </div>
+          </div>
+          <div class="flex items-center gap-2.5 self-end sm:self-center">
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+              doc.status === 'VERIFIED' ? 'bg-emerald-100 text-emerald-800 border border-emerald-200' :
+              doc.status === 'REUPLOAD_REQUIRED' ? 'bg-rose-100 text-rose-800 border border-rose-200' :
+              'bg-amber-100 text-amber-800 border border-amber-200'
+            }">${doc.status}</span>
+            <button onclick="openDocPreviewModal('${doc.id}')" class="px-3 py-1.5 bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200 rounded-lg font-bold">
+              View Doc
+            </button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    // RENDER: CANDIDATE SELECTION TABLE & GATED DOWNLOAD BUTTON
+    function renderCandidateSelectionTable() {
+      const tbody = document.getElementById("candidates-table-body");
+      tbody.innerHTML = candidates.map(cand => {
+        const isSelected = selectedCandidateIds.includes(cand.id);
+        return `
+          <tr class="${isSelected ? 'bg-blue-50/50' : 'hover:bg-slate-50'}">
+            <td class="py-3 px-4 text-center">
+              <input type="checkbox" ${isSelected ? 'checked' : ''} onchange="toggleSelectCandidate('${cand.id}', this.checked)" class="cursor-pointer rounded text-blue-600" />
+            </td>
+            <td class="py-3 px-4 font-semibold text-slate-900">${cand.name}</td>
+            <td class="py-3 px-4 font-mono font-bold text-slate-700">${cand.empCode || '—'}</td>
+            <td class="py-3 px-4 text-slate-600">${cand.onboardingData.dob}</td>
+            <td class="py-3 px-4 font-mono text-slate-700">${cand.onboardingData.panNumber}</td>
+            <td class="py-3 px-4">
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${cand.allDocsVerified ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+                ${cand.allDocsVerified ? '100% Cleared' : 'Audit Pending'}
+              </span>
+            </td>
+            <td class="py-3 px-4">
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200">Matched as per Voter ID</span>
+            </td>
+          </tr>
+        `;
+      }).join("");
+
+      updateDownloadGateStatus();
+    }
+
+    function toggleSelectCandidate(id, checked) {
+      if (checked) {
+        if (!selectedCandidateIds.includes(id)) selectedCandidateIds.push(id);
+      } else {
+        selectedCandidateIds = selectedCandidateIds.filter(i => i !== id);
+      }
+      renderCandidateSelectionTable();
+    }
+
+    function toggleSelectAll(checked) {
+      selectedCandidateIds = checked ? candidates.map(c => c.id) : [];
+      renderCandidateSelectionTable();
+    }
+
+    // GATED DOWNLOAD EVALUATOR: Unlocks only if ALL selected candidate documents are verified
+    function updateDownloadGateStatus() {
+      const count = selectedCandidateIds.length;
+      document.getElementById("selected-count-badge").innerText = `${count} of ${candidates.length} Selected`;
+
+      const downloadBtn = document.getElementById("download-schedule-btn");
+      const gateMsg = document.getElementById("download-gate-message");
+
+      if (count === 0) {
+        downloadBtn.setAttribute("disabled", "true");
+        downloadBtn.className = "px-5 py-2.5 text-xs font-semibold rounded-xl shadow-sm flex items-center gap-2 bg-slate-200 text-slate-400 border border-slate-300 cursor-not-allowed";
+        gateMsg.innerText = "Select candidate checkboxes above to evaluate download compliance.";
+        return;
+      }
+
+      const selectedCands = candidates.filter(c => selectedCandidateIds.includes(c.id));
+      const allReady = selectedCands.every(c => c.allDocsVerified);
+
+      if (allReady) {
+        downloadBtn.removeAttribute("disabled");
+        downloadBtn.className = "px-5 py-2.5 text-xs font-bold rounded-xl shadow-sm flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white cursor-pointer active:scale-95 shadow-md transition-all";
+        gateMsg.innerHTML = `<span class="text-emerald-700 font-bold">✓ 100% Documents Verified for selected ${count} candidate(s). Schedule download ready.</span>`;
+      } else {
+        downloadBtn.setAttribute("disabled", "true");
+        downloadBtn.className = "px-5 py-2.5 text-xs font-semibold rounded-xl shadow-sm flex items-center gap-2 bg-slate-200 text-slate-400 border border-slate-300 cursor-not-allowed";
+        gateMsg.innerHTML = `<span class="text-rose-600 font-semibold">🔒 Gated: Some selected candidates have unverified or pending document checklists.</span>`;
+      }
+    }
+
+    // MODAL DOCUMENT INSPECTION & ZOOM
+    function openDocPreviewModal(docId) {
+      activeDocObj = docChecklist.find(d => d.id === docId);
+      const cand = candidates.find(c => c.id === inspectedCandidateId) || candidates[0];
+      
+      currentZoom = 100;
+      applyZoom();
+
+      document.getElementById("modal-doc-title").innerText = activeDocObj.name;
+      document.getElementById("modal-doc-subtitle").innerText = `Candidate: ${cand.name} (${cand.id}) • File: ${cand.firstName}_${activeDocObj.id}_scan.pdf`;
+      document.getElementById("modal-canvas-header").innerText = activeDocObj.name.toUpperCase();
+      document.getElementById("modal-canvas-name").innerText = cand.name;
+      document.getElementById("modal-canvas-code").innerText = cand.empCode || cand.id;
+      document.getElementById("modal-canvas-dob").innerText = cand.onboardingData.dob;
+      document.getElementById("modal-canvas-pan").innerText = cand.onboardingData.panNumber;
+      document.getElementById("modal-canvas-address").innerText = `${cand.onboardingData.houseStreet}, ${cand.onboardingData.city}, ${cand.onboardingData.state} - ${cand.onboardingData.postalCode}`;
+      
+      const badge = document.getElementById("modal-status-badge");
+      badge.innerText = activeDocObj.status;
+      badge.className = activeDocObj.status === "VERIFIED" ? "text-emerald-700 font-bold" : "text-amber-700 font-bold";
+
+      document.getElementById("doc-preview-modal").classList.remove("hidden");
+    }
+
+    function closeDocPreviewModal() {
+      document.getElementById("doc-preview-modal").classList.add("hidden");
+    }
+
+    function changeZoom(delta) {
+      currentZoom = Math.max(60, Math.min(180, currentZoom + delta));
+      applyZoom();
+    }
+
+    function resetZoom() {
+      currentZoom = 100;
+      applyZoom();
+    }
+
+    function applyZoom() {
+      document.getElementById("zoom-level-label").innerText = `${currentZoom}%`;
+      const card = document.getElementById("zoomable-doc-card");
+      card.style.transform = `scale(${currentZoom / 100})`;
+      card.style.transformOrigin = "top center";
+    }
+
+    function approveActiveDoc() {
+      if (!activeDocObj) return;
+      activeDocObj.status = "VERIFIED";
+      renderChecklist();
+      
+      // Update Candidate Clearance Flag if all 10 are verified
+      const cand = candidates.find(c => c.id === inspectedCandidateId);
+      const allVerified = docChecklist.every(d => d.status === "VERIFIED");
+      if (allVerified && cand) {
+        cand.allDocsVerified = true;
+        cand.progress = 100;
+        renderCandidateSelectionTable();
+        renderCandidatesMainList();
+      }
+
+      document.getElementById("modal-status-badge").innerText = "VERIFIED";
+      document.getElementById("modal-status-badge").className = "text-emerald-700 font-bold";
+      showToast("Document verified and approved.");
+    }
+
+    function rejectActiveDoc() {
+      const reason = document.getElementById("rejection-input").value.trim();
+      if (!reason) {
+        alert("Please provide a reason for rejection.");
+        return;
+      }
+      activeDocObj.status = "REUPLOAD_REQUIRED";
+      renderChecklist();
+      
+      const cand = candidates.find(c => c.id === inspectedCandidateId);
+      if (cand) cand.allDocsVerified = false;
+      renderCandidateSelectionTable();
+
+      document.getElementById("modal-status-badge").innerText = "REUPLOAD_REQUIRED";
+      document.getElementById("modal-status-badge").className = "text-rose-700 font-bold";
+      document.getElementById("rejection-input").value = "";
+      showToast("Document rejected and marked for candidate re-upload.");
+    }
+
+    function downloadCurrentAsset() {
+      if (!activeDocObj) return;
+      const cand = candidates.find(c => c.id === inspectedCandidateId) || candidates[0];
+      const text = `VISTA Engg Solutions Pvt Ltd\nDocument Archive: ${activeDocObj.name}\nCandidate: ${cand.name} (${cand.id})\nVerification Status: ${activeDocObj.status}\nAudit Hash: SHA256-VISTA-${activeDocObj.id}-CERT-2026`;
+      
+      const blob = new Blob([text], { type: "text/plain" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `${cand.firstName}_${activeDocObj.id}_verified.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast(`Downloaded ${activeDocObj.name}`);
+    }
+
+    // 50-COLUMN REPORT DOWNLOAD (OFFICIAL EMAIL COLUMN LEFT COMPLETELY BLANK)
+    function downloadSelectedSchedule() {
+      const targets = candidates.filter(c => selectedCandidateIds.includes(c.id));
+      const headers = [
+        "Srl", "First Name (as per SSLC Marks sheet)", "Last Name", "VISTA EMP ID",
+        "SOW JD", "PO No", "Tool Onboarding", "DOJ", "NT ID", "Client Emp number",
+        "Client PM", "Date of Birth", "Gender", "Nationality", "Contact Information",
+        "Official Email Id", "Password", "Personal Email ID", "Primary Contact Number",
+        "Alternate Contact Number", "Name", "Contact Number", "Pan Number",
+        "ID Type /Election Commision Photo ID / Driving license", "ID Number",
+        "House Number & Street - Matched as per Voter ID", "Land Mark - Matched as per Voter ID",
+        "City - Matched as per Voter ID", "State - Matched as per Voter ID - ",
+        "Postal Code - Matched as per Voter ID - ", "Same as Above Resident Address",
+        "Board", "Instituion", "Year of Passing", "Percentage", "Mode",
+        "Qualification", "Specialization", "Instituion", "Year of Passing",
+        "Percentage", "Mode", "Total Experience:", "Relevant Experience:",
+        "Have you previously worked with Client in the past year?*", "Blood Group",
+        "Client Emp No", "NT ID", "DOJ", "DOE"
+      ];
+
+      const rows = targets.map((c, idx) => {
+        const d = c.onboardingData || {};
+        return [
+          idx + 1, `"${c.firstName || ""}"`, `"${c.lastName || ""}"`, `"${c.empCode || ""}"`,
+          `""`, `""`, `""`, `"${c.targetDOJ || ""}"`, `""`, `""`, `""`,
+          `"${d.dob || ""}"`, `"${d.gender || ""}"`, `"${d.nationality || "Indian"}"`, `"${c.phone || ""}"`,
+          `""`, // OFFICIAL EMAIL IS LEFT BLANK
+          `""`, `"${c.email || ""}"`, `"${c.phone || ""}"`, `"${d.alternatePhone || ""}"`,
+          `"${d.parentName || "Mr. Guardian"}"`, `"${d.parentPhone || c.phone || ""}"`, `"${d.panNumber || ""}"`,
+          `"${d.idType || "Election Commission Photo ID"}"`, `"${d.idNumber || ""}"`,
+          `"${d.houseStreet || ""}"`, `"${d.landMark || ""}"`, `"${d.city || ""}"`,
+          `"${d.state || ""}"`, `"${d.postalCode || ""}"`, `"${d.sameAsResident ? "Yes" : "No"}"`,
+          `"${d.sslcBoard || "State Board"}"`, `"${d.sslcInstitution || ""}"`, `"${d.sslcYear || ""}"`,
+          `"${d.sslcPercentage || ""}"`, `"${d.sslcMode || "Regular"}"`,
+          `"${d.higherQualification || c.role || ""}"`, `"${d.higherSpecialization || ""}"`,
+          `"${d.higherInstitution || ""}"`, `"${d.higherYear || ""}"`, `"${d.higherPercentage || ""}"`,
+          `"${d.higherMode || "Regular"}"`, `"${d.totalExp || ""}"`, `"${d.relevantExp || ""}"`,
+          `"${d.prevWorkedBGSW || "No"}"`, `"${d.bloodGroup || ""}"`, `""`, `""`, `""`, `""`
+        ].join(",");
+      });
+
+      const csvContent = "\uFEFF" + [headers.join(","), ...rows].join("\r\n");
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `VISTA_Onboarding_Schedule_Selected_${new Date().toISOString().split("T")[0]}.csv`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast(`Exported ${targets.length} candidates in official 50-column schedule format.`);
+    }
+
+    // RENDER: DECONGESTED ACTIVE EMPLOYEES TABLE
+    function renderActiveEmployeesTable() {
+      const tbody = document.getElementById("active-employees-table-body");
+      const activeEmps = candidates.filter(c => c.status === "ONBOARDED");
+
+      tbody.innerHTML = activeEmps.map(emp => `
+        <tr class="hover:bg-slate-50 transition-colors">
+          <td class="py-4 px-6 font-semibold text-slate-900">
+            <div>${emp.name}</div>
+            <div class="text-[10px] text-slate-400 font-mono">${emp.officialEmail}</div>
+          </td>
+          <td class="py-4 px-4 font-mono font-bold text-emerald-800">
+            <span class="bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">${emp.empCode}</span>
+          </td>
+          <td class="py-4 px-4">
+            <div class="font-medium text-slate-800">${emp.role}</div>
+            <div class="text-[10px] text-slate-500">${emp.bu}</div>
+          </td>
+          <td class="py-4 px-4 text-slate-700 font-medium">${emp.doj || '2024-09-29'}</td>
+          <td class="py-4 px-4 text-slate-600">${emp.totalExp}</td>
+          <td class="py-4 px-4">
+            <span class="inline-flex items-center gap-1 text-[11px] font-bold text-purple-700 bg-purple-50 px-2.5 py-1 rounded-md border border-purple-200">
+              🎉 Work Anniversary
+            </span>
+          </td>
+          <td class="py-4 px-6 text-right space-x-2">
+            <button onclick="sendAnniversaryEmail('${emp.name}', '${emp.officialEmail}')" class="px-3 py-1.5 bg-purple-50 hover:bg-purple-100 text-purple-700 font-bold rounded-lg transition-all shadow-2xs">
+              Send Greetings
+            </button>
+            <button onclick="deboardEmployeePrompt('${emp.name}', '${emp.empCode}')" class="px-3 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 font-bold rounded-lg transition-all shadow-2xs">
+              Deboard
+            </button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function sendAnniversaryEmail(name, email) {
+      showToast(`Work Anniversary greetings sent to ${name} (${email}) and HR team!`);
+    }
+
+    function deboardEmployeePrompt(name, code) {
+      if (confirm(`Initiate separation and exit notification for ${name} (${code})?`)) {
+        showToast(`Deboarding notice dispatched for ${name}. Handover checklist generated.`);
+      }
+    }
+
+    // RENDER: ADMIN USER MANAGEMENT
+    function renderAdminUsersTable() {
+      const tbody = document.getElementById("admin-users-table-body");
+      tbody.innerHTML = systemUsers.map(u => `
+        <tr class="hover:bg-slate-50">
+          <td class="py-3 px-3 font-semibold text-slate-900">${u.name}</td>
+          <td class="py-3 px-3">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${u.role === 'ADMIN' ? 'bg-indigo-100 text-indigo-800' : 'bg-blue-100 text-blue-800'}">${u.role}</span>
+          </td>
+          <td class="py-3 px-3 font-mono text-slate-600">${u.email}</td>
+          <td class="py-3 px-3 text-right">
+            <button onclick="adminResetPassword('${u.name}')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-md">
+              Reset Password
+            </button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function adminCreateUser() {
+      const name = document.getElementById("admin-new-name").value.trim();
+      const email = document.getElementById("admin-new-email").value.trim();
+      const role = document.getElementById("admin-new-role").value;
+
+      if (!name || !email) {
+        alert("Please enter both Name and Email.");
+        return;
+      }
+
+      systemUsers.push({ id: `USR-0${systemUsers.length + 1}`, name, email, role });
+      document.getElementById("admin-new-name").value = "";
+      document.getElementById("admin-new-email").value = "";
+      renderAdminUsersTable();
+      showToast(`Provisioned system user account for ${name} (${role}).`);
+    }
+
+    function adminResetPassword(name) {
+      showToast(`Temporary password reset token generated and dispatched to ${name}.`);
+    }
+
+    // RENDER: BGV PIPELINE
+    function renderBGVList() {
+      const list = document.getElementById("bgv-pipeline-list");
+      list.innerHTML = candidates.map(c => `
+        <div class="p-3.5 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between text-xs">
+          <div>
+            <p class="font-bold text-slate-900">${c.name} (${c.id})</p>
+            <p class="text-slate-500">${c.role} • DOJ: ${c.targetDOJ}</p>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="px-2.5 py-1 rounded-full font-bold ${c.bgvStatus === 'BGV Cleared' ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-blue-800'}">${c.bgvStatus}</span>
+            <button onclick="clearBGV('${c.id}')" class="px-2.5 py-1 bg-white border border-slate-300 rounded-lg font-semibold hover:bg-slate-100">Mark Cleared</button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    function clearBGV(id) {
+      const cand = candidates.find(c => c.id === id);
+      if (cand) {
+        cand.bgvStatus = "BGV Cleared";
+        cand.progress = 100;
+        renderBGVList();
+        renderCandidatesMainList();
+        renderDashboardHires();
+        showToast(`BGV Cleared for ${cand.name}!`);
+      }
+    }
+
+    // Candidate Dropdown Population
+    function populateCandidateDropdown() {
+      const select = document.getElementById("inspected-candidate-select");
+      select.innerHTML = candidates.map(c => `<option value="${c.id}" ${c.id === inspectedCandidateId ? 'selected' : ''}>${c.name} (${c.id}) - ${c.type}</option>`).join("");
+    }
+
+    function changeInspectedCandidate(id) {
+      inspectedCandidateId = id;
+      renderChecklist();
+    }
+
+    // MODAL: CREATE CANDIDATE
+    function openCreateCandidateModal() {
+      document.getElementById("create-candidate-modal").classList.remove("hidden");
+    }
+    function closeCreateCandidateModal() {
+      document.getElementById("create-candidate-modal").classList.add("hidden");
+    }
+
+    function submitNewCandidate() {
+      const fn = document.getElementById("cand-new-fn").value || "Candidate";
+      const ln = document.getElementById("cand-new-ln").value || "User";
+      const email = document.getElementById("cand-new-email").value || "user@vista.com";
+      const bu = document.getElementById("cand-new-bu").value;
+      const cohort = document.getElementById("cand-new-cohort").value;
+      const role = document.getElementById("cand-new-role").value;
+      const rand = Math.floor(1000 + Math.random() * 9000);
+
+      const newCand = {
+        id: `VISTA-2026-${rand}`,
+        firstName: fn,
+        lastName: ln,
+        name: `${fn} ${ln}`,
+        role: role,
+        bu: bu,
+        location: "Bengaluru, KA, India",
+        progress: 0,
+        type: cohort,
+        status: "NOT_STARTED",
+        targetDOJ: "2026-11-01",
+        doj: "2026-11-01",
+        totalExp: cohort === "EXPERIENCED" ? "3.0 Years" : "Fresher (0 Yrs)",
+        email: email,
+        phone: "+91 98765 43210",
+        empCode: "",
+        officialEmail: "",
+        bgvStatus: "BGV Initiated",
+        allDocsVerified: false,
+        onboardingData: {
+          dob: "2002-01-01", gender: "Male", nationality: "Indian", panNumber: "PQRST1234Z",
+          idType: "Election Commission Photo ID", idNumber: "TN/01/990011",
+          houseStreet: "Street 1", city: "Bengaluru", state: "Karnataka", postalCode: "560001",
+          sameAsResident: true, sslcBoard: "State Board", sslcInstitution: "Govt High School",
+          sslcYear: "2018", sslcPercentage: "80%", sslcMode: "Regular", higherQualification: "B.Tech",
+          higherSpecialization: "Engineering", higherInstitution: "Anna University",
+          higherYear: "2024", higherPercentage: "78%", higherMode: "Regular",
+          totalExp: cohort === "EXPERIENCED" ? "3 Years" : "0", relevantExp: cohort === "EXPERIENCED" ? "3 Years" : "0",
+          prevWorkedBGSW: "No", bloodGroup: "O+ve", parentName: "Guardian Name", parentPhone: "+91 9988776655"
+        }
+      };
+
+      candidates.unshift(newCand);
+      closeCreateCandidateModal();
+      renderCandidatesMainList();
+      renderDashboardHires();
+      renderCandidateSelectionTable();
+      populateCandidateDropdown();
+      showToast(`Candidate ${newCand.name} enrolled with ID ${newCand.id}`);
+    }
+
+    // MODAL: GRAPH MONTH ROSTER
+    function openGraphModal(month) {
+      const records = monthlyRecords[month] || [];
+      document.getElementById("graph-modal-title").innerText = `Joined Employees in ${month} (${records.length} Records)`;
+      document.getElementById("graph-modal-body").innerHTML = records.map(r => `
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+          <p class="font-bold text-slate-900">${r.name}</p>
+          <p class="text-slate-600">${r.role}</p>
+        </div>
+      `).join("");
+      document.getElementById("graph-modal").classList.remove("hidden");
+    }
+
+    function closeGraphModal() {
+      document.getElementById("graph-modal").classList.add("hidden");
+    }
+
+    // Initialize Application
+    window.onload = function() {
+      populateCandidateDropdown();
+      renderChecklist();
+      renderCandidateSelectionTable();
+      renderDashboardHires();
+      renderCandidatesMainList();
+      renderActiveEmployeesTable();
+      renderBGVList();
+      renderAdminUsersTable();
+    };
+  </script>
+</body>
+</html>
