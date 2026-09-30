@@ -53,7 +53,6 @@
   <div id="auth-screen" class="fixed inset-0 z-50 bg-[#0A162B] flex items-center justify-center p-4">
     <div class="bg-white rounded-3xl max-w-md w-full p-8 shadow-2xl border border-slate-200/40 relative">
       <div class="flex flex-col items-center text-center">
-        <!-- VISTA Official Logo Card -->
         <div class="bg-[#0F2042] p-4 rounded-2xl shadow-md w-full flex flex-col items-center mb-6 border border-slate-800">
           <svg viewBox="0 0 460 170" class="h-11 w-auto" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="50" cy="110" r="7" fill="#E879F9" />
@@ -81,7 +80,6 @@
         <p class="text-xs text-slate-500 mt-1">Select login role or enter enterprise credentials</p>
       </div>
 
-      <!-- Quick Role Fill Pills -->
       <div class="grid grid-cols-3 gap-2 my-4">
         <button onclick="fillLoginCreds('admin@vistaengg.com', 'Vista@2026')" class="py-2 px-1 bg-indigo-50 hover:bg-indigo-100 text-indigo-700 text-[10px] font-bold rounded-xl border border-indigo-200 text-center">
           Admin Portal
@@ -97,7 +95,7 @@
       <form onsubmit="handleLoginSubmit(event)" class="space-y-3.5 text-xs">
         <div>
           <label class="block font-semibold text-slate-700 mb-1">Corporate / Employee Email or ID</label>
-          <input id="login-email" type="text" required placeholder="name@vistaengg.com or VISTA1854" value="admin@vistaengg.com" class="w-full border border-slate-300 rounded-xl p-2.5 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium" />
+          <input id="login-email" type="text" required placeholder="name@vistaengg.com or VISTA1854" value="andan.k@vistaengg.com" class="w-full border border-slate-300 rounded-xl p-2.5 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium" />
         </div>
         <div>
           <label class="block font-semibold text-slate-700 mb-1">Password</label>
@@ -138,82 +136,113 @@
             <text x="365" y="75" font-family="'Plus Jakarta Sans', sans-serif" font-weight="700" font-size="20" fill="#38BDF8">TM</text>
             <text x="260" y="150" font-family="'Plus Jakarta Sans', sans-serif" font-weight="600" font-size="18" fill="#94A3B8" letter-spacing="1">Innovation @ work</text>
           </svg>
-          <p class="text-[10px] text-slate-400 mt-2 font-medium tracking-wide uppercase">Enterprise Onboarding Suite</p>
+          <p id="portal-sidebar-title" class="text-[10px] text-slate-400 mt-2 font-medium tracking-wide uppercase">Enterprise Onboarding Suite</p>
         </div>
 
         <nav class="p-4 space-y-1.5" id="sidebar-nav">
-          <button onclick="switchTab('dashboard')" id="nav-dashboard" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-blue-600 text-white shadow-md transition-all">
-            <div class="flex items-center gap-3">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-              <span>Dashboard</span>
-            </div>
-          </button>
+          
+          <!-- ADMIN & HR NAVIGATION ITEMS -->
+          <div id="admin-hr-nav-group" class="space-y-1.5">
+            <button onclick="switchTab('dashboard')" id="nav-dashboard" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-blue-600 text-white shadow-md transition-all">
+              <div class="flex items-center gap-3">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                <span>Dashboard</span>
+              </div>
+            </button>
 
-          <button onclick="switchTab('candidates')" id="nav-candidates" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
-            <div class="flex items-center gap-3 min-w-0">
-              <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
-              <span class="truncate whitespace-nowrap">Candidates & Onboarding</span>
-            </div>
-            <span class="ml-2 px-2 py-0.5 text-[10px] font-semibold bg-emerald-500/20 text-emerald-300 rounded-full border border-emerald-500/30 shrink-0">Active</span>
-          </button>
+            <button onclick="switchTab('candidates')" id="nav-candidates" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
+              <div class="flex items-center gap-3 min-w-0">
+                <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                <span class="truncate whitespace-nowrap">Candidates & Onboarding</span>
+              </div>
+              <span class="ml-2 px-2 py-0.5 text-[10px] font-semibold bg-emerald-500/20 text-emerald-300 rounded-full border border-emerald-500/30 shrink-0">Active</span>
+            </button>
 
-          <button onclick="switchTab('documents')" id="nav-documents" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
-            <div class="flex items-center gap-3">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-              <span>Documents & Export</span>
-            </div>
-            <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded-full text-slate-400">Review</span>
-          </button>
+            <button onclick="switchTab('documents')" id="nav-documents" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
+              <div class="flex items-center gap-3">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                <span>Documents & Export</span>
+              </div>
+              <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded-full text-slate-400">Review</span>
+            </button>
 
-          <button onclick="switchTab('bgv')" id="nav-bgv" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
-            <div class="flex items-center gap-3">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-              <span>BGV Pipeline</span>
-            </div>
-            <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full">5 Stages</span>
-          </button>
+            <button onclick="switchTab('bgv')" id="nav-bgv" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
+              <div class="flex items-center gap-3">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                <span>BGV Pipeline</span>
+              </div>
+              <span class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full">5 Stages</span>
+            </button>
 
-          <!-- Ready for Onboarding Header -->
-          <button onclick="switchTab('ready-onboarding')" id="nav-ready-onboarding" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
-            <div class="flex items-center gap-3">
-              <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              <span>Ready for Onboarding</span>
-            </div>
-            <span id="ready-onboarding-count" class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-bold">2 Ready</span>
-          </button>
+            <button onclick="switchTab('ready-onboarding')" id="nav-ready-onboarding" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
+              <div class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <span>Ready for Onboarding</span>
+              </div>
+              <span id="ready-onboarding-count" class="text-[10px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-bold">2 Ready</span>
+            </button>
 
-          <button onclick="switchTab('employees')" id="nav-employees" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
-            <div class="flex items-center gap-3">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
-              <span>Active Employees</span>
-            </div>
-          </button>
+            <button onclick="switchTab('employees')" id="nav-employees" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
+              <div class="flex items-center gap-3">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
+                <span>Active Employees</span>
+              </div>
+            </button>
 
-          <button onclick="switchTab('employee-portal')" id="nav-employee-portal" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
-            <div class="flex items-center gap-3">
-              <svg class="w-4 h-4 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
-              <span>Employee Portal</span>
-            </div>
-            <span class="text-[10px] bg-cyan-500/20 text-cyan-300 px-2 py-0.5 rounded-full font-bold">Portal</span>
-          </button>
+            <button onclick="switchTab('admin')" id="nav-admin" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
+              <div class="flex items-center gap-3">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                <span>User & Role Admin</span>
+              </div>
+              <span class="text-[10px] bg-indigo-500/30 text-indigo-300 px-2 py-0.5 rounded-full font-bold">Admin</span>
+            </button>
+          </div>
 
-          <button onclick="switchTab('admin')" id="nav-admin" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
-            <div class="flex items-center gap-3">
-              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-              <span>User & Role Admin</span>
-            </div>
-            <span class="text-[10px] bg-indigo-500/30 text-indigo-300 px-2 py-0.5 rounded-full font-bold">Admin</span>
-          </button>
+          <!-- EMPLOYEE DEDICATED NAVIGATION GROUP -->
+          <div id="employee-only-nav-group" class="hidden space-y-1.5">
+            <button onclick="switchTab('emp-upload-docs')" id="nav-emp-upload-docs" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-blue-600 text-white shadow-md transition-all">
+              <div class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
+                <span>Upload Documents</span>
+              </div>
+              <span id="emp-nav-pending-badge" class="px-2 py-0.5 text-[10px] font-bold bg-amber-400 text-slate-900 rounded-full">Action</span>
+            </button>
+
+            <!-- CANDIDATE REVIEW & SUBMIT TO HR TAB -->
+            <button onclick="switchTab('emp-review-submit')" id="nav-emp-review-submit" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
+              <div class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-amber-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4"></path></svg>
+                <span>Review & Submit to HR</span>
+              </div>
+              <span id="emp-review-badge" class="text-[10px] bg-amber-500/20 text-amber-300 px-2 py-0.5 rounded-full font-bold">Review</span>
+            </button>
+
+            <button onclick="switchTab('emp-stage-tracker')" id="nav-emp-stage-tracker" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
+              <div class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                <span>Stage & BGV Tracker</span>
+              </div>
+              <span class="text-[10px] bg-slate-800 px-2 py-0.5 rounded-full text-slate-300 font-mono">Live</span>
+            </button>
+
+            <button onclick="switchTab('employee-portal')" id="nav-employee-portal" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold text-slate-300 hover:text-white hover:bg-slate-800/60 transition-all">
+              <div class="flex items-center gap-3">
+                <svg class="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                <span>My Profile & Policies</span>
+              </div>
+            </button>
+          </div>
+
         </nav>
       </div>
 
       <!-- Current Session Info -->
       <div class="p-4 border-t border-slate-800/80 bg-[#0B1833] flex items-center justify-between">
         <div class="flex items-center gap-2.5 min-w-0">
-          <div id="user-avatar" class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs ring-2 ring-blue-400/30">DV</div>
+          <div id="user-avatar" class="w-8 h-8 rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-xs ring-2 ring-blue-400/30">AK</div>
           <div class="min-w-0">
-            <p id="user-name" class="text-xs font-semibold text-white truncate">David Vance</p>
-            <p id="user-role" class="text-[10px] text-slate-400">System Administrator</p>
+            <p id="user-name" class="text-xs font-semibold text-white truncate">Andan Karinson</p>
+            <p id="user-role" class="text-[10px] text-slate-400">Employee Workspace</p>
           </div>
         </div>
         <button onclick="handleSwitchPortal()" class="p-1.5 text-slate-400 hover:text-white hover:bg-slate-800/80 rounded-lg transition-colors" title="Switch User / Portal">
@@ -239,21 +268,395 @@
           </div>
           <div>
             <h1 class="text-sm font-bold text-slate-900 leading-tight">VISTA Engg Solutions Private Limited</h1>
-            <p class="text-[10px] text-slate-500 font-medium">Enterprise Onboarding Suite</p>
+            <p id="topbar-portal-label" class="text-[10px] text-slate-500 font-medium">Enterprise Employee Workspace</p>
           </div>
-          <span id="role-badge" class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 ml-2">HR Operations</span>
+          <span id="role-badge" class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 ml-2">Employee Portal</span>
         </div>
 
         <div class="flex items-center gap-4">
           <div class="relative">
-            <input type="text" placeholder="Global search..." class="w-64 pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:bg-white focus:outline-none" />
+            <input type="text" placeholder="Search guidelines or docs..." class="w-64 pl-8 pr-3 py-1.5 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:bg-white focus:outline-none" />
             <svg class="w-3.5 h-3.5 absolute left-2.5 top-2 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
           </div>
         </div>
       </header>
 
       <!-- ======================================================== -->
-      <!-- TAB 1: DASHBOARD -->
+      <!-- EMPLOYEE TAB 1: SELF-DESCRIPTIVE DOCUMENT UPLOAD PORTAL -->
+      <!-- ======================================================== -->
+      <div id="tab-emp-upload-docs" class="hidden p-8 space-y-6">
+        
+        <div class="bg-gradient-to-r from-[#0F2042] to-[#1E3A8A] text-white p-6 rounded-2xl shadow-md border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div class="space-y-1">
+            <div class="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 text-[11px] font-bold border border-cyan-400/30">
+              <span class="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse"></span> Self-Descriptive Upload Center
+            </div>
+            <h2 class="text-lg font-bold">Upload Your Statutory & Joining Documents</h2>
+            <p class="text-xs text-slate-300 max-w-2xl leading-relaxed">
+              Checklist dynamically customized for your cohort (<strong id="emp-cohort-label" class="text-cyan-300 uppercase">EXPERIENCED</strong>). <strong>Front and Back side</strong> uploads are supported wherever dual sides are required. Accepted formats: <strong>PDF, PNG, JPG</strong> up to <strong>5 MB</strong>.
+            </p>
+          </div>
+          <div class="p-3 bg-white/10 rounded-xl backdrop-blur-xs border border-white/10 text-center shrink-0">
+            <p class="text-[10px] text-slate-300 font-semibold uppercase">Mandatory Documents</p>
+            <p id="emp-doc-stats-overview" class="text-xl font-extrabold text-white font-mono mt-0.5">0 / 0 Verified</p>
+          </div>
+        </div>
+
+        <div class="space-y-4" id="emp-upload-cards-list"></div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- EMPLOYEE TAB 2: REVIEW EXTRACTED INFORMATION & SUBMIT TO HR -->
+      <!-- ======================================================== -->
+      <div id="tab-emp-review-submit" class="hidden p-8 space-y-6">
+        
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-6">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b pb-4">
+            <div>
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
+                <h3 class="text-base font-bold text-slate-900">Extracted Dossier Review & Final Submission</h3>
+              </div>
+              <p class="text-xs text-slate-500 mt-0.5">Review your extracted statutory records, emergency details, education, and credentials before submission to HR.</p>
+            </div>
+            <div id="dossier-submission-pill" class="px-3.5 py-1.5 rounded-xl text-xs font-bold bg-amber-50 text-amber-800 border border-amber-300 flex items-center gap-2">
+              <span class="w-2 h-2 rounded-full bg-amber-500"></span>
+              <span>Pending Candidate Submission</span>
+            </div>
+          </div>
+
+          <!-- Section 1: Demographics, Identifiers & Blood Group -->
+          <div class="space-y-3">
+            <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wide flex items-center gap-2">
+              <span class="w-1.5 h-3.5 bg-blue-600 rounded-full"></span>
+              1. Demographics & Statutory Identifiers
+            </h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs">
+              <div>
+                <p class="text-[10px] uppercase font-bold text-slate-400">Legal Full Name (as per SSLC)</p>
+                <p id="review-full-name" class="font-bold text-slate-900 mt-0.5">—</p>
+              </div>
+              <div>
+                <p class="text-[10px] uppercase font-bold text-slate-400">VISTA EMP ID</p>
+                <p id="review-emp-id" class="font-mono font-bold text-blue-800 mt-0.5">—</p>
+              </div>
+              <div>
+                <p class="text-[10px] uppercase font-bold text-slate-400">Date of Birth</p>
+                <p id="review-dob" class="font-semibold text-slate-800 mt-0.5">—</p>
+              </div>
+              <div>
+                <p class="text-[10px] uppercase font-bold text-slate-400">Gender</p>
+                <p id="review-gender" class="font-semibold text-slate-800 mt-0.5">—</p>
+              </div>
+              <div>
+                <p class="text-[10px] uppercase font-bold text-slate-400">Nationality</p>
+                <p id="review-nationality" class="font-semibold text-slate-800 mt-0.5">—</p>
+              </div>
+              <div>
+                <p class="text-[10px] uppercase font-bold text-slate-400">Blood Group</p>
+                <p id="review-blood-group" class="font-bold text-rose-700 mt-0.5 font-mono">—</p>
+              </div>
+              <div>
+                <p class="text-[10px] uppercase font-bold text-slate-400">Permanent PAN Number</p>
+                <p id="review-pan" class="font-mono font-bold text-slate-900 mt-0.5">—</p>
+              </div>
+              <div>
+                <p class="text-[10px] uppercase font-bold text-slate-400">ID Type & ID Number</p>
+                <p id="review-id-type-number" class="font-mono font-bold text-slate-900 mt-0.5">—</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Contact Information & Alternate Contacts with Names -->
+          <div class="space-y-3">
+            <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wide flex items-center gap-2">
+              <span class="w-1.5 h-3.5 bg-emerald-600 rounded-full"></span>
+              2. Contact & Alternate Emergency Contacts
+            </h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs">
+              <div>
+                <p class="text-[10px] uppercase font-bold text-slate-400">Primary Contact Number</p>
+                <p id="review-phone" class="font-semibold text-slate-800 mt-0.5 font-mono">—</p>
+              </div>
+              <div>
+                <p class="text-[10px] uppercase font-bold text-slate-400">Personal Email ID</p>
+                <p id="review-email" class="font-mono text-slate-700 mt-0.5 truncate">—</p>
+              </div>
+              <div>
+                <p class="text-[10px] uppercase font-bold text-slate-400">Alternate Contact 1 (Name & No)</p>
+                <p id="review-alt-contact-1" class="font-semibold text-slate-800 mt-0.5">—</p>
+              </div>
+              <div>
+                <p class="text-[10px] uppercase font-bold text-slate-400">Alternate Contact 2 (Name & No)</p>
+                <p id="review-alt-contact-2" class="font-semibold text-slate-800 mt-0.5">—</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 3: Residential Address, City, State & Postal Code -->
+          <div class="space-y-3">
+            <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wide flex items-center gap-2">
+              <span class="w-1.5 h-3.5 bg-indigo-600 rounded-full"></span>
+              3. Matched Registered Address Details
+            </h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs">
+              <div class="lg:col-span-2">
+                <p class="text-[10px] uppercase font-bold text-slate-400">House & Street (as per Voter ID)</p>
+                <p id="review-street" class="font-semibold text-slate-800 mt-0.5">—</p>
+              </div>
+              <div>
+                <p class="text-[10px] uppercase font-bold text-slate-400">City</p>
+                <p id="review-city" class="font-semibold text-slate-800 mt-0.5">—</p>
+              </div>
+              <div>
+                <p class="text-[10px] uppercase font-bold text-slate-400">State & Postal Code</p>
+                <p id="review-state-postal" class="font-semibold text-slate-800 mt-0.5 font-mono">—</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 4: Academic Records (Institution, Year of Passing, Percentage, Degree, Specialization) -->
+          <div class="space-y-3">
+            <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wide flex items-center gap-2">
+              <span class="w-1.5 h-3.5 bg-amber-600 rounded-full"></span>
+              4. Academic Qualifications & Educational Institution Records
+            </h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-xs">
+              <!-- SSLC / 10th Card -->
+              <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                <span class="text-[10px] uppercase font-bold text-amber-700 bg-amber-100 px-2 py-0.5 rounded">Secondary (10th / SSLC)</span>
+                <div>
+                  <p class="text-[10px] uppercase font-bold text-slate-400">Institution</p>
+                  <p id="review-sslc-institution" class="font-semibold text-slate-900 mt-0.5">—</p>
+                </div>
+                <div class="grid grid-cols-2 gap-2 pt-1 border-t border-slate-200">
+                  <div>
+                    <p class="text-[10px] uppercase font-bold text-slate-400">Year of Passing</p>
+                    <p id="review-sslc-year" class="font-mono font-bold text-slate-800 mt-0.5">—</p>
+                  </div>
+                  <div>
+                    <p class="text-[10px] uppercase font-bold text-slate-400">Percentage / CGPA</p>
+                    <p id="review-sslc-percentage" class="font-mono font-bold text-emerald-700 mt-0.5">—</p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Degree / Higher Qualification Card -->
+              <div class="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-2">
+                <span class="text-[10px] uppercase font-bold text-blue-700 bg-blue-100 px-2 py-0.5 rounded">Higher Education / Degree</span>
+                <div class="grid grid-cols-2 gap-2">
+                  <div>
+                    <p class="text-[10px] uppercase font-bold text-slate-400">Qualification</p>
+                    <p id="review-higher-qualification" class="font-bold text-slate-900 mt-0.5">—</p>
+                  </div>
+                  <div>
+                    <p class="text-[10px] uppercase font-bold text-slate-400">Specialization</p>
+                    <p id="review-higher-specialization" class="font-semibold text-slate-900 mt-0.5">—</p>
+                  </div>
+                </div>
+                <div>
+                  <p class="text-[10px] uppercase font-bold text-slate-400">Institution</p>
+                  <p id="review-higher-institution" class="font-semibold text-slate-900 mt-0.5">—</p>
+                </div>
+                <div class="grid grid-cols-2 gap-2 pt-1 border-t border-slate-200">
+                  <div>
+                    <p class="text-[10px] uppercase font-bold text-slate-400">Year of Passing</p>
+                    <p id="review-higher-year" class="font-mono font-bold text-slate-800 mt-0.5">—</p>
+                  </div>
+                  <div>
+                    <p class="text-[10px] uppercase font-bold text-slate-400">Percentage / CGPA</p>
+                    <p id="review-higher-percentage" class="font-mono font-bold text-emerald-700 mt-0.5">—</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 5: Experience Records -->
+          <div class="space-y-3">
+            <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wide flex items-center gap-2">
+              <span class="w-1.5 h-3.5 bg-cyan-600 rounded-full"></span>
+              5. Professional Experience Credentials
+            </h4>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 bg-slate-50 p-4 rounded-xl border border-slate-200 text-xs">
+              <div>
+                <p class="text-[10px] uppercase font-bold text-slate-400">Total Experience</p>
+                <p id="review-total-exp" class="font-mono font-bold text-slate-900 mt-0.5 text-sm">—</p>
+              </div>
+              <div>
+                <p class="text-[10px] uppercase font-bold text-slate-400">Relevant Experience</p>
+                <p id="review-relevant-exp" class="font-mono font-bold text-blue-900 mt-0.5 text-sm">—</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 6: Uploaded Document Assets Matrix -->
+          <div class="space-y-3">
+            <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wide flex items-center gap-2">
+              <span class="w-1.5 h-3.5 bg-slate-700 rounded-full"></span>
+              6. Uploaded Document Verification Matrix
+            </h4>
+            <div class="overflow-x-auto border border-slate-200 rounded-xl">
+              <table class="w-full text-left text-xs border-collapse">
+                <thead>
+                  <tr class="bg-slate-50 text-slate-600 font-semibold border-b border-slate-200">
+                    <th class="py-2.5 px-4">#</th>
+                    <th class="py-2.5 px-4">Checklist Item</th>
+                    <th class="py-2.5 px-4">Category</th>
+                    <th class="py-2.5 px-4">Front Side / Primary Asset</th>
+                    <th class="py-2.5 px-4">Back Side Asset</th>
+                    <th class="py-2.5 px-4 text-center">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="review-doc-matrix-body" class="divide-y divide-slate-100"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Section 7: Extracted Self-Declaration Notes -->
+          <div class="space-y-2">
+            <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wide flex items-center gap-2">
+              <span class="w-1.5 h-3.5 bg-purple-600 rounded-full"></span>
+              7. Self-Declaration & Additional Remarks
+            </h4>
+            <div id="review-remarks-box" class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-700 font-mono italic">
+              "No remarks provided yet."
+            </div>
+          </div>
+
+          <!-- Section 8: Declaration Checkbox & Submission CTA -->
+          <div class="p-5 rounded-2xl bg-blue-50/60 border border-blue-200 space-y-4">
+            <label class="flex items-start gap-3 cursor-pointer">
+              <input id="candidate-certify-checkbox" type="checkbox" class="mt-1 w-4 h-4 rounded text-blue-600 border-slate-300 focus:ring-blue-500 cursor-pointer" />
+              <span class="text-xs text-slate-700 leading-relaxed">
+                I hereby declare that all information, front & back document scans, and declarations provided above are true, complete, and authentic to the best of my knowledge. I understand that any false declaration or mismatched statutory proofs will impact my background verification and employment tenure at VISTA Engg Solutions.
+              </span>
+            </label>
+            <div class="flex items-center justify-between pt-2 border-t border-blue-200/80">
+              <p class="text-[11px] text-slate-500">Ensure all mandatory items are green before finalizing.</p>
+              <button id="submit-dossier-hr-btn" onclick="submitDossierToHR()" class="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 active:scale-95 text-white font-bold rounded-xl text-xs shadow-md transition-all flex items-center gap-2">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                <span>Confirm & Submit Dossier to HR</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- EMPLOYEE TAB 3: STAGE & VERIFICATION PIPELINE TRACKER -->
+      <!-- ======================================================== -->
+      <div id="tab-emp-stage-tracker" class="hidden p-8 space-y-6">
+        
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-6">
+          <div>
+            <h3 class="text-base font-bold text-slate-900">Your Onboarding & BGV Clearance Pipeline</h3>
+            <p class="text-xs text-slate-500 mt-0.5">Track the live audit progress of your statutory documents across all five mandatory checkpoints.</p>
+          </div>
+
+          <div class="relative">
+            <div class="overflow-hidden h-1.5 mb-4 text-xs flex rounded bg-slate-100">
+              <div id="emp-stepper-bar" style="width: 60%" class="shadow-none flex flex-col text-center whitespace-nowrap text-white justify-center bg-blue-600 transition-all duration-500"></div>
+            </div>
+            <div class="grid grid-cols-5 text-center text-xs gap-2">
+              <div class="space-y-1">
+                <span class="w-6 h-6 mx-auto rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-[10px]">✓</span>
+                <p class="font-bold text-slate-900">1. Initiated</p>
+                <p class="text-[10px] text-emerald-600">Completed</p>
+              </div>
+              <div class="space-y-1">
+                <span id="step-2-circle" class="w-6 h-6 mx-auto rounded-full bg-emerald-600 text-white flex items-center justify-center font-bold text-[10px]">✓</span>
+                <p class="font-bold text-slate-900">2. Uploaded</p>
+                <p id="step-2-status" class="text-[10px] text-emerald-600">Completed</p>
+              </div>
+              <div class="space-y-1">
+                <span id="step-3-circle" class="w-6 h-6 mx-auto rounded-full bg-blue-600 text-white flex items-center justify-center font-bold text-[10px]">3</span>
+                <p class="font-bold text-slate-900">3. Verification</p>
+                <p id="step-3-status" class="text-[10px] text-blue-600 font-semibold">In Progress</p>
+              </div>
+              <div class="space-y-1">
+                <span id="step-4-circle" class="w-6 h-6 mx-auto rounded-full bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-[10px]">4</span>
+                <p class="font-bold text-slate-500">4. Clarification</p>
+                <p id="step-4-status" class="text-[10px] text-slate-400">If Needed</p>
+              </div>
+              <div class="space-y-1">
+                <span id="step-5-circle" class="w-6 h-6 mx-auto rounded-full bg-slate-200 text-slate-600 flex items-center justify-center font-bold text-[10px]">5</span>
+                <p class="font-bold text-slate-500">5. BGV Cleared</p>
+                <p id="step-5-status" class="text-[10px] text-slate-400">Final Gate</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+          <div class="p-4 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+            <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wide">Detailed Document Audit Breakdown</h4>
+            <span class="text-xs font-semibold text-slate-500">Auto-updated on compliance check</span>
+          </div>
+          <table class="w-full text-left border-collapse text-xs">
+            <thead>
+              <tr class="border-b border-slate-200 bg-slate-100/60 text-slate-600 font-semibold">
+                <th class="py-3 px-5">Document / Field Name</th>
+                <th class="py-3 px-4">Category</th>
+                <th class="py-3 px-4">Requirement</th>
+                <th class="py-3 px-4">Audit Status</th>
+                <th class="py-3 px-6 text-right">HR Review Remarks</th>
+              </tr>
+            </thead>
+            <tbody id="emp-audit-table-body" class="divide-y divide-slate-100"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- EMPLOYEE TAB 4: MY PROFILE & VISTA CORPORATE POLICIES -->
+      <!-- ======================================================== -->
+      <div id="tab-employee-portal" class="hidden p-8 space-y-6">
+        <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-6">
+          <div class="flex items-center justify-between border-b pb-4">
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Employee Workspace & Official Profile</h3>
+              <p class="text-xs text-slate-500">Enterprise credentials, joining dossier info, and corporate compliance guidelines.</p>
+            </div>
+            <span class="px-3 py-1 bg-emerald-50 text-emerald-700 text-xs font-bold rounded-full border border-emerald-200">Active Employment</span>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+              <p class="font-bold text-slate-800">Your Permanent Employee Code</p>
+              <p id="portal-emp-code" class="text-2xl font-extrabold text-blue-900 font-mono">VISTA1854</p>
+              <p class="text-[11px] text-slate-500">Configured for biometric, attendance & intranet access</p>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+              <p class="font-bold text-slate-800">Official Enterprise Email</p>
+              <p id="portal-emp-email" class="text-xs font-semibold text-slate-800 font-mono truncate">andan.k@vistaengg.com</p>
+              <p class="text-[11px] text-slate-500">Configured on Microsoft Exchange 365</p>
+            </div>
+            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
+              <p class="font-bold text-slate-800">Joining Date & Notice Policy</p>
+              <p id="portal-emp-doj" class="text-xs font-semibold text-purple-700 font-mono">2024-09-29</p>
+              <p id="portal-emp-notice" class="text-[11px] text-slate-500">Standard Notice Duration: 90 Days</p>
+            </div>
+          </div>
+
+          <div class="mt-4 pt-4 border-t border-slate-100 space-y-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <h4 class="text-xs font-bold text-slate-800 uppercase tracking-wide">VISTA Corporate Policies & Compliance Handbooks</h4>
+                <p class="text-[11px] text-slate-500">Employees are mandated to review and stay compliant with all organizational policies.</p>
+              </div>
+              <span class="text-[10px] bg-blue-50 text-blue-700 font-bold px-2 py-1 rounded-md border border-blue-200">5 Active Handbooks</span>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5" id="corporate-policies-grid"></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ======================================================== -->
+      <!-- TAB 1: DASHBOARD (ADMIN & HR ONLY) -->
       <!-- ======================================================== -->
       <div id="tab-dashboard" class="p-8 space-y-6">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -361,9 +764,7 @@
                   <th class="pb-2 text-center">Action</th>
                 </tr>
               </thead>
-              <tbody id="dashboard-hires-body" class="divide-y divide-slate-100">
-                <!-- Dynamically populated -->
-              </tbody>
+              <tbody id="dashboard-hires-body" class="divide-y divide-slate-100"></tbody>
             </table>
           </div>
 
@@ -371,7 +772,7 @@
             <div class="flex items-center justify-between mb-2">
               <div>
                 <h4 class="text-sm font-bold text-slate-900">Monthly Offers & Hires</h4>
-                <p class="text-[11px] text-slate-500">Click any bar to see who joined that month</p>
+                <p class="text-[11px] text-slate-500">Offers released vs confirmed joinings</p>
               </div>
               <div class="flex items-center gap-3 text-xs font-semibold">
                 <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 bg-blue-900 rounded-xs"></span> Hired</span>
@@ -427,7 +828,7 @@
       </div>
 
       <!-- ======================================================== -->
-      <!-- TAB 2: CANDIDATE DIRECTORY & CONVERSION GATEWAY -->
+      <!-- TAB 2: CANDIDATE DIRECTORY (ADMIN & HR ONLY) -->
       <!-- ======================================================== -->
       <div id="tab-candidates" class="hidden p-8 space-y-6">
         <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
@@ -456,16 +857,14 @@
                   <th class="py-3 px-6 text-right">Onboard Action</th>
                 </tr>
               </thead>
-              <tbody id="candidates-full-table-body" class="divide-y divide-slate-100">
-                <!-- Dynamically populated -->
-              </tbody>
+              <tbody id="candidates-full-table-body" class="divide-y divide-slate-100"></tbody>
             </table>
           </div>
         </div>
       </div>
 
       <!-- ======================================================== -->
-      <!-- TAB 3: DOCUMENTS & STATUTORY EXPORT (50-COL EXACT XLS FORMAT) -->
+      <!-- TAB 3: DOCUMENTS AUDIT & EXPORT (ADMIN & HR ONLY) -->
       <!-- ======================================================== -->
       <div id="tab-documents" class="hidden p-8 space-y-6">
         <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -474,9 +873,7 @@
             <p class="text-xs text-slate-500 mt-0.5">Inspect documents one by one to verify authenticity. The master schedule unlocks only when 100% of candidate documents are verified.</p>
           </div>
           <div class="flex items-center gap-3">
-            <span id="statutory-global-status" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">
-              Auditing in progress
-            </span>
+            <span id="statutory-global-status" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">Auditing in progress</span>
           </div>
         </div>
 
@@ -484,19 +881,14 @@
           <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-100 gap-3">
             <div class="flex items-center gap-3">
               <label class="text-xs font-bold text-slate-700">Inspect Candidate Checklist:</label>
-              <select id="inspected-candidate-select" onchange="changeInspectedCandidate(this.value)" class="text-xs border border-slate-300 rounded-lg p-2 font-semibold text-slate-800 bg-slate-50 focus:bg-white">
-                <!-- Dynamically populated -->
-              </select>
+              <select id="inspected-candidate-select" onchange="changeInspectedCandidate(this.value)" class="text-xs border border-slate-300 rounded-lg p-2 font-semibold text-slate-800 bg-slate-50 focus:bg-white"></select>
             </div>
             <div class="flex items-center gap-2">
-              <span id="verified-counter-badge" class="text-xs font-bold text-slate-700 font-mono">10 OF 10 VERIFIED</span>
+              <span id="verified-counter-badge" class="text-xs font-bold text-slate-700 font-mono">0 OF 0 VERIFIED</span>
               <span id="inspected-cohort-badge" class="px-2 py-0.5 rounded-full text-[10px] font-bold bg-blue-50 text-blue-700 border border-blue-200">EXPERIENCED</span>
             </div>
           </div>
-
-          <div id="document-checklist-container" class="space-y-3">
-            <!-- Dynamically populated -->
-          </div>
+          <div id="document-checklist-container" class="space-y-3"></div>
         </div>
 
         <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
@@ -519,9 +911,7 @@
                 <th class="py-3 px-4">Voter ID / Matched Address</th>
               </tr>
             </thead>
-            <tbody id="candidates-table-body" class="divide-y divide-slate-100">
-              <!-- Dynamically populated -->
-            </tbody>
+            <tbody id="candidates-table-body" class="divide-y divide-slate-100"></tbody>
           </table>
 
           <div class="p-4 bg-slate-50 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-3">
@@ -535,7 +925,7 @@
       </div>
 
       <!-- ======================================================== -->
-      <!-- TAB 4: BGV PIPELINE (100% APPROVAL ENFORCED GATE) -->
+      <!-- TAB 4: BGV PIPELINE (ADMIN & HR ONLY) -->
       <!-- ======================================================== -->
       <div id="tab-bgv" class="hidden p-8 space-y-6">
         <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-4">
@@ -551,14 +941,12 @@
             <div class="p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700">4. Clarification Required</div>
             <div class="p-2.5 rounded-xl bg-slate-100 border border-slate-200 text-slate-700">5. BGV Cleared</div>
           </div>
-          <div id="bgv-pipeline-list" class="space-y-3">
-            <!-- Dynamically populated -->
-          </div>
+          <div id="bgv-pipeline-list" class="space-y-3"></div>
         </div>
       </div>
 
       <!-- ======================================================== -->
-      <!-- TAB 5: READY FOR ONBOARDING -->
+      <!-- TAB 5: READY FOR ONBOARDING (ADMIN & HR ONLY) -->
       <!-- ======================================================== -->
       <div id="tab-ready-onboarding" class="hidden p-8 space-y-6">
         <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
@@ -585,16 +973,14 @@
                   <th class="py-3 px-6 text-right">Onboard Action</th>
                 </tr>
               </thead>
-              <tbody id="ready-onboarding-table-body" class="divide-y divide-slate-100">
-                <!-- Dynamically populated -->
-              </tbody>
+              <tbody id="ready-onboarding-table-body" class="divide-y divide-slate-100"></tbody>
             </table>
           </div>
         </div>
       </div>
 
       <!-- ======================================================== -->
-      <!-- TAB 6: ACTIVE EMPLOYEES & SEPARATION GATEWAY -->
+      <!-- TAB 6: ACTIVE EMPLOYEES DIRECTORY (ADMIN & HR ONLY) -->
       <!-- ======================================================== -->
       <div id="tab-employees" class="hidden p-8 space-y-6">
         <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
@@ -619,49 +1005,14 @@
                   <th class="py-3 px-6 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody id="active-employees-table-body" class="divide-y divide-slate-100">
-                <!-- Dynamically populated -->
-              </tbody>
+              <tbody id="active-employees-table-body" class="divide-y divide-slate-100"></tbody>
             </table>
           </div>
         </div>
       </div>
 
       <!-- ======================================================== -->
-      <!-- TAB 7: EMPLOYEE SELF-SERVICE PORTAL -->
-      <!-- ======================================================== -->
-      <div id="tab-employee-portal" class="hidden p-8 space-y-6">
-        <div class="bg-white rounded-2xl border border-slate-200 shadow-xs p-6 space-y-5">
-          <div class="flex items-center justify-between border-b pb-4">
-            <div>
-              <h3 class="text-base font-bold text-slate-900">Employee Self-Service Portal</h3>
-              <p class="text-xs text-slate-500">Access your credentials, joining dossier, and separation timeline.</p>
-            </div>
-            <span class="px-3 py-1 bg-emerald-50 text-emerald-700 text-xs font-bold rounded-full border border-emerald-200">Active Employment</span>
-          </div>
-
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-              <p class="font-bold text-slate-800">Your Permanent Employee Code</p>
-              <p id="portal-emp-code" class="text-2xl font-extrabold text-blue-900 font-mono">VISTA1854</p>
-              <p class="text-[11px] text-slate-500">Used for biometric and intranet access</p>
-            </div>
-            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-              <p class="font-bold text-slate-800">Official Enterprise Email</p>
-              <p id="portal-emp-email" class="text-xs font-semibold text-slate-800 font-mono truncate">andan.k@vistaengg.com</p>
-              <p class="text-[11px] text-slate-500">Configured on Microsoft Exchange</p>
-            </div>
-            <div class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-2">
-              <p class="font-bold text-slate-800">Joining Date & Notice Policy</p>
-              <p id="portal-emp-doj" class="text-xs font-semibold text-purple-700 font-mono">2024-09-29</p>
-              <p id="portal-emp-notice" class="text-[11px] text-slate-500">Standard Notice: 90 Days</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ======================================================== -->
-      <!-- TAB 8: ADMIN USER & ROLE MANAGEMENT -->
+      <!-- TAB 8: ADMIN USER & ROLE MANAGEMENT (ADMIN ONLY) -->
       <!-- ======================================================== -->
       <div id="tab-admin" class="hidden p-8 space-y-6">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -710,9 +1061,7 @@
                     <th class="py-2.5 px-3 text-right">Reset Access</th>
                   </tr>
                 </thead>
-                <tbody id="admin-users-table-body" class="divide-y divide-slate-100">
-                  <!-- Dynamically populated -->
-                </tbody>
+                <tbody id="admin-users-table-body" class="divide-y divide-slate-100"></tbody>
               </table>
             </div>
           </div>
@@ -722,9 +1071,7 @@
     </main>
   </div>
 
-  <!-- ======================================================== -->
-  <!-- MODAL: ONE-CLICK IN-APP DOCUMENT VIEWER WITH REJECTION BAR -->
-  <!-- ======================================================== -->
+  <!-- MODAL: ONE-CLICK IN-APP DOCUMENT VIEWER -->
   <div id="doc-preview-modal" class="hidden fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-3xl w-full shadow-2xl overflow-hidden border border-slate-200 flex flex-col max-h-[92vh]">
       <div class="p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50 shrink-0">
@@ -754,16 +1101,16 @@
           </div>
           <div class="border-b pb-4">
             <span class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Official Statutory Archive</span>
-            <h2 id="modal-canvas-header" class="text-base font-extrabold text-slate-900 mt-1">DOCUMENT VERIFICATION RECORD</h2>
+            <h2 id="modal-canvas-header" class="text-base font-extrabold text-slate-900 mt-1">DOCUMENT RECORD</h2>
             <p id="modal-canvas-id" class="text-[11px] text-slate-500">Issuer: Statutory Verification Board</p>
           </div>
           <div class="grid grid-cols-2 gap-3 py-2 bg-slate-50 p-3 rounded-lg border border-slate-200">
             <div>
-              <p class="text-slate-400 text-[10px] uppercase font-bold">Candidate Name</p>
+              <p class="text-slate-400 text-[10px] uppercase font-bold">Employee Name</p>
               <p id="modal-canvas-name" class="font-bold text-slate-800">-</p>
             </div>
             <div>
-              <p class="text-slate-400 text-[10px] uppercase font-bold">Candidate ID / Code</p>
+              <p class="text-slate-400 text-[10px] uppercase font-bold">Candidate / Employee Code</p>
               <p id="modal-canvas-code" class="font-bold text-slate-800 font-mono">-</p>
             </div>
             <div>
@@ -786,19 +1133,18 @@
         </div>
       </div>
 
-      <!-- Action Footer with Rejection Feedback Bar -->
       <div class="p-4 border-t border-slate-200 bg-white shrink-0 space-y-3">
-        <div class="flex items-center gap-2">
+        <div id="hr-reject-controls" class="flex items-center gap-2">
           <input id="rejection-input" type="text" placeholder="Rejection feedback if requesting re-upload..." class="flex-1 text-xs border border-slate-300 rounded-lg p-2 focus:ring-1 focus:ring-blue-500 focus:outline-none" />
           <button onclick="rejectActiveDoc()" class="px-3.5 py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-300 rounded-lg text-xs font-bold transition-all shrink-0">
             Reject & Request Re-upload
           </button>
         </div>
         <div class="flex items-center justify-between pt-1">
-          <span class="text-xs text-slate-500 font-medium">Document Status: <strong id="modal-status-badge" class="text-emerald-700 font-bold">VERIFIED</strong></span>
+          <span class="text-xs text-slate-500 font-medium">Status: <strong id="modal-status-badge" class="text-emerald-700 font-bold">VERIFIED</strong></span>
           <div class="flex items-center gap-2">
-            <button onclick="closeDocPreviewModal()" class="px-4 py-2 border border-slate-300 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-100">Cancel</button>
-            <button onclick="approveActiveDoc()" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-xs transition-all flex items-center gap-1.5">
+            <button onclick="closeDocPreviewModal()" class="px-4 py-2 border border-slate-300 rounded-xl text-xs font-semibold text-slate-700 hover:bg-slate-100">Close</button>
+            <button id="modal-approve-btn" onclick="approveActiveDoc()" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-xs transition-all flex items-center gap-1.5">
               <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
               Approve & Verify Document
             </button>
@@ -808,9 +1154,32 @@
     </div>
   </div>
 
-  <!-- ======================================================== -->
-  <!-- MODAL: DEBOARDING / SEPARATION GATEWAY WITH NOTICE CALCULATION -->
-  <!-- ======================================================== -->
+  <!-- MODAL: INTERACTIVE CORPORATE POLICY READER -->
+  <div id="policy-reader-modal" class="hidden fixed inset-0 z-50 bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-2xl w-full shadow-2xl overflow-hidden border border-slate-200 flex flex-col max-h-[90vh]">
+      <div class="p-4 border-b border-slate-200 flex items-center justify-between bg-slate-50 shrink-0">
+        <div>
+          <h4 id="policy-modal-title" class="text-sm font-bold text-slate-900">VISTA Policy Manual</h4>
+          <p id="policy-modal-ref" class="text-[11px] text-slate-500 font-mono">Ref: POL-2026-01</p>
+        </div>
+        <button onclick="closePolicyReaderModal()" class="text-slate-400 hover:text-slate-700 font-bold text-base px-2">✕</button>
+      </div>
+
+      <div class="flex-1 overflow-y-auto p-6 text-xs text-slate-700 space-y-4 leading-relaxed" id="policy-modal-content"></div>
+
+      <div class="p-4 border-t border-slate-200 bg-slate-50 flex items-center justify-between shrink-0">
+        <label class="flex items-center gap-2 cursor-pointer">
+          <input type="checkbox" id="policy-ack-checkbox" class="w-4 h-4 rounded text-blue-600" />
+          <span class="text-xs text-slate-700 font-semibold">I have read, understood, and agreed to abide by this policy.</span>
+        </label>
+        <button onclick="acknowledgePolicy()" class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl text-xs transition-all">
+          Acknowledge & Save
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: DEBOARDING / SEPARATION GATEWAY -->
   <div id="deboard-modal" class="hidden fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden border border-slate-200">
       <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
@@ -831,7 +1200,6 @@
           </select>
         </div>
 
-        <!-- 90 Days Notice Period Negotiation & LWD Box -->
         <div id="deboard-notice-box" class="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-3">
           <div class="flex items-center justify-between">
             <span class="font-bold text-slate-700">Notice Period Duration:</span>
@@ -847,7 +1215,6 @@
           </div>
         </div>
 
-        <!-- Custom Reason for 'Others' -->
         <div id="deboard-others-box" class="hidden space-y-1">
           <label class="block font-semibold text-slate-700">Describe Reason for Separation <span class="text-rose-500">*</span></label>
           <textarea id="deboard-reason-text" rows="3" placeholder="Provide detailed rationale for separation..." class="w-full border border-slate-300 rounded-lg p-2.5 text-xs focus:ring-1 focus:ring-blue-500 focus:outline-none"></textarea>
@@ -900,7 +1267,6 @@
             </select>
           </div>
         </div>
-        <!-- 90 Days Notice Period Setup for Joiner -->
         <div class="grid grid-cols-2 gap-3">
           <div>
             <label class="block font-semibold text-slate-600 mb-1">Standard Notice Period</label>
@@ -919,12 +1285,14 @@
     </div>
   </div>
 
+  <!-- ======================================================== -->
   <!-- JAVASCRIPT APPLICATION CORE -->
+  <!-- ======================================================== -->
   <script>
     let systemUsers = [
       { id: "USR-01", name: "David Vance", role: "ADMIN", email: "admin@vistaengg.com", pass: "Vista@2026" },
       { id: "USR-02", name: "Sarah Jenkins", role: "HR", email: "sarah.j@vistaengg.com", pass: "Vista@2026" },
-      { id: "USR-03", name: "Andan Karinson", role: "EMPLOYEE", email: "andan.k@vistaengg.com", pass: "Vista@2026", empCode: "VISTA1854" }
+      { id: "USR-03", name: "Andan Karinson", role: "EMPLOYEE", email: "andan.k@vistaengg.com", pass: "Vista@2026", empCode: "VISTA1854", candidateId: "VISTA-2026-8699" }
     ];
 
     let currentUser = null;
@@ -936,14 +1304,20 @@
         role: "Associate Software Engineer", bu: "Engineering", location: "Charlotte, NC, USA",
         progress: 0, type: "FRESHER", status: "NOT_STARTED", targetDOJ: "2026-10-15",
         noticeDays: 90, noticeLWD: "2027-01-13",
-        doj: "2026-10-15", totalExp: "Fresher (0 Yrs)", email: "carl.j@gmail.com", phone: "+91 98450 12345",
+        doj: "2026-10-15", totalExp: "0 Yrs (Fresher)", relevantExp: "0 Yrs", email: "carl.j@gmail.com", phone: "+91 98450 12345",
         empCode: "", officialEmail: "", bgvStatus: "BGV Initiated",
         allDocsVerified: false,
+        candidateSubmittedToHR: false,
         onboardingData: {
-          dob: "2003-04-12", gender: "Male", nationality: "Indian", panNumber: "ABCDE1234F",
+          dob: "2003-04-12", gender: "Male", nationality: "Indian", bloodGroup: "B+ve", panNumber: "ABCDE1234F",
           idType: "Election Commission Photo ID", idNumber: "TN/02/123456",
           houseStreet: "Flat 402, Green Glen Layout", landMark: "Near Outer Ring Road",
-          city: "Bengaluru", state: "Karnataka", postalCode: "560103", sameAsResident: true
+          city: "Bengaluru", state: "Karnataka", postalCode: "560103", sameAsResident: true,
+          alternateName1: "Robert Jacobs (Father)", alternatePhone1: "+91 98450 67890",
+          alternateName2: "Martha Jacobs (Mother)", alternatePhone2: "+91 98450 44332",
+          sslcInstitution: "Bishop Cotton Boys' School", sslcYear: "2019", sslcPercentage: "91.8%",
+          higherQualification: "B.Tech", higherSpecialization: "Computer Science and Engineering",
+          higherInstitution: "National Institute of Engineering", higherYear: "2023", higherPercentage: "84.2%"
         }
       },
       {
@@ -951,30 +1325,42 @@
         role: "Senior Full Stack Consultant", bu: "AI/ML Data Annotation", location: "Charlotte, NC, USA",
         progress: 27, type: "EXPERIENCED", status: "IN_PROGRESS", targetDOJ: "2026-10-05",
         noticeDays: 90, noticeLWD: "2027-01-03",
-        doj: "2026-10-05", totalExp: "4.5 Years", email: "robert.jones@outlook.com", phone: "+91 97891 37258",
+        doj: "2026-10-05", totalExp: "4.5 Years", relevantExp: "4.0 Years", email: "robert.jones@outlook.com", phone: "+91 97891 37258",
         empCode: "", officialEmail: "", bgvStatus: "Documents Submitted",
         allDocsVerified: false,
+        candidateSubmittedToHR: false,
         onboardingData: {
-          dob: "1998-11-23", gender: "Male", nationality: "Indian", panNumber: "XYZPQ9876K",
-          idType: "Election Commission Photo ID", idNumber: "TN/04/998877",
+          dob: "1998-11-23", gender: "Male", nationality: "Indian", bloodGroup: "A+ve", panNumber: "XYZPQ9876K",
+          idType: "Driving License", idNumber: "TN37 20180004567",
           houseStreet: "24/B, Avinashi Road, Peelamedu", landMark: "Opposite Fun Mall",
-          city: "Coimbatore", state: "Tamil Nadu", postalCode: "641004", sameAsResident: true
+          city: "Coimbatore", state: "Tamil Nadu", postalCode: "641004", sameAsResident: true,
+          alternateName1: "K. Jones (Brother)", alternatePhone1: "+91 97891 11223",
+          alternateName2: "Priya Jones (Spouse)", alternatePhone2: "+91 97891 88990",
+          sslcInstitution: "Stanes Anglo Indian Higher Secondary School", sslcYear: "2014", sslcPercentage: "89.5%",
+          higherQualification: "B.E.", higherSpecialization: "Information Technology",
+          higherInstitution: "PSG College of Technology", higherYear: "2018", higherPercentage: "82.0%"
         }
       },
       {
         id: "VISTA-2026-8699", firstName: "Andan", lastName: "Karinson", name: "Andan Karinson",
         role: "Embedded Systems Specialist", bu: "Engineering", location: "Bengaluru, KA, India",
-        progress: 100, type: "EXPERIENCED", status: "ONBOARDED", targetDOJ: "2026-09-10",
+        progress: 80, type: "EXPERIENCED", status: "IN_PROGRESS", targetDOJ: "2026-09-10",
         noticeDays: 90, noticeLWD: "2026-12-09",
-        doj: "2024-09-29", totalExp: "5.0 Years", email: "andan.k@gmail.com",
+        doj: "2024-09-29", totalExp: "5.0 Years", relevantExp: "4.8 Years", email: "andan.k@gmail.com",
         phone: "+91 94432 88776", empCode: "VISTA1854", officialEmail: "andan.karinson@vistaengg.com",
-        bgvStatus: "BGV Cleared",
-        allDocsVerified: true,
+        bgvStatus: "Verification In Progress",
+        allDocsVerified: false,
+        candidateSubmittedToHR: false,
         onboardingData: {
-          dob: "1997-07-15", gender: "Male", nationality: "Indian", panNumber: "AAAPK4433D",
+          dob: "1997-07-15", gender: "Male", nationality: "Indian", bloodGroup: "O+ve", panNumber: "AAAPK4433D",
           idType: "Election Commission Photo ID", idNumber: "KA/01/554433",
           houseStreet: "12, 4th Cross, Indiranagar", landMark: "Near Metro Pillar 42",
-          city: "Bengaluru", state: "Karnataka", postalCode: "560038", sameAsResident: true
+          city: "Bengaluru", state: "Karnataka", postalCode: "560038", sameAsResident: true,
+          alternateName1: "K. Karinson (Father)", alternatePhone1: "+91 94432 11223",
+          alternateName2: "Lakshmi Karinson (Mother)", alternatePhone2: "+91 94432 99881",
+          sslcInstitution: "St. Joseph's Boys High School", sslcYear: "2013", sslcPercentage: "92.4%",
+          higherQualification: "B.E.", higherSpecialization: "Electronics & Communication Engg",
+          higherInstitution: "PSG College of Technology", higherYear: "2017", higherPercentage: "86.5%"
         }
       },
       {
@@ -982,15 +1368,21 @@
         role: "Lead Cloud Architect", bu: "Engineering", location: "Bengaluru, KA, India",
         progress: 100, type: "EXPERIENCED", status: "ONBOARDED", targetDOJ: "2026-09-01",
         noticeDays: 90, noticeLWD: "2026-11-30",
-        doj: "2023-09-29", totalExp: "7.2 Years", email: "ananya.s@cloudmail.com",
+        doj: "2023-09-29", totalExp: "7.2 Years", relevantExp: "6.5 Years", email: "ananya.s@cloudmail.com",
         phone: "+91 98840 55667", empCode: "VISTA1855", officialEmail: "ananya.sharma@vistaengg.com",
         bgvStatus: "BGV Cleared",
         allDocsVerified: true,
+        candidateSubmittedToHR: true,
         onboardingData: {
-          dob: "1995-05-19", gender: "Female", nationality: "Indian", panNumber: "CKLPS7788R",
+          dob: "1995-05-19", gender: "Female", nationality: "Indian", bloodGroup: "AB+ve", panNumber: "CKLPS7788R",
           idType: "Election Commission Photo ID", idNumber: "KA/03/991122",
           houseStreet: "704, Skyline Towers, Bellandur", landMark: "EcoSpace Central Gate",
-          city: "Bengaluru", state: "Karnataka", postalCode: "560103", sameAsResident: true
+          city: "Bengaluru", state: "Karnataka", postalCode: "560103", sameAsResident: true,
+          alternateName1: "V. Sharma (Father)", alternatePhone1: "+91 98840 12345",
+          alternateName2: "Rohan Sharma (Spouse)", alternatePhone2: "+91 98840 88771",
+          sslcInstitution: "Delhi Public School", sslcYear: "2011", sslcPercentage: "94.6%",
+          higherQualification: "M.Tech", higherSpecialization: "Cloud Computing & Distributed Systems",
+          higherInstitution: "RV College of Engineering", higherYear: "2017", higherPercentage: "88.2%"
         }
       }
     ];
@@ -1000,23 +1392,259 @@
       { id: "VISTA1855", name: "Ananya Sharma", role: "Lead Cloud Architect", bu: "Engineering", doj: "2023-09-29", email: "ananya.s@vistaengg.com", exitType: null, exitStatus: "Active", lwd: null }
     ];
 
-    let inspectedCandidateId = "VISTA-2026-8650";
+    let inspectedCandidateId = "VISTA-2026-8699";
     let selectedCandidateIds = [];
     let currentZoom = 100;
     let activeDocObj = null;
 
     let docChecklist = [
-      { id: "sslc", name: "1. First Name & SSLC / 10th Marks Sheet", category: "EDUCATION", status: "VERIFIED", date: "2026-09-12" },
-      { id: "dob", name: "2. Date of Birth Proof", category: "IDENTITY", status: "VERIFIED", date: "2026-09-12" },
-      { id: "pan", name: "3. PAN Card Copy", category: "FINANCIAL", status: "VERIFIED", date: "2026-09-13" },
-      { id: "voter", name: "4. Election Commission Photo ID (Voter ID)", category: "IDENTITY", status: "VERIFIED", date: "2026-09-14" },
-      { id: "address", name: "5. House & Street Address Proof (Matched as per Voter ID)", category: "IDENTITY", status: "VERIFIED", date: "2026-09-14" },
-      { id: "degree", name: "6. Degree Certificate / Consolidated Marksheets", category: "EDUCATION", status: "VERIFIED", date: "2026-09-15" },
-      { id: "service", name: "7. Relieving & Service Certificates", category: "EXPERIENCE", status: "VERIFIED", date: "2026-09-15" },
-      { id: "payslips", name: "8. Last 3 Months Payslips & Form 16", category: "FINANCIAL", status: "VERIFIED", date: "2026-09-16" },
-      { id: "bgsw", name: "9. Previous Client Declaration (Past Year: No)", category: "COMPLIANCE", status: "VERIFIED", date: "2026-09-16" },
-      { id: "medical", name: "10. Blood Group & Medical Fitness", category: "MEDICAL", status: "VERIFIED", date: "2026-09-17" }
+      { 
+        id: "sslc", 
+        name: "1. SSLC / 10th Marks Sheet", 
+        category: "EDUCATION", 
+        instruction: "Provide a color scan of your 10th Standard / Matriculation marksheet. Your First Name and DOB will be verified against this record.",
+        acceptedTypes: "PDF or JPG (Max 5MB)",
+        hasFrontAndBack: true,
+        status: "VERIFIED", 
+        uploadedFileFront: "SSLC_Marksheet_Front.pdf",
+        uploadedFileBack: "SSLC_Pass_Certificate_Back.pdf",
+        date: "2026-09-12",
+        feedback: "Verified against state board database.",
+        targetCohort: "ALL",
+        isOptional: false,
+        isTextField: false
+      },
+      { 
+        id: "dob", 
+        name: "2. Date of Birth Proof (Birth Certificate / Passport)", 
+        category: "IDENTITY", 
+        instruction: "Submit government-issued Birth Certificate, Indian Passport, or SSLC page bearing unambiguous date of birth.",
+        acceptedTypes: "PDF or JPG (Max 5MB)",
+        hasFrontAndBack: true,
+        status: "VERIFIED", 
+        uploadedFileFront: "Passport_Front_Cover.pdf",
+        uploadedFileBack: "Passport_Address_Back.pdf",
+        date: "2026-09-12",
+        feedback: "Matches SSLC records.",
+        targetCohort: "ALL",
+        isOptional: false,
+        isTextField: false
+      },
+      { 
+        id: "pan", 
+        name: "3. Income Tax PAN Card Copy", 
+        category: "FINANCIAL", 
+        instruction: "Clear scan of your permanent PAN Card. Must reflect your full name, father's name, and 10-digit alphanumeric PAN.",
+        acceptedTypes: "PDF or PNG/JPG (Max 5MB)",
+        hasFrontAndBack: true,
+        status: "VERIFIED", 
+        uploadedFileFront: "PAN_Card_Front_Clear.pdf",
+        uploadedFileBack: "PAN_Card_Back_Barcode.pdf",
+        date: "2026-09-13",
+        feedback: "NSDL/ITD validation passed.",
+        targetCohort: "ALL",
+        isOptional: false,
+        isTextField: false
+      },
+      { 
+        id: "voter", 
+        name: "4. Election Commission Photo ID (Voter ID Card)", 
+        category: "IDENTITY", 
+        instruction: "Both Front and Back sides of your Voter ID card issued by Election Commission of India. Must show complete address.",
+        acceptedTypes: "PDF or JPG (Max 5MB)",
+        hasFrontAndBack: true,
+        status: "VERIFIED", 
+        uploadedFileFront: "Voter_ID_Card_Front.pdf",
+        uploadedFileBack: "Voter_ID_Card_Back_Address.pdf",
+        date: "2026-09-14",
+        feedback: "EPIC number matched.",
+        targetCohort: "ALL",
+        isOptional: false,
+        isTextField: false
+      },
+      { 
+        id: "address", 
+        name: "5. Address Proof (Matched as per Voter ID)", 
+        category: "IDENTITY", 
+        instruction: "Utility bill, Registered Rental Agreement, or Bank Passbook page matching current residence and Voter ID address.",
+        acceptedTypes: "PDF or JPG (Max 5MB)",
+        hasFrontAndBack: false,
+        status: "VERIFIED", 
+        uploadedFileFront: "Rental_Agreement_Registered.pdf",
+        uploadedFileBack: "",
+        date: "2026-09-14",
+        feedback: "Matched with residential records.",
+        targetCohort: "ALL",
+        isOptional: false,
+        isTextField: false
+      },
+      { 
+        id: "degree", 
+        name: "6. Degree Certificate / Consolidated Marksheets", 
+        category: "EDUCATION", 
+        instruction: "Convocation Degree Certificate or all semester consolidated transcripts of your highest qualifying university degree.",
+        acceptedTypes: "PDF only (Max 5MB)",
+        hasFrontAndBack: true,
+        status: "VERIFIED", 
+        uploadedFileFront: "BE_Degree_Convocation_Front.pdf",
+        uploadedFileBack: "BE_Degree_Transcript_Back.pdf",
+        date: "2026-09-15",
+        feedback: "University Roll Number authenticated.",
+        targetCohort: "ALL",
+        isOptional: false,
+        isTextField: false
+      },
+      { 
+        id: "service", 
+        name: "7. Relieving & Service Certificates", 
+        category: "EXPERIENCE", 
+        instruction: "Official relieving letter and experience certificate on company letterhead from all past employers.",
+        acceptedTypes: "PDF only (Max 5MB)",
+        hasFrontAndBack: false,
+        status: "VERIFIED", 
+        uploadedFileFront: "Prior_Employer_Relieving.pdf",
+        uploadedFileBack: "",
+        date: "2026-09-15",
+        feedback: "Dates aligned with PF / UAN timeline.",
+        targetCohort: "EXPERIENCED",
+        isOptional: false,
+        isTextField: false
+      },
+      { 
+        id: "payslips", 
+        name: "8. 6 Months Payslips & Form 16", 
+        category: "FINANCIAL", 
+        instruction: "Consecutive recent 6 months salary pay slips along with Part B of Form 16 from previous employers.",
+        acceptedTypes: "PDF only (Max 5MB)",
+        hasFrontAndBack: false,
+        status: "VERIFIED", 
+        uploadedFileFront: "6_Months_PaySlips_Signed.pdf",
+        uploadedFileBack: "",
+        date: "2026-09-16",
+        feedback: "6 months salary credits reconciled.",
+        targetCohort: "EXPERIENCED",
+        isOptional: false,
+        isTextField: false
+      },
+      { 
+        id: "increment", 
+        name: "9. Increment Letter / Hike Letter", 
+        category: "FINANCIAL", 
+        instruction: "Latest increment letter, hike letter, or annual compensation revision letter issued by prior employer.",
+        acceptedTypes: "PDF or JPG (Max 5MB)",
+        hasFrontAndBack: false,
+        status: "PENDING_REVIEW", 
+        uploadedFileFront: "Annual_Increment_Letter_2025.pdf",
+        uploadedFileBack: "",
+        date: "2026-09-18",
+        feedback: "Submitted for compensation review.",
+        targetCohort: "EXPERIENCED",
+        isOptional: false,
+        isTextField: false
+      },
+      { 
+        id: "covid", 
+        name: "10. COVID-19 Vaccination Certificate", 
+        category: "MEDICAL", 
+        instruction: "Official CoWIN / International health authority certificate confirming completion of Dose 1 & 2 or Booster immunization.",
+        acceptedTypes: "PDF or JPG (Max 5MB)",
+        hasFrontAndBack: false,
+        status: "VERIFIED", 
+        uploadedFileFront: "CoWIN_Final_Vaccination_Cert.pdf",
+        uploadedFileBack: "",
+        date: "2026-09-20",
+        feedback: "QR verified with Ministry of Health.",
+        targetCohort: "ALL",
+        isOptional: false,
+        isTextField: false
+      },
+      { 
+        id: "remarks", 
+        name: "11. Self-Declaration & Additional Remarks", 
+        category: "COMPLIANCE", 
+        instruction: "Please provide any relevant notes regarding gaps in employment, current notice period waivers, or specific induction remarks.",
+        acceptedTypes: "Plain Text Submission",
+        hasFrontAndBack: false,
+        status: "VERIFIED", 
+        textContent: "No pending integrity or criminal proceedings. Notice period buyout completed with past employer.",
+        date: "2026-09-21",
+        feedback: "Acknowledgment recorded.",
+        targetCohort: "ALL",
+        isOptional: false,
+        isTextField: true
+      },
+      { 
+        id: "police", 
+        name: "12. Police Verification Certificate (PCC)", 
+        category: "BACKGROUND", 
+        instruction: "Police Clearance Certificate (PCC) issued by the jurisdictional Police Station or Passport Seva Kendra. (Optional - upload if currently available).",
+        acceptedTypes: "PDF or JPG (Max 5MB)",
+        hasFrontAndBack: true,
+        status: "NOT_UPLOADED", 
+        uploadedFileFront: "",
+        uploadedFileBack: "",
+        date: "—",
+        feedback: "Optional document - will not block statutory clearance.",
+        targetCohort: "ALL",
+        isOptional: true,
+        isTextField: false
+      }
     ];
+
+    let corporatePolicies = [
+      {
+        id: "POL-01",
+        title: "Code of Business Conduct & Ethics",
+        ref: "VISTA-POL-ETH-2026",
+        version: "Rev 2026.1",
+        tag: "Core Ethics",
+        summary: "Standards governing integrity, anti-corruption, conflict of interest, and fair competition across all client engagements.",
+        fullContent: `<h3>1. Purpose & Core Value</h3><p>VISTA Engg Solutions is committed to achieving high standards of integrity, transparency, and accountability in all operations. Every employee is expected to uphold our values: Innovation @ work, client confidentiality, and professional integrity.</p><h3>2. Non-Bribery and Anti-Corruption</h3><p>Employees shall not offer, promise, give, or accept any bribes, kickbacks, or illicit personal advantages in exchange for business opportunities or contracts.</p><h3>3. Workplace Non-Discrimination</h3><p>VISTA provides equal employment opportunities irrespective of race, color, gender, age, religion, or nationality. Merit and integrity are the sole criteria for career progression.</p>`
+      },
+      {
+        id: "POL-02",
+        title: "Information Security, IP & TISAX Policy",
+        ref: "VISTA-POL-SEC-2026",
+        version: "Rev 2026.2",
+        tag: "Data Security",
+        summary: "Guidelines on automotive client data protection, TISAX/ISO27001 data classification, clean desk policy, and NDAs.",
+        fullContent: `<h3>1. Intellectual Property & Clean Desk</h3><p>All source code, Gerber files, schematics, and AI annotation datasets developed within VISTA premises remain exclusive intellectual property. Employees must adhere to clean desk and clean screen regulations.</p><h3>2. Device Access & Credentials</h3><p>Biometric authentication and corporate SSO credentials must not be shared. No unauthorized USB mass storage devices are permitted on client-dedicated work machines.</p>`
+      },
+      {
+        id: "POL-03",
+        title: "Employee Leave & Attendance Regulations",
+        ref: "VISTA-POL-HR-2026",
+        version: "Rev 2026.1",
+        tag: "Human Resources",
+        summary: "Leave allocations (Earned, Casual, Sick), biometric attendance rules, working hours, and standard 90 days notice terms.",
+        fullContent: `<h3>1. Working Hours & Attendance</h3><p>Standard working week comprises 5 business days with biometric clock-in before 09:30 AM. Leave requests must be applied at least 48 hours in advance through the HR portal.</p><h3>2. Notice Period & Deboarding Policy</h3><p>A mandatory 90-day notice period applies to all confirmed employees to ensure orderly knowledge transfer and customer continuity.</p>`
+      },
+      {
+        id: "POL-04",
+        title: "Prevention of Sexual Harassment (POSH) Manual",
+        ref: "VISTA-POL-POSH-2026",
+        version: "Rev 2026.1",
+        tag: "Statutory Law",
+        summary: "Procedures and framework of the Internal Complaints Committee (ICC) to foster a safe, zero-tolerance work environment.",
+        fullContent: `<h3>1. Zero Tolerance Mandate</h3><p>VISTA enforces strict zero-tolerance for any form of unwelcome sexual conduct, overt advances, or intimidating behavior in the physical or remote workplace.</p><h3>2. Redressal Mechanism</h3><p>An Internal Complaints Committee (ICC) headed by senior women personnel ensures unbiased, strictly confidential investigation within statutory timeframes.</p>`
+      },
+      {
+        id: "POL-05",
+        title: "Travel & Expense Reimbursement Policy",
+        ref: "VISTA-POL-FIN-2026",
+        version: "Rev 2026.1",
+        tag: "Finance",
+        summary: "Guidelines on client-site travel, daily per diems, lodging allowances, and expense claim settlement schedules.",
+        fullContent: `<h3>1. Official Travel Authorization</h3><p>All on-site client travels require prior managerial sign-off. Travel tickets and hotel bookings are arranged via the corporate administrative desk.</p><h3>2. Expense Submission Schedule</h3><p>Original tax invoices with GSTIN must be uploaded by the 25th of each calendar month for reconciliation with monthly payroll cycles.</p>`
+      }
+    ];
+
+    function getCohortChecklist(cohort) {
+      if (cohort === "FRESHER") {
+        return docChecklist.filter(d => d.targetCohort === "ALL");
+      }
+      return docChecklist;
+    }
 
     function showToast(msg) {
       const toast = document.getElementById("toast");
@@ -1043,45 +1671,52 @@
 
       currentUser = user;
       document.getElementById("auth-screen").classList.add("hidden");
-
       document.getElementById("user-name").innerText = currentUser.name;
-      document.getElementById("user-role").innerText = currentUser.role === "ADMIN" ? "System Administrator" : currentUser.role === "HR" ? "HR Operations Lead" : "Active Employee";
       document.getElementById("user-avatar").innerText = currentUser.name.split(" ").map(n=>n[0]).join("");
-      document.getElementById("role-badge").innerText = currentUser.role === "ADMIN" ? "System Admin Suite" : currentUser.role === "HR" ? "HR Operations" : "Employee Portal";
 
-      const adminBtn = document.getElementById("nav-admin");
-      const candBtn = document.getElementById("nav-candidates");
-      const docBtn = document.getElementById("nav-documents");
-      const bgvBtn = document.getElementById("nav-bgv");
-      const readyBtn = document.getElementById("nav-ready-onboarding");
-      const empPortalBtn = document.getElementById("nav-employee-portal");
+      const adminHrNav = document.getElementById("admin-hr-nav-group");
+      const empNav = document.getElementById("employee-only-nav-group");
+      const hrControls = document.getElementById("hr-reject-controls");
+      const approveBtn = document.getElementById("modal-approve-btn");
 
-      if (currentUser.role === "ADMIN") {
-        adminBtn.classList.remove("hidden");
-        candBtn.classList.remove("hidden");
-        docBtn.classList.remove("hidden");
-        bgvBtn.classList.remove("hidden");
-        readyBtn.classList.remove("hidden");
-        empPortalBtn.classList.add("hidden");
-        switchTab('dashboard');
-      } else if (currentUser.role === "HR") {
-        adminBtn.classList.add("hidden");
-        candBtn.classList.remove("hidden");
-        docBtn.classList.remove("hidden");
-        bgvBtn.classList.remove("hidden");
-        readyBtn.classList.remove("hidden");
-        empPortalBtn.classList.add("hidden");
-        switchTab('dashboard');
-      } else if (currentUser.role === "EMPLOYEE") {
-        adminBtn.classList.add("hidden");
-        candBtn.classList.add("hidden");
-        docBtn.classList.add("hidden");
-        bgvBtn.classList.add("hidden");
-        readyBtn.classList.add("hidden");
-        empPortalBtn.classList.remove("hidden");
+      if (currentUser.role === "EMPLOYEE") {
+        adminHrNav.classList.add("hidden");
+        empNav.classList.remove("hidden");
+        
+        document.getElementById("user-role").innerText = "Employee Workspace";
+        document.getElementById("role-badge").innerText = "Employee Portal";
+        document.getElementById("role-badge").className = "px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-cyan-50 text-cyan-700 border border-cyan-200 ml-2";
+        document.getElementById("portal-sidebar-title").innerText = "Employee Workspace";
+        document.getElementById("topbar-portal-label").innerText = "Personalized Onboarding & Induction";
+
         document.getElementById("portal-emp-code").innerText = currentUser.empCode || "VISTA1854";
         document.getElementById("portal-emp-email").innerText = currentUser.email;
-        switchTab('employee-portal');
+
+        if (hrControls) hrControls.classList.add("hidden");
+        if (approveBtn) approveBtn.classList.add("hidden");
+
+        switchTab('emp-upload-docs');
+      } else {
+        adminHrNav.classList.remove("hidden");
+        empNav.classList.add("hidden");
+
+        document.getElementById("user-role").innerText = currentUser.role === "ADMIN" ? "System Administrator" : "HR Operations Lead";
+        document.getElementById("role-badge").innerText = currentUser.role === "ADMIN" ? "System Admin Suite" : "HR Operations";
+        document.getElementById("role-badge").className = "px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-emerald-50 text-emerald-700 border border-emerald-200 ml-2";
+        document.getElementById("portal-sidebar-title").innerText = "Enterprise Onboarding Suite";
+        document.getElementById("topbar-portal-label").innerText = "Enterprise Onboarding Suite";
+
+        const adminBtn = document.getElementById("nav-admin");
+        if (currentUser.role === "ADMIN") {
+          adminBtn.classList.remove("hidden");
+        } else {
+          adminBtn.classList.add("hidden");
+        }
+
+        if (hrControls) hrControls.classList.remove("hidden");
+        if (approveBtn) approveBtn.classList.remove("hidden");
+
+        switchTab('dashboard');
       }
 
       refreshAllViews();
@@ -1093,12 +1728,25 @@
     }
 
     function switchTab(tabName) {
-      if (tabName === 'admin' && currentUser?.role !== 'ADMIN') {
-        alert("Access Denied: Only Administrator accounts can access User & Role Admin.");
-        return;
+      if (currentUser?.role === 'EMPLOYEE') {
+        const allowed = ['emp-upload-docs', 'emp-review-submit', 'emp-stage-tracker', 'employee-portal'];
+        if (!allowed.includes(tabName)) {
+          alert("Access Denied: Employees only have access to Document Upload, Dossier Review, Stage Tracker, and Profile.");
+          return;
+        }
+      } else {
+        if (tabName === 'admin' && currentUser?.role !== 'ADMIN') {
+          alert("Access Denied: Only Administrator accounts can access User & Role Admin.");
+          return;
+        }
       }
 
-      ['dashboard', 'candidates', 'documents', 'bgv', 'ready-onboarding', 'employees', 'employee-portal', 'admin'].forEach(t => {
+      const allTabs = [
+        'dashboard', 'candidates', 'documents', 'bgv', 'ready-onboarding', 
+        'employees', 'employee-portal', 'admin', 'emp-upload-docs', 'emp-review-submit', 'emp-stage-tracker'
+      ];
+
+      allTabs.forEach(t => {
         const el = document.getElementById(`tab-${t}`);
         const nav = document.getElementById(`nav-${t}`);
         if (el) el.classList.add("hidden");
@@ -1115,6 +1763,10 @@
         activeNav.classList.add("bg-blue-600", "text-white", "shadow-md");
         activeNav.classList.remove("text-slate-300");
       }
+
+      if (tabName === 'emp-review-submit') {
+        renderDossierReviewTab();
+      }
     }
 
     function refreshAllViews() {
@@ -1127,10 +1779,376 @@
       renderReadyForOnboarding();
       renderActiveEmployeesTable();
       renderAdminUsersTable();
+      renderEmployeeUploadCards();
+      renderEmployeeAuditBreakdown();
+      renderCorporatePoliciesList();
+      renderDossierReviewTab();
     }
 
+    // -------------------------------------------------------------
+    // EMPLOYEE PORTAL: UPLOAD CARDS WITH FRONT & BACK SLOTS
+    // -------------------------------------------------------------
+    function renderEmployeeUploadCards() {
+      const container = document.getElementById("emp-upload-cards-list");
+      if (!container) return;
+
+      const activeCandidate = candidates.find(c => c.id === currentUser?.candidateId) || candidates[2];
+      const currentCohort = activeCandidate?.type || "EXPERIENCED";
+      const applicableDocs = getCohortChecklist(currentCohort);
+
+      const cohortLabel = document.getElementById("emp-cohort-label");
+      if (cohortLabel) cohortLabel.innerText = currentCohort;
+
+      const mandatoryDocs = applicableDocs.filter(d => !d.isOptional);
+      const verifiedMandatoryCount = mandatoryDocs.filter(d => d.status === "VERIFIED").length;
+      
+      document.getElementById("emp-doc-stats-overview").innerText = `${verifiedMandatoryCount} / ${mandatoryDocs.length} Verified`;
+      
+      const pendingCount = mandatoryDocs.filter(d => d.status !== "VERIFIED").length;
+      const badge = document.getElementById("emp-nav-pending-badge");
+      if (badge) {
+        badge.innerText = `${pendingCount} Left`;
+        badge.className = pendingCount === 0 
+          ? "px-2 py-0.5 text-[10px] font-bold bg-emerald-400 text-slate-900 rounded-full" 
+          : "px-2 py-0.5 text-[10px] font-bold bg-amber-400 text-slate-900 rounded-full";
+      }
+
+      container.innerHTML = applicableDocs.map((doc, idx) => {
+        const isVerified = doc.status === "VERIFIED";
+        const isReupload = doc.status === "REUPLOAD_REQUIRED";
+
+        return `
+          <div class="bg-white rounded-2xl border ${isReupload ? 'border-rose-300 shadow-sm' : 'border-slate-200'} p-5 shadow-xs transition-all">
+            <div class="flex flex-col lg:flex-row lg:items-start justify-between gap-4">
+              
+              <!-- Description Column -->
+              <div class="space-y-1.5 max-w-2xl flex-1">
+                <div class="flex items-center gap-2">
+                  <span class="font-mono text-xs font-bold text-slate-400">#${idx + 1}</span>
+                  <h4 class="text-sm font-bold text-slate-900">${doc.name}</h4>
+                  <span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-slate-100 text-slate-600">${doc.category}</span>
+                  ${doc.hasFrontAndBack ? '<span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">Dual-Sided (Front & Back)</span>' : ''}
+                  ${doc.isOptional ? '<span class="text-[10px] uppercase font-bold px-2 py-0.5 rounded bg-purple-50 text-purple-700 border border-purple-200">Optional</span>' : ''}
+                </div>
+                <p class="text-xs text-slate-600 leading-relaxed">${doc.instruction}</p>
+                
+                ${!doc.isTextField ? `
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 text-xs">
+                    <div class="p-2.5 rounded-xl border ${doc.uploadedFileFront ? 'bg-slate-50 border-slate-200' : 'bg-amber-50/40 border-amber-200 border-dashed'} flex items-center justify-between">
+                      <div class="min-w-0">
+                        <span class="text-[10px] font-bold uppercase text-slate-400 block">${doc.hasFrontAndBack ? 'Front Side' : 'Primary Document'}</span>
+                        <span class="font-mono text-slate-800 text-[11px] font-semibold truncate block">${doc.uploadedFileFront || 'Pending upload'}</span>
+                      </div>
+                      <label class="px-2.5 py-1 bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 font-bold rounded-lg text-[10px] cursor-pointer shadow-2xs">
+                        <span>${doc.uploadedFileFront ? 'Replace' : 'Upload'}</span>
+                        <input type="file" onchange="handleSideUpload('${doc.id}', 'front', this)" class="hidden" accept=".pdf,.png,.jpg,.jpeg">
+                      </label>
+                    </div>
+
+                    ${doc.hasFrontAndBack ? `
+                      <div class="p-2.5 rounded-xl border ${doc.uploadedFileBack ? 'bg-slate-50 border-slate-200' : 'bg-amber-50/40 border-amber-200 border-dashed'} flex items-center justify-between">
+                        <div class="min-w-0">
+                          <span class="text-[10px] font-bold uppercase text-slate-400 block">Back Side</span>
+                          <span class="font-mono text-slate-800 text-[11px] font-semibold truncate block">${doc.uploadedFileBack || 'Pending upload'}</span>
+                        </div>
+                        <label class="px-2.5 py-1 bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 font-bold rounded-lg text-[10px] cursor-pointer shadow-2xs">
+                          <span>${doc.uploadedFileBack ? 'Replace' : 'Upload'}</span>
+                          <input type="file" onchange="handleSideUpload('${doc.id}', 'back', this)" class="hidden" accept=".pdf,.png,.jpg,.jpeg">
+                        </label>
+                      </div>
+                    ` : ''}
+                  </div>
+                ` : `
+                  <div class="pt-2">
+                    <textarea id="text-field-${doc.id}" rows="2" placeholder="Type your declaration or specific notes here..." class="w-full text-xs p-2.5 rounded-xl border border-slate-300 bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500">${doc.textContent || ''}</textarea>
+                  </div>
+                `}
+
+                ${doc.feedback ? `
+                  <div class="mt-2 text-xs p-2.5 rounded-xl ${isReupload ? 'bg-rose-50 text-rose-800 border border-rose-200' : 'bg-slate-50 text-slate-700'}">
+                    <strong>HR Review Note:</strong> ${doc.feedback}
+                  </div>
+                ` : ''}
+              </div>
+
+              <!-- Status badge & Preview -->
+              <div class="flex flex-col sm:flex-row lg:flex-col items-end justify-center gap-2.5 shrink-0 pt-1">
+                <div class="w-full text-right">
+                  <span class="inline-block px-3 py-1 rounded-full text-xs font-bold ${
+                    isVerified ? 'bg-emerald-100 text-emerald-800 border border-emerald-200' :
+                    isReupload ? 'bg-rose-100 text-rose-800 border border-rose-300 animate-pulse' :
+                    doc.status === 'NOT_UPLOADED' ? 'bg-slate-100 text-slate-500 border border-slate-200' :
+                    'bg-amber-100 text-amber-800 border border-amber-200'
+                  }">
+                    ${isVerified ? '✓ VERIFIED & APPROVED' : isReupload ? '⚠ ACTION NEEDED: RE-UPLOAD' : doc.status === 'NOT_UPLOADED' ? '⚪ NOT UPLOADED' : '⏳ PENDING HR AUDIT'}
+                  </span>
+                </div>
+
+                <div class="flex items-center gap-2 w-full justify-end">
+                  ${!doc.isTextField ? `
+                    ${(doc.uploadedFileFront || doc.uploadedFileBack) ? `
+                      <button onclick="openDocPreviewModal('${doc.id}')" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-lg text-xs transition-colors">
+                        Preview Scans
+                      </button>
+                    ` : ''}
+                  ` : `
+                    <button onclick="saveTextFieldEntry('${doc.id}')" class="px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg text-xs transition-all shadow-xs flex items-center gap-1.5">
+                      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                      <span>Save Remarks</span>
+                    </button>
+                  `}
+                </div>
+              </div>
+
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function handleSideUpload(docId, side, inputElement) {
+      if (!inputElement.files || inputElement.files.length === 0) return;
+      const file = inputElement.files[0];
+      const doc = docChecklist.find(d => d.id === docId);
+      if (!doc) return;
+
+      if (side === 'front') {
+        doc.uploadedFileFront = file.name;
+      } else {
+        doc.uploadedFileBack = file.name;
+      }
+
+      doc.date = new Date().toISOString().split("T")[0];
+      doc.status = "PENDING_REVIEW";
+      doc.feedback = `Uploaded ${side.toUpperCase()} side (${file.name}) on ${doc.date}. Queued for HR inspection.`;
+
+      refreshAllViews();
+      showToast(`Uploaded ${side.toUpperCase()} side for ${doc.name}`);
+    }
+
+    function saveTextFieldEntry(docId) {
+      const textarea = document.getElementById(`text-field-${docId}`);
+      if (!textarea) return;
+      const text = textarea.value.trim();
+      const doc = docChecklist.find(d => d.id === docId);
+      if (!doc) return;
+
+      doc.textContent = text;
+      doc.date = new Date().toISOString().split("T")[0];
+      doc.status = "VERIFIED";
+      doc.feedback = "Self-declaration confirmed and saved.";
+      
+      refreshAllViews();
+      showToast("Declaration saved.");
+    }
+
+    // -------------------------------------------------------------
+    // EXTRACTION, CANDIDATE REVIEW & HR SUBMISSION GATEWAY (ALL FIELDS EXTRACTED)
+    // -------------------------------------------------------------
+    function renderDossierReviewTab() {
+      const activeCandidate = candidates.find(c => c.id === currentUser?.candidateId) || candidates[2];
+      if (!activeCandidate) return;
+
+      const d = activeCandidate.onboardingData || {};
+
+      // 1. Demographics & Identifiers
+      document.getElementById("review-full-name").innerText = activeCandidate.name || "—";
+      document.getElementById("review-emp-id").innerText = activeCandidate.empCode || currentUser?.empCode || "VISTA1854";
+      document.getElementById("review-dob").innerText = d.dob || "—";
+      document.getElementById("review-gender").innerText = d.gender || "—";
+      document.getElementById("review-nationality").innerText = d.nationality || "Indian";
+      document.getElementById("review-blood-group").innerText = d.bloodGroup || "—";
+      document.getElementById("review-pan").innerText = d.panNumber || "—";
+      document.getElementById("review-id-type-number").innerText = `${d.idType || 'ID Proof'}: ${d.idNumber || '—'}`;
+
+      // 2. Contact & Alternate Emergency Contacts (Name & Number)
+      document.getElementById("review-phone").innerText = activeCandidate.phone || "—";
+      document.getElementById("review-email").innerText = activeCandidate.email || "—";
+      document.getElementById("review-alt-contact-1").innerText = `${d.alternateName1 || 'Alternate Contact 1'}: ${d.alternatePhone1 || '—'}`;
+      document.getElementById("review-alt-contact-2").innerText = `${d.alternateName2 || 'Alternate Contact 2'}: ${d.alternatePhone2 || '—'}`;
+
+      // 3. Residential Address Details
+      document.getElementById("review-street").innerText = d.houseStreet || "—";
+      document.getElementById("review-city").innerText = d.city || "—";
+      document.getElementById("review-state-postal").innerText = `${d.state || '—'} - ${d.postalCode || '—'}`;
+
+      // 4. Academic Qualifications
+      document.getElementById("review-sslc-institution").innerText = d.sslcInstitution || "—";
+      document.getElementById("review-sslc-year").innerText = d.sslcYear || "—";
+      document.getElementById("review-sslc-percentage").innerText = d.sslcPercentage || "—";
+
+      document.getElementById("review-higher-qualification").innerText = d.higherQualification || "B.E. / B.Tech";
+      document.getElementById("review-higher-specialization").innerText = d.higherSpecialization || "Engineering";
+      document.getElementById("review-higher-institution").innerText = d.higherInstitution || "—";
+      document.getElementById("review-higher-year").innerText = d.higherYear || "—";
+      document.getElementById("review-higher-percentage").innerText = d.higherPercentage || "—";
+
+      // 5. Professional Experience
+      document.getElementById("review-total-exp").innerText = activeCandidate.totalExp || "—";
+      document.getElementById("review-relevant-exp").innerText = activeCandidate.relevantExp || "—";
+
+      // Remarks note
+      const remarksDoc = docChecklist.find(item => item.id === "remarks");
+      document.getElementById("review-remarks-box").innerText = `"${remarksDoc?.textContent || 'No remarks provided.'}"`;
+
+      // Matrix Table
+      const applicableDocs = getCohortChecklist(activeCandidate.type);
+      const matrixBody = document.getElementById("review-doc-matrix-body");
+      if (!matrixBody) return;
+
+      matrixBody.innerHTML = applicableDocs.map((doc, idx) => `
+        <tr class="hover:bg-slate-50 transition-colors">
+          <td class="py-2.5 px-4 font-mono text-slate-400 font-bold">${idx + 1}</td>
+          <td class="py-2.5 px-4 font-semibold text-slate-800">${doc.name}</td>
+          <td class="py-2.5 px-4 font-mono text-[10px] uppercase text-slate-500">${doc.category}</td>
+          <td class="py-2.5 px-4 font-mono text-slate-700">${doc.uploadedFileFront || (doc.isTextField ? 'Text Recorded' : '<span class="text-rose-500">Missing</span>')}</td>
+          <td class="py-2.5 px-4 font-mono text-slate-700">${doc.hasFrontAndBack ? (doc.uploadedFileBack || '<span class="text-rose-500">Missing Back</span>') : '<span class="text-slate-400 font-sans">N/A (Single Side)</span>'}</td>
+          <td class="py-2.5 px-4 text-center">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${doc.status === 'VERIFIED' ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+              ${doc.status}
+            </span>
+          </td>
+        </tr>
+      `).join("");
+
+      const pill = document.getElementById("dossier-submission-pill");
+      const btn = document.getElementById("submit-dossier-hr-btn");
+      if (activeCandidate.candidateSubmittedToHR) {
+        pill.className = "px-3.5 py-1.5 rounded-xl text-xs font-bold bg-emerald-50 text-emerald-800 border border-emerald-300 flex items-center gap-2";
+        pill.innerHTML = `<span class="w-2 h-2 rounded-full bg-emerald-500"></span><span>✓ Submitted & Queued with HR</span>`;
+        btn.innerText = "✓ Dossier Submitted to HR (Click to Re-confirm)";
+        btn.className = "px-6 py-2.5 bg-emerald-600 hover:bg-emerald-700 active:scale-95 text-white font-bold rounded-xl text-xs shadow-md transition-all flex items-center gap-2";
+      }
+    }
+
+    function submitDossierToHR() {
+      const checkbox = document.getElementById("candidate-certify-checkbox");
+      if (!checkbox.checked) {
+        alert("Please confirm the statutory truthfulness declaration checkbox before submitting.");
+        return;
+      }
+
+      const activeCandidate = candidates.find(c => c.id === currentUser?.candidateId) || candidates[2];
+      if (activeCandidate) {
+        activeCandidate.candidateSubmittedToHR = true;
+        activeCandidate.bgvStatus = "Documents Submitted";
+        activeCandidate.progress = Math.max(activeCandidate.progress, 50);
+      }
+
+      renderDossierReviewTab();
+      refreshAllViews();
+      showToast("Dossier successfully confirmed & transmitted to VISTA HR Operations.");
+      switchTab('emp-stage-tracker');
+    }
+
+    // -------------------------------------------------------------
+    // VISTA CORPORATE POLICIES VIEW & READER
+    // -------------------------------------------------------------
+    function renderCorporatePoliciesList() {
+      const container = document.getElementById("corporate-policies-grid");
+      if (!container) return;
+
+      container.innerHTML = corporatePolicies.map(pol => `
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex flex-col justify-between space-y-3 hover:bg-white hover:shadow-xs transition-all">
+          <div class="space-y-1">
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-mono uppercase font-bold text-slate-400">${pol.ref}</span>
+              <span class="px-2 py-0.5 rounded text-[9px] font-bold bg-blue-100 text-blue-800">${pol.tag}</span>
+            </div>
+            <h5 class="text-xs font-bold text-slate-900">${pol.title}</h5>
+            <p class="text-[11px] text-slate-500 leading-relaxed">${pol.summary}</p>
+          </div>
+          <div class="flex items-center justify-between pt-2 border-t border-slate-200/60">
+            <span class="text-[10px] text-slate-400 font-mono">${pol.version}</span>
+            <button onclick="openPolicyReaderModal('${pol.id}')" class="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-[11px] font-semibold flex items-center gap-1">
+              <span>Open & Read</span>
+            </button>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    let activePolicyObj = null;
+    function openPolicyReaderModal(polId) {
+      activePolicyObj = corporatePolicies.find(p => p.id === polId);
+      if (!activePolicyObj) return;
+
+      document.getElementById("policy-modal-title").innerText = activePolicyObj.title;
+      document.getElementById("policy-modal-ref").innerText = `${activePolicyObj.ref} • ${activePolicyObj.version}`;
+      document.getElementById("policy-modal-content").innerHTML = activePolicyObj.fullContent;
+      document.getElementById("policy-ack-checkbox").checked = false;
+
+      document.getElementById("policy-reader-modal").classList.remove("hidden");
+    }
+
+    function closePolicyReaderModal() {
+      document.getElementById("policy-reader-modal").classList.add("hidden");
+      activePolicyObj = null;
+    }
+
+    function acknowledgePolicy() {
+      const checkbox = document.getElementById("policy-ack-checkbox");
+      if (!checkbox.checked) {
+        alert("Please confirm you have read and agreed to the policy.");
+        return;
+      }
+      closePolicyReaderModal();
+      showToast(`Acknowledged ${activePolicyObj?.title}. Record saved.`);
+    }
+
+    // -------------------------------------------------------------
+    // AUDIT BREAKDOWN VIEW
+    // -------------------------------------------------------------
+    function renderEmployeeAuditBreakdown() {
+      const tbody = document.getElementById("emp-audit-table-body");
+      if (!tbody) return;
+
+      const activeCandidate = candidates.find(c => c.id === currentUser?.candidateId) || candidates[2];
+      const currentCohort = activeCandidate?.type || "EXPERIENCED";
+      const applicableDocs = getCohortChecklist(currentCohort);
+
+      tbody.innerHTML = applicableDocs.map(doc => {
+        const isVerified = doc.status === "VERIFIED";
+        const isReupload = doc.status === "REUPLOAD_REQUIRED";
+
+        return `
+          <tr class="hover:bg-slate-50 transition-colors">
+            <td class="py-3 px-5 font-semibold text-slate-800">
+              ${doc.name}
+              <div class="text-[10px] text-slate-400 font-mono mt-0.5">
+                ${doc.hasFrontAndBack ? `Front: ${doc.uploadedFileFront || '—'} | Back: ${doc.uploadedFileBack || '—'}` : (doc.uploadedFileFront || doc.textContent || 'Pending')}
+              </div>
+            </td>
+            <td class="py-3 px-4 font-mono text-[10px] uppercase text-slate-500">${doc.category}</td>
+            <td class="py-3 px-4">
+              <span class="px-2 py-0.5 rounded text-[10px] font-semibold ${doc.isOptional ? 'bg-purple-50 text-purple-700 border border-purple-200' : 'bg-slate-100 text-slate-700'}">
+                ${doc.isOptional ? 'Optional' : 'Mandatory'}
+              </span>
+            </td>
+            <td class="py-3 px-4">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
+                isVerified ? 'bg-emerald-100 text-emerald-800' :
+                isReupload ? 'bg-rose-100 text-rose-800' :
+                doc.status === 'NOT_UPLOADED' ? 'bg-slate-100 text-slate-500' :
+                'bg-amber-100 text-amber-800'
+              }">
+                ${doc.status}
+              </span>
+            </td>
+            <td class="py-3 px-6 text-right text-slate-600">
+              ${doc.feedback || 'Under active compliance check.'}
+            </td>
+          </tr>
+        `;
+      }).join("");
+    }
+
+    // -------------------------------------------------------------
+    // ADMIN & HR CONTROLS & VIEWS
+    // -------------------------------------------------------------
     function renderDashboardHires() {
       const tbody = document.getElementById("dashboard-hires-body");
+      if (!tbody) return;
       tbody.innerHTML = candidates.map(c => `
         <tr class="hover:bg-slate-50">
           <td class="py-2.5 font-semibold text-slate-900">${c.name}</td>
@@ -1157,6 +2175,7 @@
 
     function renderCandidatesMainList() {
       const tbody = document.getElementById("candidates-full-table-body");
+      if (!tbody) return;
       tbody.innerHTML = candidates.map(cand => `
         <tr class="hover:bg-slate-50/60">
           <td class="py-3.5 px-6 font-semibold text-slate-900">
@@ -1211,21 +2230,30 @@
 
     function renderChecklist() {
       const container = document.getElementById("document-checklist-container");
+      if (!container) return;
       const cand = candidates.find(c => c.id === inspectedCandidateId) || candidates[0];
+      const applicableDocs = getCohortChecklist(cand.type);
       
-      const verifiedCount = docChecklist.filter(d => d.status === "VERIFIED").length;
-      document.getElementById("verified-counter-badge").innerText = `${verifiedCount} OF 10 VERIFIED`;
+      const mandatoryDocs = applicableDocs.filter(d => !d.isOptional);
+      const verifiedCount = mandatoryDocs.filter(d => d.status === "VERIFIED").length;
+      document.getElementById("verified-counter-badge").innerText = `${verifiedCount} OF ${mandatoryDocs.length} VERIFIED`;
       document.getElementById("inspected-cohort-badge").innerText = cand.type;
 
-      container.innerHTML = docChecklist.map((doc, idx) => `
+      container.innerHTML = applicableDocs.map((doc, idx) => `
         <div class="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 rounded-xl border border-slate-200 bg-slate-50/50 text-xs gap-3 hover:bg-slate-50 transition-colors">
           <div class="flex items-center gap-3.5">
             <span class="font-mono text-slate-400 font-bold text-xs">${idx + 1}.</span>
             <div>
-              <p class="font-bold text-slate-900">${doc.name}</p>
+              <div class="flex items-center gap-2">
+                <p class="font-bold text-slate-900">${doc.name}</p>
+                ${doc.hasFrontAndBack ? '<span class="text-[9px] uppercase font-bold px-1.5 py-0.5 rounded bg-blue-50 text-blue-700 border border-blue-200">Dual-Sided</span>' : ''}
+                ${doc.isOptional ? '<span class="text-[9px] uppercase font-bold px-1.5 py-0.5 rounded bg-purple-50 text-purple-700 border border-purple-200">Optional</span>' : ''}
+              </div>
               <div class="flex items-center gap-2 mt-0.5">
                 <span class="text-[10px] text-slate-400 font-mono uppercase">${doc.category}</span>
-                <span class="text-[10px] text-slate-400">• Submitted: ${doc.date}</span>
+                <span class="text-[10px] text-slate-400">• Updated: ${doc.date}</span>
+                ${doc.uploadedFileFront ? `<span class="text-[10px] text-blue-600 font-mono">• F: ${doc.uploadedFileFront}</span>` : ''}
+                ${doc.uploadedFileBack ? `<span class="text-[10px] text-cyan-600 font-mono">• B: ${doc.uploadedFileBack}</span>` : ''}
               </div>
             </div>
           </div>
@@ -1233,11 +2261,14 @@
             <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
               doc.status === 'VERIFIED' ? 'bg-emerald-100 text-emerald-800 border border-emerald-200' : 
               doc.status === 'REUPLOAD_REQUIRED' ? 'bg-rose-100 text-rose-800 border border-rose-200' :
+              doc.status === 'NOT_UPLOADED' ? 'bg-slate-100 text-slate-500 border border-slate-200' :
               'bg-amber-100 text-amber-800 border border-amber-200'
             }">${doc.status}</span>
-            <button onclick="openDocPreviewModal('${doc.id}')" class="px-3 py-1.5 bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200 rounded-lg font-bold">
-              View Doc
-            </button>
+            ${!doc.isTextField && (doc.uploadedFileFront || doc.uploadedFileBack) ? `
+              <button onclick="openDocPreviewModal('${doc.id}')" class="px-3 py-1.5 bg-blue-50 text-blue-700 hover:bg-blue-100 border border-blue-200 rounded-lg font-bold">
+                Review Doc
+              </button>
+            ` : ''}
           </div>
         </div>
       `).join("");
@@ -1251,7 +2282,7 @@
       applyZoom();
 
       document.getElementById("modal-doc-title").innerText = activeDocObj.name;
-      document.getElementById("modal-doc-subtitle").innerText = `Candidate: ${cand.name} (${cand.id})`;
+      document.getElementById("modal-doc-subtitle").innerText = `Subject: ${cand.name} (${cand.id}) • Front: ${activeDocObj.uploadedFileFront || '—'} / Back: ${activeDocObj.uploadedFileBack || '—'}`;
       document.getElementById("modal-canvas-header").innerText = activeDocObj.name.toUpperCase();
       document.getElementById("modal-canvas-name").innerText = cand.name;
       document.getElementById("modal-canvas-code").innerText = cand.empCode || cand.id;
@@ -1288,9 +2319,13 @@
     function approveActiveDoc() {
       if (!activeDocObj) return;
       activeDocObj.status = "VERIFIED";
+      activeDocObj.feedback = "Approved and verified by HR compliance.";
       
       const cand = candidates.find(c => c.id === inspectedCandidateId);
-      const allVerified = docChecklist.every(d => d.status === "VERIFIED");
+      const applicableDocs = getCohortChecklist(cand?.type || "EXPERIENCED");
+      const mandatoryDocs = applicableDocs.filter(d => !d.isOptional);
+      const allVerified = mandatoryDocs.every(d => d.status === "VERIFIED");
+      
       if (allVerified && cand) {
         cand.allDocsVerified = true;
         cand.progress = 100;
@@ -1298,7 +2333,7 @@
       
       closeDocPreviewModal();
       refreshAllViews();
-      showToast("Document verified and approved. 100% compliance will unlock BGV clearance.");
+      showToast("Document verified and approved.");
     }
 
     function rejectActiveDoc() {
@@ -1310,6 +2345,8 @@
       if (!activeDocObj) return;
       
       activeDocObj.status = "REUPLOAD_REQUIRED";
+      activeDocObj.feedback = reason;
+
       const cand = candidates.find(c => c.id === inspectedCandidateId);
       if (cand) {
         cand.allDocsVerified = false;
@@ -1324,7 +2361,7 @@
     function downloadCurrentAsset() {
       if (!activeDocObj) return;
       const cand = candidates.find(c => c.id === inspectedCandidateId) || candidates[0];
-      const text = `VISTA Engg Solutions Pvt Ltd\nDocument Archive: ${activeDocObj.name}\nCandidate: ${cand.name} (${cand.id})\nVerification Status: ${activeDocObj.status}\nAudit Hash: SHA256-VISTA-${activeDocObj.id}-CERT-2026`;
+      const text = `VISTA Engg Solutions Pvt Ltd\nDocument Archive: ${activeDocObj.name}\nCandidate: ${cand.name} (${cand.id})\nVerification Status: ${activeDocObj.status}\nFront Asset: ${activeDocObj.uploadedFileFront}\nBack Asset: ${activeDocObj.uploadedFileBack}\nAudit Hash: SHA256-VISTA-${activeDocObj.id}-CERT-2026`;
       
       const blob = new Blob([text], { type: "text/plain" });
       const url = URL.createObjectURL(blob);
@@ -1340,6 +2377,7 @@
 
     function renderBGVList() {
       const list = document.getElementById("bgv-pipeline-list");
+      if (!list) return;
       list.innerHTML = candidates.map(c => {
         const canMarkCleared = c.allDocsVerified && c.bgvStatus !== 'BGV Cleared';
         return `
@@ -1374,10 +2412,13 @@
 
     function renderReadyForOnboarding() {
       const eligible = candidates.filter(c => c.allDocsVerified && c.bgvStatus === "BGV Cleared" && (!c.empCode || c.empCode === ""));
-      document.getElementById("ready-onboarding-count").innerText = `${eligible.length} Ready`;
-      document.getElementById("ready-status-pill").innerText = `${eligible.length} Candidate(s) Eligible`;
+      const countEl = document.getElementById("ready-onboarding-count");
+      const pillEl = document.getElementById("ready-status-pill");
+      if (countEl) countEl.innerText = `${eligible.length} Ready`;
+      if (pillEl) pillEl.innerText = `${eligible.length} Candidate(s) Eligible`;
 
       const tbody = document.getElementById("ready-onboarding-table-body");
+      if (!tbody) return;
       if (eligible.length === 0) {
         tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400">All cleared candidates have been onboarded.</td></tr>`;
         return;
@@ -1439,6 +2480,7 @@
 
     function renderActiveEmployeesTable() {
       const tbody = document.getElementById("active-employees-table-body");
+      if (!tbody) return;
       tbody.innerHTML = activeEmployees.map(emp => `
         <tr class="hover:bg-slate-50 transition-colors">
           <td class="py-4 px-6 font-semibold text-slate-900">
@@ -1478,7 +2520,6 @@
       `).join("");
     }
 
-    // DEBOARDING & NOTICE PERIOD LOGIC
     function openDeboardModal(empId) {
       targetDeboardEmployee = activeEmployees.find(e => e.id === empId);
       if (!targetDeboardEmployee) return;
@@ -1546,13 +2587,11 @@
 
       closeDeboardModal();
       refreshAllViews();
-      showToast(`Deboarding initialized for ${targetDeboardEmployee.name}. Last Working Day scheduled for ${targetDeboardEmployee.lwd}.`);
+      showToast(`Deboarding initialized for ${targetDeboardEmployee.name}. Last Working Day: ${targetDeboardEmployee.lwd}.`);
     }
 
-    // STATUTORY EXPORT (50 COLUMNS EXACT)
     function downloadSelectedSchedule() {
       const targets = candidates.filter(c => selectedCandidateIds.includes(c.id));
-      
       const headers = [
         "Srl", "First Name (as per SSLC Marks sheet)", "Last Name", "VISTA EMP ID",
         "SOW JD", "PO No", "Tool Onboarding", "DOJ", "NT ID", "Client Emp number",
@@ -1587,9 +2626,9 @@
           `""`, `""`,
           `"${c.email || ""}"`,
           `"${c.phone || ""}"`,
-          `"${d.alternatePhone || ""}"`,
-          `"${d.parentName || ""}"`,
-          `"${d.parentPhone || ""}"`,
+          `"${d.alternatePhone1 || ""}"`,
+          `"${d.alternateName1 || ""}"`,
+          `"${d.alternatePhone1 || ""}"`,
           `"${d.panNumber || ""}"`,
           `"${d.idType || "Voter ID"}"`,
           `"${d.idNumber || ""}"`,
@@ -1599,20 +2638,20 @@
           `"${d.state || ""}"`,
           `"${d.postalCode || ""}"`,
           `"${d.sameAsResident ? "Yes" : "No"}"`,
-          `"${d.sslcBoard || ""}"`,
+          `"State Board"`,
           `"${d.sslcInstitution || ""}"`,
           `"${d.sslcYear || ""}"`,
           `"${d.sslcPercentage || ""}"`,
-          `"${d.sslcMode || ""}"`,
+          `"Full Time"`,
           `"${d.higherQualification || ""}"`,
           `"${d.higherSpecialization || ""}"`,
           `"${d.higherInstitution || ""}"`,
           `"${d.higherYear || ""}"`,
           `"${d.higherPercentage || ""}"`,
-          `"${d.higherMode || ""}"`,
-          `"${d.totalExp || ""}"`,
-          `"${d.relevantExp || ""}"`,
-          `"${d.prevWorkedBGSW || "No"}"`,
+          `"Full Time"`,
+          `"${c.totalExp || ""}"`,
+          `"${c.relevantExp || ""}"`,
+          `"No"`,
           `"${d.bloodGroup || ""}"`,
           `""`, `""`, `""`, `""`
         ].join(",");
@@ -1633,6 +2672,7 @@
 
     function renderCandidateSelectionTable() {
       const tbody = document.getElementById("candidates-table-body");
+      if (!tbody) return;
       tbody.innerHTML = candidates.map(cand => {
         const isSelected = selectedCandidateIds.includes(cand.id);
         return `
@@ -1675,10 +2715,12 @@
 
     function updateDownloadGateStatus() {
       const count = selectedCandidateIds.length;
-      document.getElementById("selected-count-badge").innerText = `${count} of ${candidates.length} Selected`;
+      const countBadge = document.getElementById("selected-count-badge");
+      if (countBadge) countBadge.innerText = `${count} of ${candidates.length} Selected`;
 
       const downloadBtn = document.getElementById("download-schedule-btn");
       const gateMsg = document.getElementById("download-gate-message");
+      if (!downloadBtn || !gateMsg) return;
 
       if (count === 0) {
         downloadBtn.setAttribute("disabled", "true");
@@ -1703,6 +2745,7 @@
 
     function renderAdminUsersTable() {
       const tbody = document.getElementById("admin-users-table-body");
+      if (!tbody) return;
       tbody.innerHTML = systemUsers.map(u => `
         <tr class="hover:bg-slate-50">
           <td class="py-3 px-3 font-semibold text-slate-900">${u.name}</td>
@@ -1739,7 +2782,8 @@
 
     function populateCandidateDropdown() {
       const select = document.getElementById("inspected-candidate-select");
-      select.innerHTML = candidates.map(c => `<option value="${c.id}" ${c.id === inspectedCandidateId ? 'selected' : ''}>${c.name} (${c.id})</option>`).join("");
+      if (!select) return;
+      select.innerHTML = candidates.map(c => `<option value="${c.id}" ${c.id === inspectedCandidateId ? 'selected' : ''}>${c.name} (${c.id}) [${c.type}]</option>`).join("");
     }
 
     function changeInspectedCandidate(id) {
@@ -1789,25 +2833,41 @@
         officialEmail: "",
         bgvStatus: "BGV Initiated",
         allDocsVerified: false,
+        candidateSubmittedToHR: false,
         onboardingData: {
           dob: "2002-01-01",
           gender: "Male",
           nationality: "Indian",
+          bloodGroup: "O+ve",
           panNumber: "PQRST1234Z",
+          idType: "Election Commission Photo ID",
+          idNumber: "KA/02/889900",
           houseStreet: "Electronic City",
           city: "Bengaluru",
           state: "Karnataka",
-          postalCode: "560100"
+          postalCode: "560100",
+          alternateName1: "Parent Contact",
+          alternatePhone1: "+91 98765 00001",
+          alternateName2: "Guardian Contact",
+          alternatePhone2: "+91 98765 00002",
+          sslcInstitution: "State Board High School",
+          sslcYear: "2018",
+          sslcPercentage: "88.0%",
+          higherQualification: "B.E.",
+          higherSpecialization: "Computer Science",
+          higherInstitution: "VTU Belagavi",
+          higherYear: "2022",
+          higherPercentage: "81.5%"
         }
       });
 
       closeCreateCandidateModal();
       refreshAllViews();
-      showToast(`Created candidate ${fn} ${ln} with ${noticeDays} days notice`);
+      showToast(`Created candidate ${fn} ${ln} [${cohort}] with ${noticeDays} days notice`);
     }
 
     window.onload = function() {
-      // Prompt with login screen initially
+      // Default initial view setup
     };
   </script>
 </body>
