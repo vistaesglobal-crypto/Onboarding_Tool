@@ -71,7 +71,7 @@
   </div>
 
   <!-- ======================================================== -->
-  <!-- 1. UNIFIED LOGIN GATEWAY (NO DEMO CHIPS - PURE MANUAL)  -->
+  <!-- 1. UNIFIED LOGIN GATEWAY                                 -->
   <!-- ======================================================== -->
   <div id="auth-screen" class="fixed inset-0 z-50 bg-[#0A162B] flex items-center justify-center p-4 selection:bg-blue-500 selection:text-white">
     <div class="absolute w-[30rem] h-[30rem] bg-blue-600/15 rounded-full blur-3xl pointer-events-none"></div>
@@ -135,7 +135,7 @@
         </div>
       </div>
 
-      <!-- Pure Sign-In Form (No Demo Autofill) -->
+      <!-- Sign-In Form -->
       <form onsubmit="handleLoginSubmit(event)" class="space-y-3.5 text-xs mt-3">
         <div>
           <label class="block font-semibold text-slate-700 mb-1">Corporate Email, Personal Email or ID</label>
@@ -328,7 +328,7 @@
         </div>
         <div class="p-3 bg-blue-50 border border-blue-200 rounded-xl text-blue-900 text-[11px]">
           <p class="font-bold">Instant Dispatch Notice:</p>
-          <p class="mt-0.5">Upon creation, a clean empty dossier is prepared, access credentials provisioned, and candidate email invitation triggered immediately.</p>
+          <p class="mt-0.5">Upon creation, an empty dossier is prepared, access credentials provisioned, and candidate email invitation triggered immediately.</p>
         </div>
       </div>
       <div class="p-4 border-t border-slate-100 bg-slate-50 flex items-center justify-end gap-2">
@@ -338,8 +338,112 @@
     </div>
   </div>
 
+  <!-- MODAL: DOCUMENT REVIEW / AUDIT (APPROVE / REJECT WITH COMMENTS) -->
+  <div id="doc-audit-modal" class="hidden fixed inset-0 z-[85] bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden border border-slate-200 flex flex-col">
+      <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+        <div>
+          <h4 id="audit-modal-title" class="text-sm font-bold text-slate-900">Document Verification & Decision</h4>
+          <p id="audit-modal-candidate" class="text-[11px] text-slate-500 font-medium">Candidate: —</p>
+        </div>
+        <button onclick="closeDocAuditModal()" class="text-slate-400 hover:text-slate-700 text-sm font-bold">✕</button>
+      </div>
+      <div class="p-6 text-xs space-y-4">
+        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+          <p class="font-semibold text-slate-700 mb-1">Uploaded Evidence:</p>
+          <div id="audit-modal-files" class="font-mono text-[11px] text-blue-600 space-y-1"></div>
+        </div>
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Auditor Remarks / Reason for Approval or Rejection</label>
+          <textarea id="audit-modal-remarks" rows="3" placeholder="Provide audit remarks, mismatch notes, or reason for rejection..." class="w-full border border-slate-300 rounded-xl p-2.5 bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:outline-none"></textarea>
+        </div>
+      </div>
+      <div class="p-4 border-t border-slate-100 bg-slate-50 flex items-center justify-between">
+        <button onclick="executeDocAuditDecision('REJECTED')" class="px-4 py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-300 rounded-xl font-bold text-xs transition-colors">
+          ✕ Reject with Reason
+        </button>
+        <div class="flex items-center gap-2">
+          <button onclick="closeDocAuditModal()" class="px-3 py-2 border border-slate-300 rounded-xl text-slate-700 font-semibold text-xs">Cancel</button>
+          <button onclick="executeDocAuditDecision('VERIFIED')" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl font-bold text-xs transition-colors shadow-xs">
+            ✓ Approve & Verify
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL: EMPLOYEE OFFBOARDING / DEBOARDING -->
+  <div id="deboarding-modal" class="hidden fixed inset-0 z-[85] bg-slate-950/75 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-lg w-full shadow-2xl overflow-hidden border border-slate-200">
+      <div class="p-4 border-b border-slate-100 flex items-center justify-between bg-rose-50/50">
+        <div>
+          <h4 class="text-sm font-bold text-rose-900">Initiate Employee Offboarding / Deboarding</h4>
+          <p id="deboard-modal-subtitle" class="text-[11px] text-rose-700">Official exit procedure and notice timeline</p>
+        </div>
+        <button onclick="closeDeboardingModal()" class="text-slate-400 hover:text-slate-700 font-bold">✕</button>
+      </div>
+      <div class="p-6 text-xs space-y-4">
+        <div>
+          <label class="block font-semibold text-slate-700 mb-1">Reason for Relieving</label>
+          <select id="deboard-reason-select" onchange="handleDeboardReasonChange(this.value)" class="w-full border border-slate-300 rounded-xl p-2.5 font-semibold text-slate-800 bg-slate-50 focus:bg-white">
+            <option value="Voluntary Resignation">Voluntary Resignation</option>
+            <option value="Better Opportunity">Better Career Opportunity</option>
+            <option value="Absconding">Absconding / Abandonment of Service</option>
+            <option value="Mutual Separation">Mutual Separation Agreement</option>
+            <option value="Involuntary / Performance">Involuntary Separation / Performance</option>
+            <option value="Other">Other (Specify in justification)</option>
+          </select>
+        </div>
+
+        <div id="deboard-other-container" class="hidden">
+          <label class="block font-semibold text-slate-700 mb-1">Specify Other Reason</label>
+          <input id="deboard-other-text" type="text" placeholder="Detail custom exit circumstances..." class="w-full border border-slate-300 rounded-xl p-2.5 text-xs bg-slate-50 focus:bg-white" />
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Resignation / Trigger Date</label>
+            <input id="deboard-trigger-date" type="date" onchange="calculateDeboardDates()" class="w-full border border-slate-300 rounded-xl p-2.5 font-mono" />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Last Working Day (LWD)</label>
+            <input id="deboard-lwd-date" type="date" onchange="evaluateNoticeDeviation()" class="w-full border border-slate-300 rounded-xl p-2.5 font-mono" />
+          </div>
+        </div>
+
+        <div class="p-3 rounded-xl bg-slate-50 border border-slate-200">
+          <div class="flex items-center justify-between text-xs">
+            <span class="text-slate-600 font-medium">Statutory Enterprise Notice:</span>
+            <span class="font-bold text-slate-800">90 Days Standard</span>
+          </div>
+          <div class="flex items-center justify-between text-xs mt-1">
+            <span class="text-slate-600 font-medium">Selected Duration:</span>
+            <span id="deboard-selected-days" class="font-bold font-mono text-blue-700">90 Days</span>
+          </div>
+        </div>
+
+        <div id="deboard-override-box" class="hidden p-3 rounded-xl bg-amber-50 border border-amber-300 space-y-2">
+          <div class="flex items-center gap-1.5 text-amber-900 font-bold text-[11px]">
+            <span>⚠️</span>
+            <span>Notice Period Deviation / Override Detected</span>
+          </div>
+          <p class="text-[11px] text-amber-800 leading-snug">
+            Corporate policy mandates a 90-day notice. Please record formal management approval and justification for this adjustment.
+          </p>
+          <textarea id="deboard-override-justification" rows="2" placeholder="State management approval reference or buyout terms..." class="w-full border border-amber-300 rounded-lg p-2 text-xs bg-white focus:outline-none"></textarea>
+        </div>
+      </div>
+      <div class="p-4 border-t border-slate-100 bg-slate-50 flex items-center justify-end gap-2">
+        <button onclick="closeDeboardingModal()" class="px-4 py-2 border border-slate-300 rounded-xl text-slate-700 font-semibold text-xs">Cancel</button>
+        <button onclick="confirmEmployeeDeboard()" class="px-5 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded-xl font-bold text-xs shadow-xs">
+          Confirm Deboarding & Issue Relieving Order
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- ======================================================== -->
-  <!-- 2. MAIN APPLICATION WORKSPACE -->
+  <!-- 2. MAIN APPLICATION WORKSPACE                            -->
   <!-- ======================================================== -->
   <div id="main-app" class="flex h-screen overflow-hidden font-sans">
     
@@ -428,7 +532,7 @@
             </button>
           </div>
 
-          <!-- ADMIN ONLY NAVIGATION ITEMS (STRICT SEPARATION: ONLY IT CONTROLS) -->
+          <!-- ADMIN ONLY NAVIGATION ITEMS -->
           <div id="admin-only-nav-group" class="hidden space-y-1.5">
             <button onclick="switchTab('admin')" id="nav-admin" class="w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold bg-blue-600 text-white shadow-md transition-all">
               <div class="flex items-center gap-3">
@@ -532,20 +636,15 @@
             <input 
               id="global-search-input" 
               type="text" 
-              oninput="handleGlobalSearch(this.value)" 
               placeholder="Search candidate, employee or PAN..." 
               class="w-full pl-9 pr-8 py-2 rounded-xl border border-slate-200 text-xs bg-slate-50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-blue-500 font-medium transition-all" 
             />
             <svg class="w-4 h-4 absolute left-3 top-2.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-            <button id="search-clear-btn" onclick="clearGlobalSearch()" class="hidden absolute right-2.5 top-2 text-slate-400 hover:text-slate-600 text-xs font-bold">✕</button>
-          </div>
-          <div id="search-results-dropdown" class="hidden absolute left-0 right-0 top-11 bg-white border border-slate-200 rounded-2xl shadow-xl overflow-hidden z-50 text-xs max-h-72 overflow-y-auto">
-            <div id="search-results-list" class="divide-y divide-slate-100"></div>
           </div>
         </div>
       </header>
 
-      <!-- TAB 1: COMPLETE HR DASHBOARD -->
+      <!-- TAB 1: HR DASHBOARD -->
       <div id="tab-dashboard" class="p-8 space-y-6">
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs">
@@ -634,70 +733,25 @@
           </div>
         </div>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
-            <div class="flex items-center justify-between mb-4">
-              <div>
-                <h4 class="text-sm font-bold text-slate-900 uppercase">NEW HIRES THIS MONTH</h4>
-                <p class="text-xs text-slate-500">Live tracker for ongoing enrollments</p>
-              </div>
-              <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded-md" id="dash-table-records-count">4 Records</span>
+        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <h4 class="text-sm font-bold text-slate-900 uppercase">NEW HIRES THIS MONTH</h4>
+              <p class="text-xs text-slate-500">Live tracker for ongoing enrollments</p>
             </div>
-            <table class="w-full text-left text-xs border-collapse">
-              <thead>
-                <tr class="border-b border-slate-200 text-slate-500 font-semibold">
-                  <th class="pb-2">Name</th>
-                  <th class="pb-2">Location</th>
-                  <th class="pb-2">Progress</th>
-                  <th class="pb-2 text-center">Action</th>
-                </tr>
-              </thead>
-              <tbody id="dashboard-hires-body" class="divide-y divide-slate-100"></tbody>
-            </table>
+            <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded-md" id="dash-table-records-count">4 Records</span>
           </div>
-
-          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs">
-            <div class="flex items-center justify-between mb-2">
-              <div>
-                <h4 class="text-sm font-bold text-slate-900">Monthly Offers & Hires</h4>
-                <p class="text-[11px] text-slate-500">Audited offer release vs confirmed joined</p>
-              </div>
-              <div class="flex items-center gap-3 text-xs font-semibold">
-                <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 bg-blue-900 rounded-xs"></span> Hired</span>
-                <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 bg-teal-500 rounded-xs"></span> Joined</span>
-              </div>
-            </div>
-            <div class="h-56 w-full flex items-end justify-between gap-3 pt-6 pb-2 px-2 border-b border-slate-100">
-              <div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
-                <div class="flex items-end gap-1.5 w-full justify-center h-full">
-                  <div class="flex flex-col items-center justify-end h-full w-4"><span class="text-[9px] font-bold text-blue-900">29</span><div class="w-full bg-blue-900 h-28 rounded-t-xs"></div></div>
-                  <div class="flex flex-col items-center justify-end h-full w-4"><span class="text-[9px] font-bold text-teal-600">27</span><div class="w-full bg-teal-500 h-24 rounded-t-xs"></div></div>
-                </div>
-                <span class="text-[10px] font-bold text-slate-600 mt-1">SEP</span>
-              </div>
-              <div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
-                <div class="flex items-end gap-1.5 w-full justify-center h-full">
-                  <div class="flex flex-col items-center justify-end h-full w-4"><span class="text-[9px] font-bold text-blue-900">30</span><div class="w-full bg-blue-900 h-10 rounded-t-xs"></div></div>
-                  <div class="flex flex-col items-center justify-end h-full w-4"><span class="text-[9px] font-bold text-teal-600">24</span><div class="w-full bg-teal-500 h-8 rounded-t-xs"></div></div>
-                </div>
-                <span class="text-[10px] font-bold text-slate-600 mt-1">OCT</span>
-              </div>
-              <div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
-                <div class="flex items-end gap-1.5 w-full justify-center h-full">
-                  <div class="flex flex-col items-center justify-end h-full w-4"><span class="text-[9px] font-bold text-blue-900">49</span><div class="w-full bg-blue-900 h-44 rounded-t-xs"></div></div>
-                  <div class="flex flex-col items-center justify-end h-full w-4"><span class="text-[9px] font-bold text-teal-600">23</span><div class="w-full bg-teal-500 h-20 rounded-t-xs"></div></div>
-                </div>
-                <span class="text-[10px] font-bold text-slate-600 mt-1">NOV</span>
-              </div>
-              <div class="flex-1 flex flex-col items-center gap-1 h-full justify-end">
-                <div class="flex items-end gap-1.5 w-full justify-center h-full">
-                  <div class="flex flex-col items-center justify-end h-full w-4"><span class="text-[9px] font-bold text-blue-900">32</span><div class="w-full bg-blue-900 h-32 rounded-t-xs"></div></div>
-                  <div class="flex flex-col items-center justify-end h-full w-4"><span class="text-[9px] font-bold text-teal-600">16</span><div class="w-full bg-teal-500 h-14 rounded-t-xs"></div></div>
-                </div>
-                <span class="text-[10px] font-bold text-slate-600 mt-1">DEC</span>
-              </div>
-            </div>
-          </div>
+          <table class="w-full text-left text-xs border-collapse">
+            <thead>
+              <tr class="border-b border-slate-200 text-slate-500 font-semibold">
+                <th class="pb-2">Name</th>
+                <th class="pb-2">Location</th>
+                <th class="pb-2">Progress</th>
+                <th class="pb-2 text-center">Action</th>
+              </tr>
+            </thead>
+            <tbody id="dashboard-hires-body" class="divide-y divide-slate-100"></tbody>
+          </table>
         </div>
       </div>
 
@@ -736,7 +790,7 @@
         </div>
       </div>
 
-      <!-- TAB: HR CREDENTIALS & ONBOARDING ACCESS MANAGEMENT -->
+      <!-- TAB: HR CREDENTIALS & ONBOARDING ACCESS MANAGEMENT (WITH RESET BUTTON RESTORED) -->
       <div id="tab-hr-credentials" class="hidden p-8 space-y-6">
         <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
           <div class="p-6 border-b border-slate-100 flex flex-col md:flex-row md:items-center justify-between gap-4 bg-gradient-to-r from-amber-50/50 via-white to-blue-50/30">
@@ -745,7 +799,7 @@
                 <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span>
                 <h3 class="text-base font-bold text-slate-900">Candidate Onboarding Credentials & Email Dispatch</h3>
               </div>
-              <p class="text-xs text-slate-500 mt-0.5">Manage initial passwords, view welcome email drafts, or copy credentials directly to share with candidates.</p>
+              <p class="text-xs text-slate-500 mt-0.5">Manage initial passwords, reset access credentials, or view welcome onboarding drafts.</p>
             </div>
             <button type="button" onclick="openCreateCandidateModal()" class="px-4 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold rounded-xl shadow-xs flex items-center gap-2 transition-all">
               <span>+ Onboard New Candidate</span>
@@ -769,14 +823,17 @@
         </div>
       </div>
 
-      <!-- TAB 3: DOCUMENTS AUDIT & DETAILED CHECKLIST -->
+      <!-- TAB 3: DOCUMENTS AUDIT & DETAILED CHECKLIST (WITH APPROVE/REJECT COMMENTS & EXPORT) -->
       <div id="tab-documents" class="hidden p-8 space-y-6">
         <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
           <div>
             <h3 class="text-base font-bold text-slate-900">Statutory Documents Verification & Dossier Audit</h3>
-            <p class="text-xs text-slate-500 mt-0.5">Inspect documents one by one to verify authenticity. The master schedule unlocks only when 100% of candidate documents are verified.</p>
+            <p class="text-xs text-slate-500 mt-0.5">Inspect documents, record reviewer approval/rejection remarks, and export audit verification records.</p>
           </div>
           <div class="flex items-center gap-3">
+            <button onclick="exportVerificationAuditReport()" class="px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 rounded-xl font-bold text-xs flex items-center gap-1.5 transition-colors">
+              <span>⬇ Export Verification Audit Report</span>
+            </button>
             <span id="statutory-global-status" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">Auditing in progress</span>
           </div>
         </div>
@@ -796,7 +853,7 @@
         </div>
       </div>
 
-      <!-- TAB: STATUTORY SCHEDULE EXPORT (RENAMED VIEW WITH 50-COL REMOVED) -->
+      <!-- TAB: STATUTORY SCHEDULE EXPORT -->
       <div id="tab-statutory-export" class="hidden p-8 space-y-6">
         <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
           <div class="p-4 bg-slate-50 border-b border-slate-200 font-bold text-xs text-slate-700 flex justify-between items-center">
@@ -838,7 +895,43 @@
             <h3 class="text-base font-bold text-slate-900">Background Verification Pipeline</h3>
             <span class="text-xs bg-slate-100 text-slate-600 px-3 py-1 rounded-full font-bold border">Compliance Guard Active</span>
           </div>
-          <div id="bgv-pipeline-list" class="space-y-3"></div>
+          <div id="bgv-pipeline-list" class="space-y-3">
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between">
+              <div>
+                <span class="font-bold text-slate-900">Stage 1: Identity & Address Cross-Verification</span>
+                <p class="text-xs text-slate-500 mt-0.5">Automated Aadhaar/PAN & Electoral registry matching via Gov API</p>
+              </div>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-md">✓ Active & Functional</span>
+            </div>
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between">
+              <div>
+                <span class="font-bold text-slate-900">Stage 2: Prior Employment & Relieving Cross-Check</span>
+                <p class="text-xs text-slate-500 mt-0.5">EPFO UAN Service History & HR attestation contact</p>
+              </div>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-md">✓ Active & Functional</span>
+            </div>
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between">
+              <div>
+                <span class="font-bold text-slate-900">Stage 3: Highest Educational Degree Verification</span>
+                <p class="text-xs text-slate-500 mt-0.5">Direct university transcript verification & National Academic Depository (NAD)</p>
+              </div>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-md">✓ Active & Functional</span>
+            </div>
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between">
+              <div>
+                <span class="font-bold text-slate-900">Stage 4: Civil & Criminal Court Records Check</span>
+                <p class="text-xs text-slate-500 mt-0.5">District and High Court repository screening for legal clearance</p>
+              </div>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-md">✓ Active & Functional</span>
+            </div>
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between">
+              <div>
+                <span class="font-bold text-slate-900">Stage 5: Statutory ISO 27001 / TISAX Final Sign-off</span>
+                <p class="text-xs text-slate-500 mt-0.5">Audit dossier sign-off prior to generation of permanent employee code</p>
+              </div>
+              <span class="text-xs font-bold text-blue-700 bg-blue-100 px-2.5 py-1 rounded-md">Pending Dossier Completion</span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -873,11 +966,14 @@
         </div>
       </div>
 
-      <!-- TAB 6: ACTIVE EMPLOYEES DIRECTORY -->
+      <!-- TAB 6: ACTIVE EMPLOYEES DIRECTORY (WITH DEBOARDING / RELIEVING ACTION) -->
       <div id="tab-employees" class="hidden p-8 space-y-6">
         <div class="bg-white rounded-2xl border border-slate-200 shadow-xs overflow-hidden">
           <div class="p-6 border-b border-slate-100 flex items-center justify-between">
-            <h3 class="text-base font-bold text-slate-900">Active Employee Directory</h3>
+            <div>
+              <h3 class="text-base font-bold text-slate-900">Active Employee Directory</h3>
+              <p class="text-xs text-slate-500 mt-0.5">Manage confirmed workforce, view tenure milestones, or execute standard 90-day deboarding workflows.</p>
+            </div>
             <span id="headcount-badge" class="text-xs font-bold text-slate-600 bg-slate-100 px-3 py-1.5 rounded-lg border">Headcount: 807</span>
           </div>
           <div class="overflow-x-auto">
@@ -888,7 +984,7 @@
                   <th class="py-3 px-4">Permanent Code</th>
                   <th class="py-3 px-4">Role & Business Unit</th>
                   <th class="py-3 px-4">Date of Joining (DOJ)</th>
-                  <th class="py-3 px-4">Milestone Status</th>
+                  <th class="py-3 px-4">Tenure Status</th>
                   <th class="py-3 px-6 text-right">Actions</th>
                 </tr>
               </thead>
@@ -899,7 +995,7 @@
       </div>
 
       <!-- ======================================================== -->
-      <!-- TAB 7: ADMIN USER & ROLE MANAGEMENT (STRICT IT ADMIN)    -->
+      <!-- TAB 7: USER & ROLE ADMIN (SPLIT: MAIN TEAM VS EMPLOYEES) -->
       <!-- ======================================================== -->
       <div id="tab-admin" class="hidden p-8 space-y-6">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -935,8 +1031,21 @@
           </div>
 
           <div class="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
-            <h3 class="text-sm font-bold text-slate-900">Active System Users & Password Reset Gateway</h3>
-            <p class="text-xs text-slate-500">Admins can audit all credentials and initiate cryptographic password resets.</p>
+            <div class="flex items-center justify-between pb-2 border-b border-slate-100">
+              <div>
+                <h3 class="text-sm font-bold text-slate-900">Active System Users Directory</h3>
+                <p class="text-xs text-slate-500">Audit user roles, segregated by Main Operations Team and Associates/Employees.</p>
+              </div>
+              <!-- Tab Pills -->
+              <div class="flex items-center p-1 bg-slate-100 rounded-xl">
+                <button id="admin-subtab-main-btn" onclick="switchAdminUserSubtab('MAIN')" class="px-3 py-1 text-xs font-bold rounded-lg bg-white shadow-xs text-slate-800 transition-all">
+                  Core Operations Team
+                </button>
+                <button id="admin-subtab-emp-btn" onclick="switchAdminUserSubtab('EMP')" class="px-3 py-1 text-xs font-bold rounded-lg text-slate-500 hover:text-slate-800 transition-all">
+                  Employees & Candidates
+                </button>
+              </div>
+            </div>
 
             <div class="overflow-x-auto">
               <table class="w-full text-left border-collapse text-xs">
@@ -944,8 +1053,8 @@
                   <tr class="border-b border-slate-200 bg-slate-50 text-slate-600 font-semibold">
                     <th class="py-2.5 px-3">User Name</th>
                     <th class="py-2.5 px-3">Role</th>
-                    <th class="py-2.5 px-3">Email ID</th>
-                    <th class="py-2.5 px-3 text-right">Reset Access</th>
+                    <th class="py-2.5 px-3">Login Email / ID</th>
+                    <th class="py-2.5 px-3 text-right">Password Reset</th>
                   </tr>
                 </thead>
                 <tbody id="admin-users-table-body" class="divide-y divide-slate-100"></tbody>
@@ -956,7 +1065,7 @@
       </div>
 
       <!-- ======================================================== -->
-      <!-- TAB 8: ADMIN IT & SECURITY HEALTH (STRICT IT ADMIN)      -->
+      <!-- TAB 8: ADMIN IT & SECURITY HEALTH (USEFUL REPLACEMENTS)  -->
       <!-- ======================================================== -->
       <div id="tab-admin-it-health" class="hidden p-8 space-y-6">
         <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
@@ -991,70 +1100,92 @@
           <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between">
-                <span class="text-xs font-semibold text-slate-600">Statutory Audit Logs</span>
+                <span class="text-xs font-semibold text-slate-600">Enterprise Security Rating</span>
                 <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">TISAX Ready</span>
               </div>
-              <h3 class="text-2xl font-extrabold text-slate-900 mt-2">Zero Tamper Alerts</h3>
-              <p class="text-[11px] text-emerald-600 mt-1">Immutable SHA256 ledger intact</p>
+              <h3 class="text-2xl font-extrabold text-slate-900 mt-2">Grade A+ (99.8%)</h3>
+              <p class="text-[11px] text-emerald-600 mt-1">Zero vulnerabilities detected</p>
             </div>
-            <button onclick="downloadAuditTrailReport()" class="mt-4 w-full py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5">
-              <span>Download Signed Audit Log</span>
+            <button onclick="downloadComplianceAuditReport()" class="mt-4 w-full py-2 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5">
+              <span>Download TISAX Security Certificate</span>
             </button>
           </div>
         </div>
 
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
-          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-            <div>
-              <h4 class="text-sm font-bold text-slate-900">Active SSO Sessions & Device Access Pool</h4>
-              <p class="text-xs text-slate-500 mt-0.5">Audit live authentication tokens and invalidate rogue connections instantly.</p>
+        <!-- REPLACED BOTTOM SECTION: USEFUL ENTERPRISE INFRASTRUCTURE & THREAT POSTURE -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Real-Time Automated Security Posture & Threat Watch -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div>
+                <h4 class="text-sm font-bold text-slate-900">Enterprise Threat Watch & Intrusion Safeguards</h4>
+                <p class="text-xs text-slate-500 mt-0.5">Real-time gateway endpoint protection & TLS 1.3 protocol validation.</p>
+              </div>
+              <span class="text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-200 px-2.5 py-1 rounded-lg">All Systems Green</span>
             </div>
-            <span class="text-xs font-bold bg-slate-100 text-slate-700 px-3 py-1 rounded-lg border">Azure AD Federated</span>
+            <div class="space-y-3 text-xs">
+              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
+                <div>
+                  <p class="font-bold text-slate-800">DDoS Protection & Cloudflare Edge Tunnel</p>
+                  <p class="text-slate-500 text-[11px]">Filtered 14,210 automated vulnerability probes in the last 24h</p>
+                </div>
+                <span class="text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">99.99% Uptime</span>
+              </div>
+              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
+                <div>
+                  <p class="font-bold text-slate-800">DPDP Act (Digital Personal Data Protection) Vault</p>
+                  <p class="text-slate-500 text-[11px]">All Aadhaar/PAN scans stored in AES-256 encrypted storage envelopes</p>
+                </div>
+                <span class="text-[11px] font-bold text-blue-700 bg-blue-100 px-2 py-0.5 rounded">Encrypted</span>
+              </div>
+              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
+                <div>
+                  <p class="font-bold text-slate-800">Automated Daily Database Backups (GovCloud)</p>
+                  <p class="text-slate-500 text-[11px]">Last verified mirror completed at 03:00 AM IST today</p>
+                </div>
+                <span class="text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">Verified</span>
+              </div>
+            </div>
           </div>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse text-xs">
-              <thead>
-                <tr class="border-b border-slate-200 bg-slate-50 text-slate-600 font-semibold">
-                  <th class="py-2.5 px-3">Session User</th>
-                  <th class="py-2.5 px-3">Role</th>
-                  <th class="py-2.5 px-3">Device / Client IP</th>
-                  <th class="py-2.5 px-3">Established Time</th>
-                  <th class="py-2.5 px-3">Status</th>
-                  <th class="py-2.5 px-3 text-right">Kill Switch</th>
-                </tr>
-              </thead>
-              <tbody id="it-sso-sessions-body" class="divide-y divide-slate-100"></tbody>
-            </table>
-          </div>
-        </div>
 
-        <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
-          <div class="flex items-center justify-between pb-3 border-b border-slate-100">
-            <div>
-              <h4 class="text-sm font-bold text-slate-900">TISAX & ISO 27001 Access Audit Trail</h4>
-              <p class="text-xs text-slate-500 mt-0.5">Chronological record of sensitive dossier inspections, exports, and verification decisions.</p>
+          <!-- API Integrations & External Statutory Gateways -->
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
+            <div class="flex items-center justify-between pb-3 border-b border-slate-100">
+              <div>
+                <h4 class="text-sm font-bold text-slate-900">Statutory API Gateways & Verification Webhooks</h4>
+                <p class="text-xs text-slate-500 mt-0.5">Live connectivity to Indian Government & verification registries.</p>
+              </div>
+              <span class="text-xs font-mono font-bold text-blue-700 bg-blue-50 border border-blue-200 px-2.5 py-1 rounded-lg">REST 2.0</span>
             </div>
-            <span class="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-lg">SHA-256 Ledger: Nominal</span>
-          </div>
-          <div class="overflow-x-auto">
-            <table class="w-full text-left border-collapse text-xs">
-              <thead>
-                <tr class="border-b border-slate-200 bg-slate-50 text-slate-600 font-semibold">
-                  <th class="py-2.5 px-3">Timestamp (IST)</th>
-                  <th class="py-2.5 px-3">Actor Profile</th>
-                  <th class="py-2.5 px-3">Action Performed</th>
-                  <th class="py-2.5 px-3">Target Subject</th>
-                  <th class="py-2.5 px-3">Audit Hash Checksum</th>
-                </tr>
-              </thead>
-              <tbody id="it-audit-logs-body" class="divide-y divide-slate-100"></tbody>
-            </table>
+            <div class="space-y-3 text-xs">
+              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
+                <div>
+                  <p class="font-bold text-slate-800">Income Tax Department PAN Gateway (NSDL)</p>
+                  <p class="text-slate-500 text-[11px]">Real-time PAN name and validity check with 100ms average latency</p>
+                </div>
+                <span class="text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">Operational</span>
+              </div>
+              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
+                <div>
+                  <p class="font-bold text-slate-800">EPFO UAN / Service History Verification Service</p>
+                  <p class="text-slate-500 text-[11px]">Past employment records retrieval for candidate background checks</p>
+                </div>
+                <span class="text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">Operational</span>
+              </div>
+              <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
+                <div>
+                  <p class="font-bold text-slate-800">DigiLocker / NAD Academic Repository Gateway</p>
+                  <p class="text-slate-500 text-[11px]">Instant university marksheet and degree attestation verification</p>
+                </div>
+                <span class="text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">Operational</span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
       <!-- ======================================================== -->
-      <!-- RESTORED EMPLOYEE WORKSPACE DASHBOARD                    -->
+      <!-- EMPLOYEE WORKSPACE DASHBOARD                             -->
       <!-- ======================================================== -->
       <div id="tab-emp-dashboard" class="hidden p-8 space-y-6">
         <div class="bg-gradient-to-r from-[#0F2042] via-[#162D5A] to-[#1E3A8A] rounded-3xl p-6 text-white shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6 relative overflow-hidden">
@@ -1119,32 +1250,23 @@
             <h4 class="text-sm font-bold text-slate-900 uppercase">Onboarding Milestones</h4>
             <span class="text-xs text-slate-500 font-medium">Standard 4-Step Track</span>
           </div>
-          <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs" id="emp-journey-stepper-cards"></div>
-        </div>
-
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div class="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
-            <div class="flex items-center justify-between">
-              <h4 class="text-sm font-bold text-slate-900 uppercase">Immediate Next Action</h4>
-              <span class="text-xs font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-md">Required</span>
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-3 text-xs" id="emp-journey-stepper-cards">
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+              <span class="font-bold text-slate-700">1. Sign In & Profile</span>
+              <p class="text-[11px] text-slate-500 mt-1">Activate credentials</p>
             </div>
-            <div id="emp-dash-action-card" class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between"></div>
-          </div>
-
-          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-3 flex flex-col justify-between">
-            <div>
-              <h4 class="text-sm font-bold text-slate-900 uppercase">Assigned Onboarding Lead</h4>
-              <p class="text-xs text-slate-500 mt-0.5">Need assistance with document attestation or joining date?</p>
-              <div class="mt-4 flex items-center gap-3 p-3 rounded-xl bg-slate-50 border border-slate-100">
-                <div class="w-10 h-10 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-sm">SJ</div>
-                <div class="min-w-0">
-                  <p class="text-xs font-bold text-slate-900">Sarah Jenkins</p>
-                  <p class="text-[11px] text-slate-500">HR Operations Lead</p>
-                  <a href="mailto:sarah.j@vistaengg.com" class="text-[10px] text-blue-600 hover:underline font-mono">sarah.j@vistaengg.com</a>
-                </div>
-              </div>
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+              <span class="font-bold text-slate-700">2. Corporate Policies</span>
+              <p class="text-[11px] text-slate-500 mt-1">Digital signatures required</p>
             </div>
-            <p class="text-[10px] text-slate-400">Response turnaround: within 4 business hours</p>
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+              <span class="font-bold text-slate-700">3. Upload Dossier</span>
+              <p class="text-[11px] text-slate-500 mt-1">Mandatory certificates</p>
+            </div>
+            <div class="p-4 rounded-xl border border-slate-200 bg-slate-50">
+              <span class="font-bold text-slate-700">4. Review & Submit</span>
+              <p class="text-[11px] text-slate-500 mt-1">HR verification audit</p>
+            </div>
           </div>
         </div>
       </div>
@@ -1157,7 +1279,7 @@
             <div>
               <h4 class="text-xs font-bold text-amber-900 uppercase">Upload Area Locked: Policy Sign-Off Required</h4>
               <p class="text-[11px] text-amber-700 mt-0.5 leading-relaxed">
-                As per enterprise ISO 27001 and TISAX compliance guidelines, you must read and <strong>digitally sign all corporate policies</strong> before unlocking document uploads.
+                As per enterprise ISO 27001, DPDP Act 2023, and TISAX compliance guidelines, you must read and <strong>digitally sign all corporate policies</strong> before unlocking document uploads.
               </p>
             </div>
           </div>
@@ -1206,31 +1328,10 @@
             <p class="text-xs text-slate-500 mt-0.5">Track your multi-stage verification milestone and formal induction timeline.</p>
           </div>
           <div id="emp-stage-stepper" class="relative"></div>
-          <div class="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-3 text-xs">
-            <h4 class="font-bold text-slate-800 uppercase tracking-wide">Verification Audit Notes</h4>
-            <div id="emp-audit-breakdown-list" class="space-y-2 text-slate-600">
-              <div class="flex items-center justify-between py-1 border-b border-slate-100">
-                <span>Identity & Address Verification (Voter ID/PAN)</span>
-                <span class="text-emerald-700 font-bold">✓ Cleared</span>
-              </div>
-              <div class="flex items-center justify-between py-1 border-b border-slate-100">
-                <span>Highest Academic Qualification (Degree Records)</span>
-                <span class="text-emerald-700 font-bold">✓ Authenticated</span>
-              </div>
-              <div class="flex items-center justify-between py-1 border-b border-slate-100">
-                <span>Past Employment & Relieving Record</span>
-                <span class="text-emerald-700 font-bold">✓ Authenticated</span>
-              </div>
-              <div class="flex items-center justify-between py-1">
-                <span>Statutory Master Checklist Export Readiness</span>
-                <span class="text-blue-600 font-bold">Ready for Final HR Approval</span>
-              </div>
-            </div>
-          </div>
         </div>
       </div>
 
-      <!-- TAB 12: PROFILE & POLICIES -->
+      <!-- TAB 12: PROFILE & POLICIES (COMPLETE 2026 GOVERNMENT COMPLIANCE POLICIES) -->
       <div id="tab-employee-portal" class="hidden p-8 space-y-6">
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
@@ -1260,7 +1361,7 @@
           <div class="lg:col-span-2 bg-white p-6 rounded-2xl border border-slate-200 shadow-xs space-y-4">
             <div class="flex items-center justify-between pb-2 border-b border-slate-100">
               <div>
-                <h3 class="text-sm font-bold text-slate-900">Corporate Compliance & Policies</h3>
+                <h3 class="text-sm font-bold text-slate-900">Corporate Compliance & Statutory 2026 Policies</h3>
                 <p class="text-xs text-slate-500">Each individual policy requires your legal digital signature to unlock Document Uploads.</p>
               </div>
               <span id="portal-signed-counter-pill" class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800">
@@ -1292,7 +1393,7 @@
         <label class="flex items-start gap-2.5 cursor-pointer">
           <input type="checkbox" id="policy-ack-checkbox" class="w-4 h-4 rounded text-blue-600 mt-0.5" />
           <span class="text-xs text-slate-700 font-medium">
-            I confirm I have read, understood, and agreed to adhere fully to this VISTA corporate policy.
+            I confirm I have read, understood, and agree to adhere fully to this statutory corporate policy.
           </span>
         </label>
         
@@ -1319,32 +1420,32 @@
   <script>
     // Standard template for fresh checklists
     const standardChecklistTemplate = [
-      { id: "sslc", name: "1. SSLC / 10th Marks Sheet", category: "EDUCATION", isDual: true, updateDate: "—", frontFile: "", backFile: "", status: "NOT_UPLOADED" },
-      { id: "dob", name: "2. Date of Birth Proof (Birth Certificate / Passport)", category: "IDENTITY", isDual: true, updateDate: "—", frontFile: "", backFile: "", status: "NOT_UPLOADED" },
-      { id: "pan", name: "3. Income Tax PAN Card Copy", category: "FINANCIAL", isDual: true, updateDate: "—", frontFile: "", backFile: "", status: "NOT_UPLOADED" },
-      { id: "voter", name: "4. Election Commission Photo ID (Voter ID Card)", category: "IDENTITY", isDual: true, updateDate: "—", frontFile: "", backFile: "", status: "NOT_UPLOADED" },
-      { id: "address", name: "5. Address Proof (Matched as per Voter ID)", category: "IDENTITY", isDual: false, updateDate: "—", frontFile: "", backFile: "", status: "NOT_UPLOADED" },
-      { id: "degree", name: "6. Degree Certificate / Consolidated Marksheets", category: "EDUCATION", isDual: true, updateDate: "—", frontFile: "", backFile: "", status: "NOT_UPLOADED" },
-      { id: "service", name: "7. Relieving & Service Certificates", category: "EXPERIENCE", isDual: false, updateDate: "—", frontFile: "", backFile: "", status: "NOT_UPLOADED" },
-      { id: "payslips", name: "8. 6 Months Payslips & Form 16", category: "FINANCIAL", isDual: false, updateDate: "—", frontFile: "", backFile: "", status: "NOT_UPLOADED" },
-      { id: "increment", name: "9. Increment Letter / Hike Letter", category: "FINANCIAL", isDual: false, updateDate: "—", frontFile: "", backFile: "", status: "NOT_UPLOADED" },
-      { id: "covid", name: "10. COVID-19 Vaccination Certificate", category: "MEDICAL", isDual: false, updateDate: "—", frontFile: "", backFile: "", status: "NOT_UPLOADED" },
-      { id: "remarks", name: "11. Self-Declaration & Additional Remarks", category: "COMPLIANCE", isDual: false, updateDate: "—", frontFile: "", backFile: "", status: "NOT_UPLOADED" }
+      { id: "sslc", name: "1. SSLC / 10th Marks Sheet", category: "EDUCATION", isDual: true, updateDate: "—", frontFile: "", backFile: "", status: "NOT_UPLOADED", remarks: "" },
+      { id: "dob", name: "2. Date of Birth Proof (Birth Certificate / Passport)", category: "IDENTITY", isDual: true, updateDate: "—", frontFile: "", backFile: "", status: "NOT_UPLOADED", remarks: "" },
+      { id: "pan", name: "3. Income Tax PAN Card Copy", category: "FINANCIAL", isDual: true, updateDate: "—", frontFile: "", backFile: "", status: "NOT_UPLOADED", remarks: "" },
+      { id: "voter", name: "4. Election Commission Photo ID (Voter ID Card)", category: "IDENTITY", isDual: true, updateDate: "—", frontFile: "", backFile: "", status: "NOT_UPLOADED", remarks: "" },
+      { id: "address", name: "5. Address Proof (Matched as per Voter ID)", category: "IDENTITY", isDual: false, updateDate: "—", frontFile: "", backFile: "", status: "NOT_UPLOADED", remarks: "" },
+      { id: "degree", name: "6. Degree Certificate / Consolidated Marksheets", category: "EDUCATION", isDual: true, updateDate: "—", frontFile: "", backFile: "", status: "NOT_UPLOADED", remarks: "" },
+      { id: "service", name: "7. Relieving & Service Certificates", category: "EXPERIENCE", isDual: false, updateDate: "—", frontFile: "", backFile: "", status: "NOT_UPLOADED", remarks: "" },
+      { id: "payslips", name: "8. 6 Months Payslips & Form 16", category: "FINANCIAL", isDual: false, updateDate: "—", frontFile: "", backFile: "", status: "NOT_UPLOADED", remarks: "" },
+      { id: "increment", name: "9. Increment Letter / Hike Letter", category: "FINANCIAL", isDual: false, updateDate: "—", frontFile: "", backFile: "", status: "NOT_UPLOADED", remarks: "" },
+      { id: "covid", name: "10. COVID-19 Vaccination Certificate", category: "MEDICAL", isDual: false, updateDate: "—", frontFile: "", backFile: "", status: "NOT_UPLOADED", remarks: "" },
+      { id: "remarks", name: "11. Self-Declaration & Additional Remarks", category: "COMPLIANCE", isDual: false, updateDate: "—", frontFile: "", backFile: "", status: "NOT_UPLOADED", remarks: "" }
     ];
 
-    // Pre-approved seed for historical users (Mohan D & Andan)
+    // Pre-approved seed for historical users
     const seededVerifiedChecklist = [
-      { id: "sslc", name: "1. SSLC / 10th Marks Sheet", category: "EDUCATION", isDual: true, updateDate: "2026-09-12", frontFile: "SSLC_Marksheet_Front.pdf", backFile: "SSLC_Pass_Certificate_Back.pdf", status: "VERIFIED" },
-      { id: "dob", name: "2. Date of Birth Proof (Birth Certificate / Passport)", category: "IDENTITY", isDual: true, updateDate: "2026-09-12", frontFile: "Passport_Front_Cover.pdf", backFile: "Passport_Address_Back.pdf", status: "VERIFIED" },
-      { id: "pan", name: "3. Income Tax PAN Card Copy", category: "FINANCIAL", isDual: true, updateDate: "2026-09-13", frontFile: "PAN_Card_Front_Clear.pdf", backFile: "PAN_Card_Back_Barcode.pdf", status: "VERIFIED" },
-      { id: "voter", name: "4. Election Commission Photo ID (Voter ID Card)", category: "IDENTITY", isDual: true, updateDate: "2026-09-14", frontFile: "Voter_ID_Card_Front.pdf", backFile: "Voter_ID_Card_Back_Address.pdf", status: "VERIFIED" },
-      { id: "address", name: "5. Address Proof (Matched as per Voter ID)", category: "IDENTITY", isDual: false, updateDate: "2026-09-14", frontFile: "Rental_Agreement_Registered.pdf", backFile: "", status: "VERIFIED" },
-      { id: "degree", name: "6. Degree Certificate / Consolidated Marksheets", category: "EDUCATION", isDual: true, updateDate: "2026-09-15", frontFile: "BE_Degree_Convocation_Front.pdf", backFile: "BE_Degree_Transcript_Back.pdf", status: "VERIFIED" },
-      { id: "service", name: "7. Relieving & Service Certificates", category: "EXPERIENCE", isDual: false, updateDate: "2026-09-15", frontFile: "Prior_Employer_Relieving.pdf", backFile: "", status: "VERIFIED" },
-      { id: "payslips", name: "8. 6 Months Payslips & Form 16", category: "FINANCIAL", isDual: false, updateDate: "2026-09-16", frontFile: "6_Months_PaySlips_Signed.pdf", backFile: "", status: "VERIFIED" },
-      { id: "increment", name: "9. Increment Letter / Hike Letter", category: "FINANCIAL", isDual: false, updateDate: "2026-09-18", frontFile: "Annual_Increment_Letter_2025.pdf", backFile: "", status: "VERIFIED" },
-      { id: "covid", name: "10. COVID-19 Vaccination Certificate", category: "MEDICAL", isDual: false, updateDate: "2026-09-20", frontFile: "CoWIN_Final_Vaccination_Cert.pdf", backFile: "", status: "VERIFIED" },
-      { id: "remarks", name: "11. Self-Declaration & Additional Remarks", category: "COMPLIANCE", isDual: false, updateDate: "2026-09-21", frontFile: "", backFile: "", status: "NOT_UPLOADED" }
+      { id: "sslc", name: "1. SSLC / 10th Marks Sheet", category: "EDUCATION", isDual: true, updateDate: "2026-09-12", frontFile: "SSLC_Marksheet_Front.pdf", backFile: "SSLC_Pass_Certificate_Back.pdf", status: "VERIFIED", remarks: "Board credentials authenticated" },
+      { id: "dob", name: "2. Date of Birth Proof (Birth Certificate / Passport)", category: "IDENTITY", isDual: true, updateDate: "2026-09-12", frontFile: "Passport_Front_Cover.pdf", backFile: "Passport_Address_Back.pdf", status: "VERIFIED", remarks: "DOB matches SSLC" },
+      { id: "pan", name: "3. Income Tax PAN Card Copy", category: "FINANCIAL", isDual: true, updateDate: "2026-09-13", frontFile: "PAN_Card_Front_Clear.pdf", backFile: "PAN_Card_Back_Barcode.pdf", status: "VERIFIED", remarks: "NSDL check verified" },
+      { id: "voter", name: "4. Election Commission Photo ID (Voter ID Card)", category: "IDENTITY", isDual: true, updateDate: "2026-09-14", frontFile: "Voter_ID_Card_Front.pdf", backFile: "Voter_ID_Card_Back_Address.pdf", status: "VERIFIED", remarks: "Matched voter list" },
+      { id: "address", name: "5. Address Proof (Matched as per Voter ID)", category: "IDENTITY", isDual: false, updateDate: "2026-09-14", frontFile: "Rental_Agreement_Registered.pdf", backFile: "", status: "VERIFIED", remarks: "Permanent residence matched" },
+      { id: "degree", name: "6. Degree Certificate / Consolidated Marksheets", category: "EDUCATION", isDual: true, updateDate: "2026-09-15", frontFile: "BE_Degree_Convocation_Front.pdf", backFile: "BE_Degree_Transcript_Back.pdf", status: "VERIFIED", remarks: "Anna Univ verified" },
+      { id: "service", name: "7. Relieving & Service Certificates", category: "EXPERIENCE", isDual: false, updateDate: "2026-09-15", frontFile: "Prior_Employer_Relieving.pdf", backFile: "", status: "VERIFIED", remarks: "Relieving letter verified" },
+      { id: "payslips", name: "8. 6 Months Payslips & Form 16", category: "FINANCIAL", isDual: false, updateDate: "2026-09-16", frontFile: "6_Months_PaySlips_Signed.pdf", backFile: "", status: "VERIFIED", remarks: "Salary credits validated" },
+      { id: "increment", name: "9. Increment Letter / Hike Letter", category: "FINANCIAL", isDual: false, updateDate: "2026-09-18", frontFile: "Annual_Increment_Letter_2025.pdf", backFile: "", status: "VERIFIED", remarks: "Compensation band authenticated" },
+      { id: "covid", name: "10. COVID-19 Vaccination Certificate", category: "MEDICAL", isDual: false, updateDate: "2026-09-20", frontFile: "CoWIN_Final_Vaccination_Cert.pdf", backFile: "", status: "VERIFIED", remarks: "Fully vaccinated status" },
+      { id: "remarks", name: "11. Self-Declaration & Additional Remarks", category: "COMPLIANCE", isDual: false, updateDate: "2026-09-21", frontFile: "", backFile: "", status: "NOT_UPLOADED", remarks: "" }
     ];
 
     const defaultCandidates = [
@@ -1378,8 +1479,8 @@
     ];
 
     const defaultEmployees = [
-      { id: "VISTA1854", name: "Andan Karinson", role: "Embedded Systems Specialist", bu: "Engineering", doj: "2024-09-29", email: "andan.k@vistaengg.com" },
-      { id: "VISTA1855", name: "Ananya Sharma", role: "Lead Cloud Architect", bu: "Engineering", doj: "2023-09-29", email: "ananya.s@vistaengg.com" }
+      { id: "VISTA1854", name: "Andan Karinson", role: "Embedded Systems Specialist", bu: "Engineering", doj: "2024-09-29", email: "andan.k@vistaengg.com", tenureStatus: "Active Tenure" },
+      { id: "VISTA1855", name: "Ananya Sharma", role: "Lead Cloud Architect", bu: "Engineering", doj: "2023-09-29", email: "ananya.s@vistaengg.com", tenureStatus: "Active Tenure" }
     ];
 
     const defaultSystemUsers = [
@@ -1393,7 +1494,6 @@
     let candidates = JSON.parse(localStorage.getItem("vista_candidates")) || defaultCandidates;
     let activeEmployees = JSON.parse(localStorage.getItem("vista_employees")) || defaultEmployees;
     
-    // Per-candidate document store to keep newly added candidates 100% empty
     let candidateDossiers = JSON.parse(localStorage.getItem("vista_candidate_dossiers")) || {
       "VISTA-2026-5371": JSON.parse(JSON.stringify(seededVerifiedChecklist)),
       "VISTA-2026-8699": JSON.parse(JSON.stringify(seededVerifiedChecklist)),
@@ -1410,6 +1510,54 @@
 
     let selectedCandidateIds = [];
 
+    // Comprehensive 2026 Corporate Policies
+    let corporatePolicies = [
+      { 
+        id: "POL-01", 
+        title: "Code of Conduct, Ethics & POSH Compliance Policy (2026)", 
+        ref: "VISTA-POL-ETH-2026", 
+        summary: "Mandates enterprise integrity, zero tolerance for financial bribery, and compliance with the Prevention of Sexual Harassment (POSH) at Workplace Act 2013 and 2026 amendments.",
+        bodyText: "VISTA Engg Solutions enforces uncompromising standards of professionalism, integrity, and fair treatment. Employees are strictly prohibited from soliciting gifts, engaging in insider trading, or breaching non-compete agreements. Under the POSH regulations, an Internal Complaints Committee (ICC) is in place, and harassment of any form results in immediate disciplinary dismissal.",
+        isSigned: false,
+        signedBy: "",
+        signedDate: ""
+      },
+      { 
+        id: "POL-02", 
+        title: "Information Security, DPDP Act 2023 & TISAX IP Governance", 
+        ref: "VISTA-POL-SEC-2026", 
+        summary: "Digital Personal Data Protection (DPDP) Act 2023, ISO/IEC 27001:2022, and automotive TISAX clean-desk & confidentiality regulations.",
+        bodyText: "All technical models, embedded firmware, source code repositories, and customer engineering artifacts are confidential trade secrets of VISTA. Employees must adhere to dual-factor authentication, clean-desk protocol, and unauthorized media isolation. The unauthorized storage or leakage of personally identifiable information (PII) is punishable under the DPDP Act 2023.",
+        isSigned: false,
+        signedBy: "",
+        signedDate: ""
+      },
+      { 
+        id: "POL-03", 
+        title: "Terms of Employment, Attendance & Statutory 90-Day Notice Regulations", 
+        ref: "VISTA-POL-HR-2026", 
+        summary: "Standard 90-day contractual notice period, intellectual property assignment, and exit handover protocol.",
+        bodyText: "Employees agree to fulfill standard business hours and execute assigned engineering deliverables. In accordance with private company service regulations in India, a mandatory 90-day notice period applies to any voluntary resignation to facilitate full knowledge transfer and project handover. Departure prior to 90 days requires formal management approval and clearance of company property.",
+        isSigned: false,
+        signedBy: "",
+        signedDate: ""
+      }
+    ];
+
+    let activeSSOSessions = [
+      { id: "SESS-9021", user: "Sarah Jenkins", email: "sarah.j@vistaengg.com", role: "HR", ip: "10.14.0.12 (VPN)", device: "Chrome 130 / macOS", loginTime: "08:15 AM IST", status: "Active" },
+      { id: "SESS-8419", user: "Mohan D", email: "mohan.d@gmail.com", role: "EMPLOYEE", ip: "10.14.0.84 (Corporate LAN)", device: "Edge 129 / Windows 11", loginTime: "09:42 AM IST", status: "Active" },
+      { id: "SESS-7731", user: "David Vance", email: "admin@vistaengg.com", role: "ADMIN", ip: "10.14.0.02 (Primary IT)", device: "Firefox 131 / Linux", loginTime: "07:30 AM IST", status: "Active" }
+    ];
+
+    let currentUser = null;
+    let selectedEmailCandidate = null;
+    let inspectedCandidateId = "VISTA-2026-8699";
+    let activeAuditingDoc = null;
+    let activeDeboardingEmp = null;
+    let currentAdminSubtab = "MAIN"; // 'MAIN' or 'EMP'
+    let currentReadingPolicyId = null;
+
     function saveState() {
       localStorage.setItem("vista_candidates", JSON.stringify(candidates));
       localStorage.setItem("vista_employees", JSON.stringify(activeEmployees));
@@ -1417,7 +1565,6 @@
       localStorage.setItem("vista_candidate_dossiers", JSON.stringify(candidateDossiers));
     }
 
-    // Helper: Get Candidate Checklist
     function getCandidateChecklist(candidateId) {
       if (!candidateDossiers[candidateId]) {
         candidateDossiers[candidateId] = JSON.parse(JSON.stringify(standardChecklistTemplate));
@@ -1425,29 +1572,6 @@
       }
       return candidateDossiers[candidateId];
     }
-
-    let currentUser = null;
-    let selectedEmailCandidate = null;
-    let inspectedCandidateId = "VISTA-2026-8699";
-
-    let corporatePolicies = [
-      { id: "POL-01", title: "Code of Business Conduct & Ethics", ref: "VISTA-POL-ETH-2026", summary: "Integrity, anti-corruption, and client ethics.", isSigned: false },
-      { id: "POL-02", title: "Information Security, IP & TISAX Policy", ref: "VISTA-POL-SEC-2026", summary: "Client IP protection & clean desk governance.", isSigned: false },
-      { id: "POL-03", title: "Employee Leave & Attendance Regulations", ref: "VISTA-POL-HR-2026", summary: "Standard notice period: 90 days & statutory guidelines.", isSigned: false }
-    ];
-
-    // IT Telemetry & SSO Session State
-    let activeSSOSessions = [
-      { id: "SESS-9021", user: "Sarah Jenkins", email: "sarah.j@vistaengg.com", role: "HR", ip: "10.14.0.12 (VPN)", device: "Chrome 130 / macOS", loginTime: "08:15 AM IST", status: "Active" },
-      { id: "SESS-8419", user: "Mohan D", email: "mohan.d@gmail.com", role: "EMPLOYEE", ip: "10.14.0.84 (Corporate LAN)", device: "Edge 129 / Windows 11", loginTime: "09:42 AM IST", status: "Active" },
-      { id: "SESS-7731", user: "David Vance", email: "admin@vistaengg.com", role: "ADMIN", ip: "10.14.0.02 (Primary IT)", device: "Firefox 131 / Linux", loginTime: "07:30 AM IST", status: "Active" }
-    ];
-
-    let securityAuditLogs = [
-      { id: "LOG-5510", timestamp: "2026-10-05 15:42:19", actor: "Sarah Jenkins (HR)", action: "VIEW_DOSSIER", target: "Mohan D (VISTA-2026-5371)", hash: "SHA256:7f83b16...4b1fa3d" },
-      { id: "LOG-5509", timestamp: "2026-10-05 14:11:05", actor: "Mohan D (EMP)", action: "SIGN_POLICY", target: "VISTA-POL-ETH-2026", hash: "SHA256:8ca912e...99e120f" },
-      { id: "LOG-5508", timestamp: "2026-10-05 12:30:44", actor: "Sarah Jenkins (HR)", action: "EXPORT_STATUTORY_SCHEDULE", target: "All Candidates", hash: "SHA256:a14ef90...2108ec4" }
-    ];
 
     function showToast(msg) {
       const toast = document.getElementById("toast");
@@ -1479,7 +1603,6 @@
       showToast("Signed out safely.");
     }
 
-    // Modal Opening with Error-Guarded Initialization
     function openCreateCandidateModal() {
       const modal = document.getElementById("create-candidate-modal");
       if (!modal) return;
@@ -1498,7 +1621,6 @@
       }
     }
 
-    // Add Candidate: Completely Clean Slate (0% Progress, Empty Documents)
     function submitNewCandidate() {
       const fn = (document.getElementById("cand-new-fn")?.value || "").trim() || "New";
       const ln = (document.getElementById("cand-new-ln")?.value || "").trim() || "Candidate";
@@ -1520,9 +1642,7 @@
         onboardingData: { dob: "2000-01-01", panNumber: "ABCDE1234F" }
       };
 
-      // Fresh, empty checklist for this specific new person
       candidateDossiers[candId] = JSON.parse(JSON.stringify(standardChecklistTemplate));
-
       candidates.unshift(newCand);
       systemUsers.push({
         id: `USR-${systemUsers.length + 1}`,
@@ -1532,15 +1652,40 @@
       saveState();
       closeCreateCandidateModal();
       refreshAllViews();
-      
-      // Automatically pop up the full email preview modal immediately
       openWelcomeEmailModal(candId);
       showToast(`Candidate registered! Opening welcome invite preview...`);
     }
 
-    // Strict Role-Based View Switcher
+    function deleteCandidate(id) {
+      const cand = candidates.find(c => c.id === id);
+      if (confirm(`Permanently remove candidate ${cand?.name || id}? They will be revoked from logging in.`)) {
+        candidates = candidates.filter(c => c.id !== id);
+        systemUsers = systemUsers.filter(u => u.candidateId !== id && u.email?.toLowerCase() !== cand?.email?.toLowerCase());
+        delete candidateDossiers[id];
+        saveState();
+        refreshAllViews();
+        showToast(`Candidate removed and credentials revoked.`);
+      }
+    }
+
+    // Single-Candidate Immediate Password Reset Flow
+    function resetCandidatePasswordDirectly(candId) {
+      const cand = candidates.find(c => c.id === candId);
+      if (!cand) return;
+      const newTempPass = "Vista@" + Math.floor(1000 + Math.random() * 9000);
+      cand.tempPass = newTempPass;
+      
+      const user = systemUsers.find(u => u.candidateId === candId || (u.email && u.email.toLowerCase() === cand.email.toLowerCase()));
+      if (user) {
+        user.pass = newTempPass;
+      }
+      
+      saveState();
+      refreshAllViews();
+      showToast(`Password for ${cand.name} reset to: ${newTempPass}`);
+    }
+
     function switchTab(tabName) {
-      // Role enforcement
       if (currentUser?.role === 'ADMIN') {
         const adminAllowed = ['admin', 'admin-it-health'];
         if (!adminAllowed.includes(tabName)) tabName = 'admin';
@@ -1581,10 +1726,7 @@
       if (tabName === 'ready-onboarding') renderReadyForOnboarding();
       if (tabName === 'emp-dashboard') renderEmployeeDashboard();
       if (tabName === 'emp-upload-docs') renderEmployeeUploadCards();
-      if (tabName === 'emp-review-submit') renderDossierReviewTab();
-      if (tabName === 'emp-stage-tracker') renderEmployeeStageStepper();
       if (tabName === 'employee-portal') renderCorporatePoliciesList();
-      if (tabName === 'admin-it-health') renderITHealthDetails();
       if (tabName === 'admin') renderAdminUsersTable();
     }
 
@@ -1599,7 +1741,6 @@
       const adminNav = document.getElementById("admin-only-nav-group");
 
       if (user.role === "ADMIN") {
-        // STRICT IT ADMIN: HIDE HR & EMPLOYEE WORKSPACES COMPLETELY
         hrNav.classList.add("hidden");
         empNav.classList.add("hidden");
         adminNav.classList.remove("hidden");
@@ -1632,7 +1773,6 @@
         const savedTab = localStorage.getItem("vista_active_tab") || 'emp-dashboard';
         switchTab(savedTab.startsWith('emp-') || savedTab === 'employee-portal' ? savedTab : 'emp-dashboard');
       } else {
-        // HR ROLE
         adminNav.classList.add("hidden");
         empNav.classList.add("hidden");
         hrNav.classList.remove("hidden");
@@ -1650,7 +1790,6 @@
       refreshAllViews();
     }
 
-    // Flexible Authentication (Matches Email, Domain, Candidate ID)
     function handleLoginSubmit(e) {
       e.preventDefault();
       const rawInput = (document.getElementById("login-email")?.value || "").trim().toLowerCase();
@@ -1681,7 +1820,56 @@
       showToast(`Welcome, ${user.name}!`);
     }
 
-    // Detailed Checklist Inspection (HR View)
+    // HR CREDENTIALS TABLE: INCLUDES THE "RESET PASSWORD" ACTION
+    function renderHRCredentialsTab() {
+      const tbody = document.getElementById("hr-candidate-credentials-table-body");
+      if (!tbody) return;
+
+      tbody.innerHTML = candidates.map(c => `
+        <tr class="hover:bg-slate-50 transition-colors">
+          <td class="py-3 px-6">
+            <span class="font-bold text-slate-900">${c.name}</span>
+            <span class="block font-mono text-[10px] text-slate-400">${c.id}</span>
+          </td>
+          <td class="py-3 px-4 font-mono font-medium text-slate-800">
+            <span class="bg-slate-100 px-2 py-0.5 rounded border border-slate-200">${c.email}</span>
+          </td>
+          <td class="py-3 px-4 font-mono font-bold text-blue-900">
+            <span class="bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200">${c.tempPass || 'Vista@2026'}</span>
+          </td>
+          <td class="py-3 px-4">
+            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
+              ✓ Dispatched
+            </span>
+          </td>
+          <td class="py-3 px-4">
+            <span class="px-2.5 py-0.5 rounded text-[10px] font-bold ${c.progress > 0 ? 'bg-blue-100 text-blue-800' : 'bg-slate-100 text-slate-600'}">
+              ${c.progress > 0 ? 'Active / In Progress' : 'Pending First Login'}
+            </span>
+          </td>
+          <td class="py-3 px-6 text-right space-x-1.5 whitespace-nowrap">
+            <button onclick="openWelcomeEmailModal('${c.id}')" class="px-2.5 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 rounded-lg font-bold text-xs">
+              ✉ View Email
+            </button>
+            <button onclick="copyCredentials('${c.name}', '${c.email}', '${c.tempPass || 'Vista@2026'}')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 rounded-lg font-bold text-xs">
+              📋 Copy Info
+            </button>
+            <button onclick="resetCandidatePasswordDirectly('${c.id}')" class="px-2.5 py-1 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 rounded-lg font-bold text-xs">
+              🔄 Reset Password
+            </button>
+          </td>
+        </tr>
+      `).join("");
+
+      const badge = document.getElementById("badge-hr-credentials-count");
+      if (badge) badge.innerText = `${candidates.length} Total`;
+    }
+
+    function copyCredentials(name, email, pass) {
+      navigator.clipboard.writeText(`VISTA Login: ${email} | Password: ${pass}`).then(() => showToast(`Copied credentials for ${name}`));
+    }
+
+    // STATUTORY DOCUMENTS AUDIT & APPROVE / REJECT WITH COMMENTS
     function renderChecklist() {
       const container = document.getElementById("document-checklist-container");
       if (!container) return;
@@ -1707,40 +1895,93 @@
                 ${doc.frontFile ? `<span class="text-[10px] text-blue-600 font-mono">• F: ${doc.frontFile}</span>` : '<span class="text-[10px] text-slate-400 italic">• No upload yet</span>'}
                 ${doc.backFile ? `<span class="text-[10px] text-cyan-600 font-mono">• B: ${doc.backFile}</span>` : ''}
               </div>
+              ${doc.remarks ? `<p class="text-[10px] text-slate-600 mt-1 font-medium bg-slate-100 px-2 py-0.5 rounded w-fit">Auditor Notes: ${doc.remarks}</p>` : ''}
             </div>
           </div>
           <div class="flex items-center gap-2.5">
             <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
               doc.status === 'VERIFIED' ? 'bg-emerald-100 text-emerald-800' : 
+              doc.status === 'REJECTED' ? 'bg-rose-100 text-rose-800' :
               doc.status === 'PENDING_REVIEW' ? 'bg-blue-100 text-blue-800' : 'bg-slate-100 text-slate-500'
             }">${doc.status}</span>
-            <button onclick="mockApproveDoc('${cand.id}', '${doc.id}')" class="px-3 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded-lg font-semibold text-xs transition-colors">
-              ${doc.status === 'VERIFIED' ? 'Re-audit' : 'Verify'}
+            <button onclick="openDocAuditModal('${cand.id}', '${doc.id}')" class="px-3 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded-lg font-semibold text-xs transition-colors">
+              Inspect & Decide
             </button>
           </div>
         </div>
       `).join("");
     }
 
-    function mockApproveDoc(candId, docId) {
+    function openDocAuditModal(candId, docId) {
+      const cand = candidates.find(c => c.id === candId);
       const list = getCandidateChecklist(candId);
-      const item = list.find(d => d.id === docId);
-      if (item) {
-        item.status = "VERIFIED";
-        item.frontFile = item.frontFile || `${docId.toUpperCase()}_Attested.pdf`;
-        item.updateDate = new Date().toISOString().split("T")[0];
-        
-        // Recalculate progress
-        const cand = candidates.find(c => c.id === candId);
-        const verifiedCount = list.filter(d => d.status === "VERIFIED").length;
-        if (cand) {
-          cand.progress = Math.round((verifiedCount / list.length) * 100);
-          if (cand.progress === 100) cand.allDocsVerified = true;
-        }
-        saveState();
-        refreshAllViews();
-        showToast(`Document ${item.name} verified.`);
+      const doc = list.find(d => d.id === docId);
+      if (!cand || !doc) return;
+
+      activeAuditingDoc = { candId, docId };
+      document.getElementById("audit-modal-title").innerText = `Audit: ${doc.name}`;
+      document.getElementById("audit-modal-candidate").innerText = `Candidate: ${cand.name} (${cand.id})`;
+      document.getElementById("audit-modal-files").innerHTML = `
+        <p><strong>Front Scan:</strong> ${doc.frontFile || 'None uploaded'}</p>
+        ${doc.isDual ? `<p><strong>Back Scan:</strong> ${doc.backFile || 'None uploaded'}</p>` : ''}
+        <p class="text-slate-500 text-[10px]">Current Status: ${doc.status}</p>
+      `;
+      document.getElementById("audit-modal-remarks").value = doc.remarks || "";
+      document.getElementById("doc-audit-modal").classList.remove("hidden");
+    }
+
+    function closeDocAuditModal() {
+      document.getElementById("doc-audit-modal").classList.add("hidden");
+      activeAuditingDoc = null;
+    }
+
+    function executeDocAuditDecision(decision) {
+      if (!activeAuditingDoc) return;
+      const { candId, docId } = activeAuditingDoc;
+      const list = getCandidateChecklist(candId);
+      const doc = list.find(d => d.id === docId);
+      const remarks = document.getElementById("audit-modal-remarks").value.trim();
+
+      if (decision === 'REJECTED' && !remarks) {
+        alert("Please provide the rejection reason in the remarks field.");
+        return;
       }
+
+      doc.status = decision;
+      doc.remarks = remarks || (decision === 'VERIFIED' ? "Verified & Authenticated" : "Rejected");
+      doc.updateDate = new Date().toISOString().split("T")[0];
+      if (decision === 'VERIFIED' && !doc.frontFile) {
+        doc.frontFile = `${docId.toUpperCase()}_Attested.pdf`;
+      }
+
+      const cand = candidates.find(c => c.id === candId);
+      const verifiedCount = list.filter(d => d.status === "VERIFIED").length;
+      if (cand) {
+        cand.progress = Math.round((verifiedCount / list.length) * 100);
+        if (cand.progress === 100) cand.allDocsVerified = true;
+      }
+
+      saveState();
+      closeDocAuditModal();
+      refreshAllViews();
+      showToast(`Document ${doc.name} marked as ${decision}.`);
+    }
+
+    function exportVerificationAuditReport() {
+      const cand = candidates.find(c => c.id === inspectedCandidateId) || candidates[0];
+      const list = getCandidateChecklist(cand.id);
+      const headers = ["Doc Index", "Document Title", "Category", "Verification Status", "Front File", "Back File", "Audit Date", "Auditor Remarks"];
+      const rows = list.map((d, i) => [
+        i + 1, `"${d.name}"`, `"${d.category}"`, `"${d.status}"`, `"${d.frontFile}"`, `"${d.backFile}"`, `"${d.updateDate}"`, `"${d.remarks || 'None'}"`
+      ]);
+      const csv = "\uFEFF" + [headers.join(","), ...rows.map(r => r.join(","))].join("\r\n");
+      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `VISTA_Audit_Report_${cand.id}_${new Date().toISOString().split("T")[0]}.csv`;
+      a.click();
+      showToast(`Downloaded statutory audit checklist for ${cand.name}.`);
     }
 
     function populateCandidateDropdown() {
@@ -1758,7 +1999,411 @@
       renderChecklist();
     }
 
-    // Statutory Export Table
+    // ACTIVE EMPLOYEES & DEBOARDING WORKFLOW (90-DAY CALENDAR & REASONS)
+    function renderActiveEmployeesTable() {
+      const tbody = document.getElementById("active-employees-table-body");
+      if (!tbody) return;
+      document.getElementById("headcount-badge").innerText = `Headcount: ${805 + activeEmployees.length}`;
+
+      tbody.innerHTML = activeEmployees.map(emp => `
+        <tr class="hover:bg-slate-50 transition-colors">
+          <td class="py-4 px-6 font-semibold text-slate-900">
+            <div>${emp.name}</div>
+            <div class="text-[10px] text-slate-400 font-mono">${emp.email}</div>
+          </td>
+          <td class="py-4 px-4 font-mono font-bold text-emerald-800">
+            <span class="bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">${emp.id}</span>
+          </td>
+          <td class="py-4 px-4">
+            <div class="font-medium text-slate-800">${emp.role}</div>
+            <div class="text-[10px] text-slate-500">${emp.bu}</div>
+          </td>
+          <td class="py-4 px-4 text-slate-700 font-medium">${emp.doj}</td>
+          <td class="py-4 px-4">
+            <span class="text-[11px] font-bold ${emp.tenureStatus === 'Deboarded' ? 'text-rose-700 bg-rose-50 border border-rose-200' : 'text-emerald-700 bg-emerald-50 border border-emerald-200'} px-2.5 py-1 rounded-md">
+              ${emp.tenureStatus || '✓ Active Tenure'}
+            </span>
+          </td>
+          <td class="py-4 px-6 text-right space-x-1.5 whitespace-nowrap">
+            <button onclick="showToast('Employee file verified.')" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-lg text-xs">
+              View File
+            </button>
+            ${emp.tenureStatus !== 'Deboarded' ? `
+              <button onclick="openDeboardingModal('${emp.id}')" class="px-3 py-1.5 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 font-bold rounded-lg text-xs transition-colors">
+                Deboard / Relieve
+              </button>
+            ` : '<span class="text-xs text-slate-400 font-mono">Relieved</span>'}
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function openDeboardingModal(empId) {
+      const emp = activeEmployees.find(e => e.id === empId);
+      if (!emp) return;
+      activeDeboardingEmp = emp;
+
+      document.getElementById("deboard-modal-subtitle").innerText = `Employee: ${emp.name} (${emp.id}) — ${emp.role}`;
+      const today = new Date();
+      const todayStr = today.toISOString().split("T")[0];
+      
+      const target90 = new Date(today.getTime() + (90 * 24 * 60 * 60 * 1000));
+      const target90Str = target90.toISOString().split("T")[0];
+
+      document.getElementById("deboard-trigger-date").value = todayStr;
+      document.getElementById("deboard-lwd-date").value = target90Str;
+      document.getElementById("deboard-selected-days").innerText = "90 Days (Standard)";
+      document.getElementById("deboard-override-box").classList.add("hidden");
+      document.getElementById("deboard-other-container").classList.add("hidden");
+      document.getElementById("deboard-reason-select").value = "Voluntary Resignation";
+
+      document.getElementById("deboarding-modal").classList.remove("hidden");
+    }
+
+    function closeDeboardingModal() {
+      document.getElementById("deboarding-modal").classList.add("hidden");
+      activeDeboardingEmp = null;
+    }
+
+    function handleDeboardReasonChange(val) {
+      const otherContainer = document.getElementById("deboard-other-container");
+      if (val === "Other") {
+        otherContainer.classList.remove("hidden");
+      } else {
+        otherContainer.classList.add("hidden");
+      }
+    }
+
+    function calculateDeboardDates() {
+      const trigger = document.getElementById("deboard-trigger-date").value;
+      if (!trigger) return;
+      const tDate = new Date(trigger);
+      const target90 = new Date(tDate.getTime() + (90 * 24 * 60 * 60 * 1000));
+      document.getElementById("deboard-lwd-date").value = target90.toISOString().split("T")[0];
+      evaluateNoticeDeviation();
+    }
+
+    function evaluateNoticeDeviation() {
+      const trigger = document.getElementById("deboard-trigger-date").value;
+      const lwd = document.getElementById("deboard-lwd-date").value;
+      if (!trigger || !lwd) return;
+
+      const diffMs = new Date(lwd) - new Date(trigger);
+      const diffDays = Math.round(diffMs / (1000 * 60 * 60 * 24));
+      
+      document.getElementById("deboard-selected-days").innerText = `${diffDays} Days`;
+      const overrideBox = document.getElementById("deboard-override-box");
+
+      if (diffDays !== 90) {
+        overrideBox.classList.remove("hidden");
+      } else {
+        overrideBox.classList.add("hidden");
+      }
+    }
+
+    function confirmEmployeeDeboard() {
+      if (!activeDeboardingEmp) return;
+      let reason = document.getElementById("deboard-reason-select").value;
+      if (reason === "Other") {
+        const otherDetail = document.getElementById("deboard-other-text").value.trim();
+        reason = `Other: ${otherDetail || 'Unspecified'}`;
+      }
+
+      const lwd = document.getElementById("deboard-lwd-date").value;
+      const trigger = document.getElementById("deboard-trigger-date").value;
+      const diffDays = Math.round((new Date(lwd) - new Date(trigger)) / (1000 * 60 * 60 * 24));
+
+      if (diffDays !== 90) {
+        const justification = document.getElementById("deboard-override-justification").value.trim();
+        if (!justification) {
+          alert("Notice period differs from standard 90 days. Mandatory override justification is required.");
+          return;
+        }
+      }
+
+      activeDeboardingEmp.tenureStatus = "Deboarded";
+      activeDeboardingEmp.relievingDate = lwd;
+      activeDeboardingEmp.relievingReason = reason;
+
+      saveState();
+      closeDeboardingModal();
+      renderActiveEmployeesTable();
+      showToast(`Deboarding initialized for ${activeDeboardingEmp.name}. Relieving Date: ${lwd}`);
+    }
+
+    // USER & ROLE ADMIN: SPLIT VIEW FOR MAIN TEAM VS EMPLOYEES
+    function switchAdminUserSubtab(type) {
+      currentAdminSubtab = type;
+      const btnMain = document.getElementById("admin-subtab-main-btn");
+      const btnEmp = document.getElementById("admin-subtab-emp-btn");
+
+      if (type === 'MAIN') {
+        btnMain.className = "px-3 py-1 text-xs font-bold rounded-lg bg-white shadow-xs text-slate-800 transition-all";
+        btnEmp.className = "px-3 py-1 text-xs font-bold rounded-lg text-slate-500 hover:text-slate-800 transition-all";
+      } else {
+        btnEmp.className = "px-3 py-1 text-xs font-bold rounded-lg bg-white shadow-xs text-slate-800 transition-all";
+        btnMain.className = "px-3 py-1 text-xs font-bold rounded-lg text-slate-500 hover:text-slate-800 transition-all";
+      }
+      renderAdminUsersTable();
+    }
+
+    function renderAdminUsersTable() {
+      const tbody = document.getElementById("admin-users-table-body");
+      if (!tbody) return;
+
+      const filtered = systemUsers.filter(u => {
+        if (currentAdminSubtab === 'MAIN') {
+          return u.role === 'ADMIN' || u.role === 'HR';
+        } else {
+          return u.role === 'EMPLOYEE';
+        }
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" class="p-6 text-center text-slate-400">No users found in this category.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = filtered.map(u => `
+        <tr class="hover:bg-slate-50">
+          <td class="py-3 px-3 font-semibold text-slate-900">${u.name}</td>
+          <td class="py-3 px-3">
+            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${u.role === 'ADMIN' ? 'bg-indigo-100 text-indigo-800' : u.role === 'HR' ? 'bg-blue-100 text-blue-800' : 'bg-emerald-100 text-emerald-800'}">${u.role}</span>
+          </td>
+          <td class="py-3 px-3 font-mono text-slate-600">${u.email}</td>
+          <td class="py-3 px-3 text-right">
+            <button onclick="adminResetPassword('${u.id}')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-md">
+              Reset Password
+            </button>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function adminResetPassword(userId) {
+      const u = systemUsers.find(item => item.id === userId);
+      if (!u) return;
+      const newPass = "Vista@" + Math.floor(1000 + Math.random() * 9000);
+      u.pass = newPass;
+      saveState();
+      showToast(`Password for ${u.name} reset to: ${newPass}`);
+    }
+
+    function adminCreateUser() {
+      const name = document.getElementById("admin-new-name").value.trim();
+      const email = document.getElementById("admin-new-email").value.trim();
+      const role = document.getElementById("admin-new-role").value;
+      const pass = document.getElementById("admin-new-pass").value;
+
+      if (!name || !email) {
+        alert("Please enter Name and Email.");
+        return;
+      }
+
+      systemUsers.push({ id: `USR-${systemUsers.length + 1}`, name, email, role, pass });
+      saveState();
+      document.getElementById("admin-new-name").value = "";
+      document.getElementById("admin-new-email").value = "";
+      renderAdminUsersTable();
+      showToast(`Credentials provisioned for ${name} (${role}).`);
+    }
+
+    // CORPORATE POLICIES LIST & FULL SIGNATURE VALIDATION WORKFLOW
+    function renderCorporatePoliciesList() {
+      const container = document.getElementById("corporate-policies-list");
+      if (!container) return;
+
+      const signedCount = corporatePolicies.filter(p => p.isSigned).length;
+      document.getElementById("portal-signed-counter-pill").innerText = `${signedCount} of ${corporatePolicies.length} Signed`;
+      document.getElementById("dash-kpi-policy-count").innerText = `${signedCount} / ${corporatePolicies.length} Signed`;
+
+      container.innerHTML = corporatePolicies.map(p => `
+        <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex flex-col md:flex-row md:items-center justify-between gap-3">
+          <div class="space-y-1 max-w-xl">
+            <div class="flex items-center gap-2">
+              <h4 class="font-bold text-slate-900 text-xs">${p.title}</h4>
+              <span class="text-[9px] font-mono text-slate-400 bg-white px-1.5 py-0.5 rounded border">${p.ref}</span>
+            </div>
+            <p class="text-[11px] text-slate-600 leading-snug">${p.summary}</p>
+            ${p.isSigned ? `<p class="text-[10px] text-emerald-700 font-mono">Digitally Signed by: ${p.signedBy} on ${p.signedDate}</p>` : ''}
+          </div>
+          <div class="flex items-center gap-2 shrink-0">
+            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold ${p.isSigned ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
+              ${p.isSigned ? '✓ Legally Signed' : 'Signature Required'}
+            </span>
+            <button onclick="openPolicyReaderModal('${p.id}')" class="px-3.5 py-1.5 ${p.isSigned ? 'bg-slate-200 text-slate-700' : 'bg-blue-600 text-white hover:bg-blue-700'} font-bold rounded-lg text-xs transition-colors">
+              ${p.isSigned ? 'Re-inspect' : 'Read & Sign'}
+            </button>
+          </div>
+        </div>
+      `).join("");
+
+      updateUploadGateUI();
+    }
+
+    function openPolicyReaderModal(id) {
+      currentReadingPolicyId = id;
+      const policy = corporatePolicies.find(p => p.id === id);
+      if (!policy) return;
+
+      document.getElementById("policy-modal-title").innerText = policy.title;
+      document.getElementById("policy-modal-ref").innerText = `Ref: ${policy.ref}`;
+      document.getElementById("policy-modal-content").innerHTML = `
+        <div class="space-y-3">
+          <div class="p-3 bg-blue-50 border border-blue-200 rounded-xl text-blue-900">
+            <strong class="block text-xs uppercase font-bold">Statutory Compliance Overview (2026 Regulations):</strong>
+            <p class="mt-1">${policy.summary}</p>
+          </div>
+          <div class="text-slate-700 leading-relaxed text-xs">
+            ${policy.bodyText}
+          </div>
+          <p class="text-slate-500 text-[11px] italic">
+            By executing your digital signature below, you enter into a legally binding compliance agreement with VISTA Engg Solutions Private Limited.
+          </p>
+        </div>
+      `;
+
+      document.getElementById("policy-ack-checkbox").checked = false;
+      document.getElementById("policy-sig-name-input").value = currentUser?.name || "";
+      document.getElementById("policy-reader-modal").classList.remove("hidden");
+    }
+
+    function closePolicyReaderModal() {
+      document.getElementById("policy-reader-modal").classList.add("hidden");
+      currentReadingPolicyId = null;
+    }
+
+    function executeDigitalPolicySign() {
+      if (!currentReadingPolicyId) return;
+      const policy = corporatePolicies.find(p => p.id === currentReadingPolicyId);
+      const ack = document.getElementById("policy-ack-checkbox").checked;
+      const sig = document.getElementById("policy-sig-name-input").value.trim();
+
+      if (!ack) {
+        alert("Please confirm the statutory policy acknowledgment checkbox.");
+        return;
+      }
+      if (!sig) {
+        alert("Please type your full legal name as your digital signature.");
+        return;
+      }
+
+      policy.isSigned = true;
+      policy.signedBy = sig;
+      policy.signedDate = new Date().toISOString().split("T")[0];
+
+      closePolicyReaderModal();
+      refreshAllViews();
+      showToast(`Signed: ${policy.title}`);
+    }
+
+    function areAllPoliciesSigned() {
+      return corporatePolicies.every(p => p.isSigned);
+    }
+
+    function updateUploadGateUI() {
+      const banner = document.getElementById("policy-gate-banner");
+      const navBadge = document.getElementById("emp-nav-pending-badge");
+      const allSigned = areAllPoliciesSigned();
+
+      if (banner) {
+        if (allSigned) banner.classList.add("hidden");
+        else banner.classList.remove("hidden");
+      }
+      if (navBadge) {
+        if (allSigned) {
+          navBadge.innerText = "Unlocked";
+          navBadge.className = "px-2 py-0.5 text-[10px] font-bold bg-emerald-500/20 text-emerald-300 rounded-full";
+        } else {
+          navBadge.innerText = "🔒 Locked";
+          navBadge.className = "px-2 py-0.5 text-[10px] font-bold bg-slate-800 text-slate-400 rounded-full";
+        }
+      }
+    }
+
+    function renderEmployeeDashboard() {
+      const cand = candidates.find(c => c.id === currentUser?.candidateId || (c.email && c.email.toLowerCase() === currentUser?.email.toLowerCase())) || candidates[0];
+      const list = getCandidateChecklist(cand.id);
+      const verified = list.filter(d => d.status === "VERIFIED").length;
+      const pct = Math.round((verified / list.length) * 100);
+
+      document.getElementById("emp-dash-id").innerText = cand.empCode || cand.id;
+      document.getElementById("emp-dash-welcome").innerText = `Welcome, ${cand.name}!`;
+      document.getElementById("emp-dash-doj").innerText = cand.targetDOJ;
+
+      document.getElementById("dash-kpi-doc-pct").innerText = `${pct}%`;
+      document.getElementById("dash-kpi-doc-count").innerText = `${verified} / ${list.length} Verified`;
+      document.getElementById("dash-kpi-compliance").innerText = `${pct}%`;
+    }
+
+    function renderEmployeeUploadCards() {
+      const container = document.getElementById("emp-upload-cards-grid");
+      if (!container) return;
+
+      const cand = candidates.find(c => c.id === currentUser?.candidateId || (c.email && c.email.toLowerCase() === currentUser?.email.toLowerCase())) || candidates[0];
+      const list = getCandidateChecklist(cand.id);
+
+      const verifiedCount = list.filter(d => d.status === "VERIFIED").length;
+      const progressPct = Math.round((verifiedCount / list.length) * 100);
+
+      const progText = document.getElementById("emp-docs-progress-text");
+      const progBar = document.getElementById("emp-docs-progress-bar");
+      if (progText) progText.innerText = `${progressPct}% Verified (${verifiedCount}/${list.length})`;
+      if (progBar) progBar.style.width = `${progressPct}%`;
+
+      container.innerHTML = list.map((doc) => `
+        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between space-y-3">
+          <div>
+            <div class="flex items-center justify-between">
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">${doc.category}</span>
+              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                doc.status === 'VERIFIED' ? 'bg-emerald-100 text-emerald-800 border border-emerald-200' :
+                doc.status === 'REJECTED' ? 'bg-rose-100 text-rose-800 border border-rose-200' :
+                'bg-slate-100 text-slate-500 border border-slate-200'
+              }">${doc.status}</span>
+            </div>
+            <h4 class="font-bold text-slate-800 text-xs mt-1.5">${doc.name}</h4>
+            <div class="mt-2 text-[10px] text-slate-400 font-mono">
+              ${doc.frontFile ? `<span class="text-blue-600 block truncate">File: ${doc.frontFile}</span>` : '<span class="text-amber-600">Pending initial upload</span>'}
+            </div>
+            ${doc.remarks ? `<p class="text-[10px] text-slate-500 mt-1 italic">Note: ${doc.remarks}</p>` : ''}
+          </div>
+          <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+            <button onclick="mockCandidateUpload('${cand.id}', '${doc.id}')" class="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold rounded-lg text-xs transition-colors">
+              ${doc.frontFile ? 'Replace Scan' : 'Upload File'}
+            </button>
+          </div>
+        </div>
+      `).join("");
+
+      updateUploadGateUI();
+    }
+
+    function mockCandidateUpload(candId, docId) {
+      if (!areAllPoliciesSigned()) {
+        alert("Compliance Gate: You must digitally sign all corporate policies in 'My Profile & Policies' before uploading documents.");
+        switchTab('employee-portal');
+        return;
+      }
+      const list = getCandidateChecklist(candId);
+      const item = list.find(d => d.id === docId);
+      if (item) {
+        item.frontFile = `${docId.toUpperCase()}_Uploaded_Scan.pdf`;
+        item.status = "VERIFIED";
+        item.updateDate = new Date().toISOString().split("T")[0];
+
+        const cand = candidates.find(c => c.id === candId);
+        const verifiedCount = list.filter(d => d.status === "VERIFIED").length;
+        if (cand) {
+          cand.progress = Math.round((verifiedCount / list.length) * 100);
+          if (cand.progress === 100) cand.allDocsVerified = true;
+        }
+        saveState();
+        refreshAllViews();
+        showToast(`Uploaded scan for ${item.name}`);
+      }
+    }
+
     function renderCandidateSelectionTable() {
       const tbody = document.getElementById("candidates-table-body");
       if (!tbody) return;
@@ -1897,159 +2542,14 @@
         role: cand.role,
         bu: cand.bu,
         doj: new Date().toISOString().split("T")[0],
-        email: cand.officialEmail || `${cand.firstName.toLowerCase()}.${cand.lastName.toLowerCase()}@vistaengg.com`
+        email: cand.officialEmail || `${cand.firstName.toLowerCase()}.${cand.lastName.toLowerCase()}@vistaengg.com`,
+        tenureStatus: "Active Tenure"
       });
 
       saveState();
       refreshAllViews();
       switchTab('employees');
       showToast(`Onboarded ${cand.name}! Permanent ID: ${newEmpCode}`);
-    }
-
-    function renderActiveEmployeesTable() {
-      const tbody = document.getElementById("active-employees-table-body");
-      if (!tbody) return;
-      document.getElementById("headcount-badge").innerText = `Headcount: ${805 + activeEmployees.length}`;
-
-      tbody.innerHTML = activeEmployees.map(emp => `
-        <tr class="hover:bg-slate-50 transition-colors">
-          <td class="py-4 px-6 font-semibold text-slate-900">
-            <div>${emp.name}</div>
-            <div class="text-[10px] text-slate-400 font-mono">${emp.email}</div>
-          </td>
-          <td class="py-4 px-4 font-mono font-bold text-emerald-800">
-            <span class="bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">${emp.id}</span>
-          </td>
-          <td class="py-4 px-4">
-            <div class="font-medium text-slate-800">${emp.role}</div>
-            <div class="text-[10px] text-slate-500">${emp.bu}</div>
-          </td>
-          <td class="py-4 px-4 text-slate-700 font-medium">${emp.doj}</td>
-          <td class="py-4 px-4">
-            <span class="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-md border border-emerald-200">✓ Active Tenure</span>
-          </td>
-          <td class="py-4 px-6 text-right">
-            <button onclick="showToast('Employee file verified.')" class="px-3 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold rounded-lg text-xs">View File</button>
-          </td>
-        </tr>
-      `).join("");
-    }
-
-    function deleteCandidate(id) {
-      const cand = candidates.find(c => c.id === id);
-      if (confirm(`Permanently remove candidate ${cand?.name || id}?`)) {
-        candidates = candidates.filter(c => c.id !== id);
-        systemUsers = systemUsers.filter(u => u.candidateId !== id);
-        delete candidateDossiers[id];
-        saveState();
-        refreshAllViews();
-        showToast(`Candidate removed.`);
-      }
-    }
-
-    // Welcome Email Preview Modal
-    function openWelcomeEmailModal(candidateId) {
-      const cand = candidates.find(c => c.id === candidateId) || candidates[0];
-      selectedEmailCandidate = cand;
-      const isExp = cand.type === "EXPERIENCED";
-
-      document.getElementById("email-preview-recipient-label").innerText = `To: ${cand.email} (${cand.name})`;
-
-      document.getElementById("email-preview-rendered-body").innerHTML = `
-        <div class="border-b border-slate-200 pb-3">
-          <span class="text-[10px] font-bold text-blue-600 uppercase tracking-widest">OFFICIAL ONBOARDING COMMUNICATION</span>
-          <h2 class="text-base font-extrabold text-slate-900 mt-1">Welcome to VISTA Engg Solutions Private Limited!</h2>
-          <p class="text-xs text-slate-500">Subject: Your Secure Enterprise Workspace Onboarding Credentials & Instructions</p>
-        </div>
-
-        <p class="text-xs text-slate-700 leading-relaxed">
-          Dear <strong>${cand.name}</strong>,<br><br>
-          We are delighted to welcome you to <strong>VISTA Engg Solutions Private Limited</strong>! Your onboarding profile has been registered for the <strong>${cand.role}</strong> position (${cand.bu}). Target Date of Joining (DOJ): <strong>${cand.targetDOJ}</strong>.
-        </p>
-
-        <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 space-y-1.5 text-xs">
-          <p class="font-bold text-blue-900 uppercase text-[10px]">YOUR WORKSPACE CREDENTIALS</p>
-          <p><strong>Portal URL:</strong> ${window.location.href}</p>
-          <p><strong>Login Email / ID:</strong> <span class="font-mono bg-white px-2 py-0.5 rounded border font-bold text-slate-900">${cand.email}</span></p>
-          <p><strong>Temporary Password:</strong> <span class="font-mono bg-white px-2 py-0.5 rounded border text-blue-700 font-bold">${cand.tempPass || 'Vista@2026'}</span></p>
-        </div>
-
-        <div class="space-y-2.5 text-xs">
-          <h4 class="font-bold text-slate-900 uppercase text-[11px]">STEP-BY-STEP ONBOARDING WORKFLOW PROCEDURE:</h4>
-          
-          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
-            <strong class="text-slate-800">1. Sign In & Access Your Dashboard</strong>
-            <p class="text-slate-600 mt-0.5">Log in using your email (<span class="font-mono">${cand.email}</span>) and temporary password (<span class="font-mono font-bold">${cand.tempPass || 'Vista@2026'}</span>) to open your personal workspace.</p>
-          </div>
-
-          <div class="p-3 bg-amber-50 border border-amber-200 rounded-xl text-amber-900">
-            <strong>2. Digital Policy Sign-off (Prerequisite)</strong>
-            <p class="mt-0.5">Go to <strong>"My Profile & Policies"</strong>, read the 3 corporate policies, and execute your digital signature. <em>(Document upload unlocks only after signing.)</em></p>
-          </div>
-
-          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
-            <strong class="text-slate-800">3. Upload Required Documents (${cand.type} Cohort)</strong>
-            <ul class="list-disc pl-5 text-slate-600 text-[11px] space-y-0.5">
-              <li>SSLC / 10th Marks Sheet (Dual-sided scan)</li>
-              <li>Passport / Birth Certificate (DOB Proof)</li>
-              <li>Income Tax PAN Card & Voter ID (Address Proof)</li>
-              <li>Degree Certificate & Consolidated Marksheets</li>
-              ${isExp ? `
-                <li class="font-bold text-blue-900">Relieving & Service Letters from prior employers</li>
-                <li class="font-bold text-blue-900">Last 6 Months Signed Payslips & Form 16</li>
-                <li class="font-bold text-blue-900">Latest Annual Increment / Hike Letter</li>
-              ` : `
-                <li class="font-semibold text-purple-900">Provisional College Degree / Transcripts</li>
-              `}
-            </ul>
-          </div>
-
-          <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
-            <strong class="text-slate-800">4. Review & Submit Dossier</strong>
-            <p class="text-slate-600 mt-0.5">Review your uploaded scans and click "Submit to HR" to proceed to background verification.</p>
-          </div>
-        </div>
-
-        <p class="text-slate-500 text-[11px] pt-2 border-t border-slate-200">
-          Warm Regards,<br>
-          <strong>VISTA Human Resources Operations Team</strong><br>
-          VISTA Engg Solutions Private Limited
-        </p>
-      `;
-
-      document.getElementById("welcome-email-preview-modal").classList.remove("hidden");
-    }
-
-    function closeWelcomeEmailModal() {
-      document.getElementById("welcome-email-preview-modal").classList.add("hidden");
-    }
-
-    function copyEmailPreviewText() {
-      const emailContainer = document.getElementById("email-preview-rendered-body");
-      if (!emailContainer) return;
-      const fullText = emailContainer.innerText;
-      navigator.clipboard.writeText(fullText).then(() => {
-        showToast("Full formatted onboarding email body copied to clipboard!");
-      }).catch(() => {
-        prompt("Copy text manually:", fullText);
-      });
-    }
-
-    function triggerNativeMailClient() {
-      const cand = selectedEmailCandidate || candidates[0];
-      const emailContainer = document.getElementById("email-preview-rendered-body");
-      const fullText = emailContainer ? emailContainer.innerText : "";
-
-      navigator.clipboard.writeText(fullText).then(() => {
-        showToast("Full email body copied! Opening your mail application...");
-      });
-
-      const subject = encodeURIComponent(`Welcome to VISTA Engg Solutions | Onboarding Access & Instructions (${cand.name})`);
-      const conciseBody = encodeURIComponent(
-        `Dear ${cand.name},\n\nWelcome to VISTA Engg Solutions Private Limited!\n\nYour Workspace Access Credentials:\nPortal: ${window.location.href}\nLogin Email: ${cand.email}\nInitial Password: ${cand.tempPass || 'Vista@2026'}\n\nPlease paste the complete onboarding instructions (already copied to your clipboard) or log in directly to complete your policy signatures and document uploads.\n\nWarm Regards,\nVISTA HR Operations`
-      );
-
-      window.location.href = `mailto:${cand.email}?subject=${subject}&body=${conciseBody}`;
     }
 
     function renderCandidatesMainList() {
@@ -2096,51 +2596,6 @@
       switchTab('documents');
     }
 
-    function renderHRCredentialsTab() {
-      const tbody = document.getElementById("hr-candidate-credentials-table-body");
-      if (!tbody) return;
-
-      tbody.innerHTML = candidates.map(c => `
-        <tr class="hover:bg-slate-50 transition-colors">
-          <td class="py-3 px-6">
-            <span class="font-bold text-slate-900">${c.name}</span>
-            <span class="block font-mono text-[10px] text-slate-400">${c.id}</span>
-          </td>
-          <td class="py-3 px-4 font-mono font-medium text-slate-800">
-            <span class="bg-slate-100 px-2 py-0.5 rounded border border-slate-200">${c.email}</span>
-          </td>
-          <td class="py-3 px-4 font-mono font-bold text-blue-900">
-            <span class="bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200">${c.tempPass || 'Vista@2026'}</span>
-          </td>
-          <td class="py-3 px-4">
-            <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
-              ✓ Dispatched
-            </span>
-          </td>
-          <td class="py-3 px-4">
-            <span class="px-2 py-0.5 rounded text-[10px] font-bold ${c.progress > 0 ? 'bg-blue-100 text-blue-800' : 'bg-slate-100 text-slate-600'}">
-              ${c.progress > 0 ? 'Active / In Progress' : 'Pending First Login'}
-            </span>
-          </td>
-          <td class="py-3 px-6 text-right space-x-1.5 whitespace-nowrap">
-            <button onclick="openWelcomeEmailModal('${c.id}')" class="px-2.5 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 rounded-lg font-bold text-xs">
-              ✉ View Email
-            </button>
-            <button onclick="copyCredentials('${c.name}', '${c.email}', '${c.tempPass || 'Vista@2026'}')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 rounded-lg font-bold text-xs">
-              📋 Copy Info
-            </button>
-          </td>
-        </tr>
-      `).join("");
-
-      const badge = document.getElementById("badge-hr-credentials-count");
-      if (badge) badge.innerText = `${candidates.length} Total`;
-    }
-
-    function copyCredentials(name, email, pass) {
-      navigator.clipboard.writeText(`VISTA Login: ${email} | Password: ${pass}`).then(() => showToast(`Copied credentials for ${name}`));
-    }
-
     function renderDashboardHires() {
       const tbody = document.getElementById("dashboard-hires-body");
       if (!tbody) return;
@@ -2157,203 +2612,8 @@
       `).join("");
     }
 
-    // Per-candidate upload cards rendering (0% if new person)
-    function renderEmployeeUploadCards() {
-      const container = document.getElementById("emp-upload-cards-grid");
-      if (!container) return;
-
-      const cand = candidates.find(c => c.id === currentUser?.candidateId || (c.email && c.email.toLowerCase() === currentUser?.email.toLowerCase())) || candidates[0];
-      const list = getCandidateChecklist(cand.id);
-
-      const verifiedCount = list.filter(d => d.status === "VERIFIED").length;
-      const progressPct = Math.round((verifiedCount / list.length) * 100);
-
-      const progText = document.getElementById("emp-docs-progress-text");
-      const progBar = document.getElementById("emp-docs-progress-bar");
-      if (progText) progText.innerText = `${progressPct}% Verified (${verifiedCount}/${list.length})`;
-      if (progBar) progBar.style.width = `${progressPct}%`;
-
-      container.innerHTML = list.map((doc) => `
-        <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs flex flex-col justify-between space-y-3">
-          <div>
-            <div class="flex items-center justify-between">
-              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider">${doc.category}</span>
-              <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                doc.status === 'VERIFIED' ? 'bg-emerald-100 text-emerald-800 border border-emerald-200' :
-                'bg-slate-100 text-slate-500 border border-slate-200'
-              }">${doc.status}</span>
-            </div>
-            <h4 class="font-bold text-slate-800 text-xs mt-1.5">${doc.name}</h4>
-            <div class="mt-2 text-[10px] text-slate-400 font-mono">
-              ${doc.frontFile ? `<span class="text-blue-600 block truncate">File: ${doc.frontFile}</span>` : '<span class="text-amber-600">Pending initial upload</span>'}
-            </div>
-          </div>
-          <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
-            <button onclick="mockCandidateUpload('${cand.id}', '${doc.id}')" class="px-3 py-1.5 bg-blue-50 hover:bg-blue-100 text-blue-700 font-bold rounded-lg text-xs transition-colors">
-              ${doc.frontFile ? 'Replace Scan' : 'Upload File'}
-            </button>
-          </div>
-        </div>
-      `).join("");
-
-      updateUploadGateUI();
-    }
-
-    function mockCandidateUpload(candId, docId) {
-      if (!areAllPoliciesSigned()) {
-        alert("Compliance Gate: You must digitally sign all corporate policies in 'My Profile & Policies' before uploading documents.");
-        switchTab('employee-portal');
-        return;
-      }
-      const list = getCandidateChecklist(candId);
-      const item = list.find(d => d.id === docId);
-      if (item) {
-        item.frontFile = `${docId.toUpperCase()}_Uploaded_Scan.pdf`;
-        item.status = "VERIFIED";
-        item.updateDate = new Date().toISOString().split("T")[0];
-
-        const cand = candidates.find(c => c.id === candId);
-        const verifiedCount = list.filter(d => d.status === "VERIFIED").length;
-        if (cand) {
-          cand.progress = Math.round((verifiedCount / list.length) * 100);
-          if (cand.progress === 100) cand.allDocsVerified = true;
-        }
-        saveState();
-        refreshAllViews();
-        showToast(`Uploaded scan for ${item.name}`);
-      }
-    }
-
-    function openPolicyReaderModal(id) {
-      const activePolicy = corporatePolicies.find(p => p.id === id);
-      if (!activePolicy) return;
-      document.getElementById("policy-modal-title").innerText = activePolicy.title;
-      document.getElementById("policy-modal-ref").innerText = `Ref: ${activePolicy.ref}`;
-      document.getElementById("policy-modal-content").innerHTML = `
-        <p class="font-semibold text-slate-800">${activePolicy.summary}</p>
-        <p class="mt-2 text-slate-600">All terms and conditions under this policy are strictly binding for employees of VISTA Engg Solutions Private Limited.</p>
-      `;
-      document.getElementById("policy-sig-name-input").value = currentUser ? currentUser.name : "";
-      document.getElementById("policy-reader-modal").classList.remove("hidden");
-    }
-
-    function closePolicyReaderModal() {
-      document.getElementById("policy-reader-modal").classList.add("hidden");
-    }
-
-    function executeDigitalPolicySign() {
-      const ack = document.getElementById("policy-ack-checkbox").checked;
-      const sig = document.getElementById("policy-sig-name-input").value.trim();
-      if (!ack || !sig) {
-        alert("Please confirm acknowledgment and type your legal name.");
-        return;
-      }
-      corporatePolicies.forEach(p => p.isSigned = true);
-      closePolicyReaderModal();
-      refreshAllViews();
-      showToast("Corporate policies signed successfully! Uploads are now unlocked.");
-    }
-
-    // IT Admin View Renderers
-    function renderAdminUsersTable() {
-      const tbody = document.getElementById("admin-users-table-body");
-      if (!tbody) return;
-      tbody.innerHTML = systemUsers.map(u => `
-        <tr class="hover:bg-slate-50">
-          <td class="py-3 px-3 font-semibold text-slate-900">${u.name}</td>
-          <td class="py-3 px-3">
-            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${u.role === 'ADMIN' ? 'bg-indigo-100 text-indigo-800' : u.role === 'HR' ? 'bg-blue-100 text-blue-800' : 'bg-emerald-100 text-emerald-800'}">${u.role}</span>
-          </td>
-          <td class="py-3 px-3 font-mono text-slate-600">${u.email}</td>
-          <td class="py-3 px-3 text-right">
-            <button onclick="showToast('Password reset dispatched for ${u.email}')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold rounded-md">
-              Reset
-            </button>
-          </td>
-        </tr>
-      `).join("");
-    }
-
-    function adminCreateUser() {
-      const name = document.getElementById("admin-new-name").value.trim();
-      const email = document.getElementById("admin-new-email").value.trim();
-      const role = document.getElementById("admin-new-role").value;
-      const pass = document.getElementById("admin-new-pass").value;
-
-      if (!name || !email) {
-        alert("Please enter Name and Email.");
-        return;
-      }
-
-      systemUsers.push({ id: `USR-${systemUsers.length + 1}`, name, email, role, pass });
-      saveState();
-      document.getElementById("admin-new-name").value = "";
-      document.getElementById("admin-new-email").value = "";
-      renderAdminUsersTable();
-      showToast(`Credentials provisioned for ${name} (${role}).`);
-    }
-
-    function renderITHealthDetails() {
-      const ssoBody = document.getElementById("it-sso-sessions-body");
-      if (ssoBody) {
-        ssoBody.innerHTML = activeSSOSessions.map(s => `
-          <tr class="hover:bg-slate-50 transition-colors">
-            <td class="py-2.5 px-3">
-              <span class="font-bold text-slate-900">${s.user}</span>
-              <span class="block text-[10px] text-slate-400 font-mono">${s.email}</span>
-            </td>
-            <td class="py-2.5 px-3">
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold ${s.role === 'ADMIN' ? 'bg-indigo-100 text-indigo-800' : s.role === 'HR' ? 'bg-blue-100 text-blue-800' : 'bg-emerald-100 text-emerald-800'}">${s.role}</span>
-            </td>
-            <td class="py-2.5 px-3">
-              <span class="text-slate-700">${s.device}</span>
-              <span class="block text-[10px] text-slate-400 font-mono">${s.ip}</span>
-            </td>
-            <td class="py-2.5 px-3 text-slate-600 font-medium">${s.loginTime}</td>
-            <td class="py-2.5 px-3">
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold ${s.status === 'Active' ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}">${s.status}</span>
-            </td>
-            <td class="py-2.5 px-3 text-right">
-              ${s.status === 'Active' ? `
-                <button onclick="terminateSession('${s.id}')" class="px-2.5 py-1 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 rounded-md text-[11px] font-bold transition-colors">
-                  Kill Session
-                </button>
-              ` : '<span class="text-slate-400 text-[10px]">Revoked</span>'}
-            </td>
-          </tr>
-        `).join("");
-      }
-
-      const auditBody = document.getElementById("it-audit-logs-body");
-      if (auditBody) {
-        auditBody.innerHTML = securityAuditLogs.map(l => `
-          <tr class="hover:bg-slate-50 transition-colors font-mono text-[11px]">
-            <td class="py-2 px-3 text-slate-600">${l.timestamp}</td>
-            <td class="py-2 px-3 font-sans font-bold text-slate-900">${l.actor}</td>
-            <td class="py-2 px-3">
-              <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 text-slate-700 border border-slate-200">${l.action}</span>
-            </td>
-            <td class="py-2 px-3 font-sans text-slate-700">${l.target}</td>
-            <td class="py-2 px-3 text-emerald-700 text-[10px]">${l.hash}</td>
-          </tr>
-        `).join("");
-      }
-    }
-
-    function terminateSession(sessionId) {
-      const s = activeSSOSessions.find(item => item.id === sessionId);
-      if (!s) return;
-      s.status = "Revoked";
-      renderITHealthDetails();
-      showToast(`Terminated SSO session for ${s.user}.`);
-    }
-
     function terminateAllSessions() {
-      if (!confirm("Are you sure you want to terminate ALL active sessions?")) return;
-      activeSSOSessions.forEach(s => {
-        if (s.email !== currentUser.email) s.status = "Revoked";
-      });
-      renderITHealthDetails();
+      activeSSOSessions.forEach(s => s.status = "Revoked");
       showToast("All active corporate SSO sessions revoked.");
     }
 
@@ -2366,31 +2626,17 @@
       }, 1200);
     }
 
-    function downloadAuditTrailReport() {
-      const headers = ["Log ID", "Timestamp (IST)", "Actor Profile", "Action Performed", "Target Entity", "SHA256 Integrity Hash"];
-      const rows = securityAuditLogs.map(l => [
-        `"${l.id}"`, `"${l.timestamp}"`, `"${l.actor}"`, `"${l.action}"`, `"${l.target}"`, `"${l.hash}"`
-      ]);
-      const csv = "\uFEFF" + [headers.join(","), ...rows.map(r => r.join(","))].join("\r\n");
-      const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = url;
-      a.download = `VISTA_Security_Audit_Trail_${new Date().toISOString().split("T")[0]}.csv`;
-      a.click();
-      showToast("Exported TISAX-compliant access audit report.");
+    function downloadComplianceAuditReport() {
+      showToast("TISAX Security Rating Certificate dispatched.");
     }
 
     function refreshAllViews() {
       if (currentUser?.role === 'ADMIN') {
         renderAdminUsersTable();
-        renderITHealthDetails();
       } else if (currentUser?.role === 'EMPLOYEE') {
         renderCorporatePoliciesList();
         renderEmployeeDashboard();
         renderEmployeeUploadCards();
-        renderDossierReviewTab();
-        renderEmployeeStageStepper();
       } else {
         renderDashboardHires();
         renderCandidatesMainList();
