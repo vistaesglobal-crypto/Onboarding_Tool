@@ -203,9 +203,9 @@
             <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
           </span>
-          <span>Authentication Gateway Online</span>
+          <span>Authentication Gateway — Demo Mode</span>
         </div>
-        <span class="text-slate-400 font-mono text-[10px]">v2.6 Live Sync</span>
+        <span class="text-slate-400 font-mono text-[10px]">v2.6 Demo Mode</span>
       </div>
 
     </div>
@@ -737,7 +737,7 @@
           <div class="flex items-center justify-between mb-4">
             <div>
               <h4 class="text-sm font-bold text-slate-900 uppercase">NEW HIRES THIS MONTH</h4>
-              <p class="text-xs text-slate-500">Live tracker for ongoing enrollments</p>
+              <p class="text-xs text-slate-500">Frontend tracker — demo data unless connected to a backend</p>
             </div>
             <span class="text-[11px] font-bold text-blue-600 bg-blue-50 px-2 py-1 rounded-md" id="dash-table-records-count">4 Records</span>
           </div>
@@ -850,6 +850,9 @@
             </div>
           </div>
           <div id="document-checklist-container" class="space-y-3"></div>
+          <div class="mt-4 p-3 rounded-xl border border-blue-100 bg-blue-50/60 text-[11px] text-blue-800">
+            <strong>Document downloads:</strong> HR can download the actual candidate-uploaded Front/Back files from each document row. Files uploaded in this browser are stored in browser IndexedDB for this single-file demo; pre-loaded sample filenames do not contain real document files.
+          </div>
         </div>
       </div>
 
@@ -901,28 +904,28 @@
                 <span class="font-bold text-slate-900">Stage 1: Identity & Address Cross-Verification</span>
                 <p class="text-xs text-slate-500 mt-0.5">Automated Aadhaar/PAN & Electoral registry matching via Gov API</p>
               </div>
-              <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-md">✓ Active & Functional</span>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-md">✓ Demo Workflow</span>
             </div>
             <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between">
               <div>
                 <span class="font-bold text-slate-900">Stage 2: Prior Employment & Relieving Cross-Check</span>
                 <p class="text-xs text-slate-500 mt-0.5">EPFO UAN Service History & HR attestation contact</p>
               </div>
-              <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-md">✓ Active & Functional</span>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-md">✓ Demo Workflow</span>
             </div>
             <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between">
               <div>
                 <span class="font-bold text-slate-900">Stage 3: Highest Educational Degree Verification</span>
                 <p class="text-xs text-slate-500 mt-0.5">Direct university transcript verification & National Academic Depository (NAD)</p>
               </div>
-              <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-md">✓ Active & Functional</span>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-md">✓ Demo Workflow</span>
             </div>
             <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between">
               <div>
                 <span class="font-bold text-slate-900">Stage 4: Civil & Criminal Court Records Check</span>
                 <p class="text-xs text-slate-500 mt-0.5">District and High Court repository screening for legal clearance</p>
               </div>
-              <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-md">✓ Active & Functional</span>
+              <span class="text-xs font-bold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-md">✓ Demo Workflow</span>
             </div>
             <div class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between">
               <div>
@@ -1022,7 +1025,7 @@
               </div>
               <div>
                 <label class="block font-semibold text-slate-700 mb-1">Temporary Password</label>
-                <input id="admin-new-pass" type="password" value="Vista@2026" class="w-full border border-slate-300 rounded-lg p-2.5 font-mono" />
+                <input id="admin-new-pass" type="password" value="" placeholder="Set by secure backend / demo only" class="w-full border border-slate-300 rounded-lg p-2.5 font-mono" />
               </div>
               <button onclick="adminCreateUser()" class="w-full py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-xs transition-all">
                 Provision Credentials
@@ -1076,7 +1079,7 @@
                 <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
               </div>
               <h3 class="text-2xl font-extrabold text-slate-900 mt-2" id="it-stat-sso-count">184 Live</h3>
-              <p class="text-[11px] text-slate-400 mt-1">Microsoft Azure AD Sync: 100%</p>
+              <p class="text-[11px] text-slate-400 mt-1">Identity Sync: DEMO / NOT CONNECTED</p>
             </div>
             <button onclick="terminateAllSessions()" class="mt-4 w-full py-2 bg-rose-50 hover:bg-rose-100 text-rose-700 border border-rose-200 rounded-xl text-xs font-bold transition-colors">
               Revoke All Active Sessions
@@ -1090,7 +1093,7 @@
                 <span class="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded">PostgreSQL</span>
               </div>
               <h3 class="text-2xl font-extrabold text-slate-900 mt-2">42.8 GB / 500 GB</h3>
-              <p class="text-[11px] text-slate-400 mt-1">AWS S3 GovCloud Bucket</p>
+              <p class="text-[11px] text-slate-400 mt-1">Object Storage: DEMO / NOT CONNECTED</p>
             </div>
             <button id="btn-trigger-backup" onclick="triggerManualSnapshot()" class="mt-4 w-full py-2 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 rounded-xl text-xs font-bold transition-colors flex items-center justify-center gap-1.5">
               <span>Trigger Snapshot Now</span>
@@ -1101,7 +1104,7 @@
             <div>
               <div class="flex items-center justify-between">
                 <span class="text-xs font-semibold text-slate-600">Enterprise Security Rating</span>
-                <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">TISAX Ready</span>
+                <span class="text-[10px] font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded">TISAX Readiness: DEMO / NOT CERTIFIED</span>
               </div>
               <h3 class="text-2xl font-extrabold text-slate-900 mt-2">Grade A+ (99.8%)</h3>
               <p class="text-[11px] text-emerald-600 mt-1">Zero vulnerabilities detected</p>
@@ -1126,7 +1129,7 @@
             <div class="space-y-3 text-xs">
               <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
                 <div>
-                  <p class="font-bold text-slate-800">DDoS Protection & Cloudflare Edge Tunnel</p>
+                  <p class="font-bold text-slate-800">Edge Security: DEMO / NOT CONNECTED</p>
                   <p class="text-slate-500 text-[11px]">Filtered 14,210 automated vulnerability probes in the last 24h</p>
                 </div>
                 <span class="text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">99.99% Uptime</span>
@@ -1163,21 +1166,21 @@
                   <p class="font-bold text-slate-800">Income Tax Department PAN Gateway (NSDL)</p>
                   <p class="text-slate-500 text-[11px]">Real-time PAN name and validity check with 100ms average latency</p>
                 </div>
-                <span class="text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">Operational</span>
+                <span class="text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">Demo / Not Connected</span>
               </div>
               <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
                 <div>
                   <p class="font-bold text-slate-800">EPFO UAN / Service History Verification Service</p>
                   <p class="text-slate-500 text-[11px]">Past employment records retrieval for candidate background checks</p>
                 </div>
-                <span class="text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">Operational</span>
+                <span class="text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">Demo / Not Connected</span>
               </div>
               <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 flex items-center justify-between">
                 <div>
                   <p class="font-bold text-slate-800">DigiLocker / NAD Academic Repository Gateway</p>
                   <p class="text-slate-500 text-[11px]">Instant university marksheet and degree attestation verification</p>
                 </div>
-                <span class="text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">Operational</span>
+                <span class="text-[11px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">Demo / Not Connected</span>
               </div>
             </div>
           </div>
@@ -1455,7 +1458,7 @@
         progress: 91, type: "EXPERIENCED", status: "IN_PROGRESS", targetDOJ: "2026-10-15",
         noticeDays: 90, doj: "2026-10-15", email: "mohan.d@gmail.com", phone: "+91 98765 12345",
         empCode: "", officialEmail: "mohan.d@vistaengg.com", bgvStatus: "Verification In Progress",
-        allDocsVerified: false, tempPass: "Vista@2026",
+        allDocsVerified: false, tempPass: "",
         onboardingData: { dob: "1995-07-03", panNumber: "ABCDE5678M" }
       },
       {
@@ -1464,7 +1467,7 @@
         progress: 80, type: "EXPERIENCED", status: "IN_PROGRESS", targetDOJ: "2026-09-10",
         noticeDays: 90, doj: "2024-09-29", email: "andan.k@vistaengg.com", phone: "+91 94432 88776",
         empCode: "VISTA1854", officialEmail: "andan.karinson@vistaengg.com", bgvStatus: "Verification In Progress",
-        allDocsVerified: false, tempPass: "Vista@2026",
+        allDocsVerified: false, tempPass: "",
         onboardingData: { dob: "1997-07-15", panNumber: "AAAPK4433D" }
       },
       {
@@ -1473,7 +1476,7 @@
         progress: 0, type: "FRESHER", status: "NOT_STARTED", targetDOJ: "2026-10-15",
         noticeDays: 90, doj: "2026-10-15", email: "carl.j@gmail.com", phone: "+91 98450 12345",
         empCode: "", officialEmail: "", bgvStatus: "BGV Initiated",
-        allDocsVerified: false, tempPass: "Vista@2026",
+        allDocsVerified: false, tempPass: "",
         onboardingData: { dob: "2003-04-12", panNumber: "ABCDE1234F" }
       }
     ];
@@ -1484,10 +1487,10 @@
     ];
 
     const defaultSystemUsers = [
-      { id: "USR-01", name: "David Vance", role: "ADMIN", email: "admin@vistaengg.com", pass: "Vista@2026" },
-      { id: "USR-02", name: "Sarah Jenkins", role: "HR", email: "sarah.j@vistaengg.com", pass: "Vista@2026" },
-      { id: "USR-03", name: "Andan Karinson", role: "EMPLOYEE", email: "andan.k@vistaengg.com", pass: "Vista@2026", candidateId: "VISTA-2026-8699" },
-      { id: "USR-04", name: "Mohan D", role: "EMPLOYEE", email: "mohan.d@gmail.com", pass: "Vista@2026", candidateId: "VISTA-2026-5371", corporateEmail: "mohan.d@vistaes.com" }
+      { id: "USR-01", name: "David Vance", role: "ADMIN", email: "admin@vistaengg.com", passHash: "c07c82ebc68205f46dcdb0db1eff47588f3853bbb1379dd2db80108d11fd963c" },
+      { id: "USR-02", name: "Sarah Jenkins", role: "HR", email: "sarah.j@vistaengg.com", passHash: "c07c82ebc68205f46dcdb0db1eff47588f3853bbb1379dd2db80108d11fd963c" },
+      { id: "USR-03", name: "Andan Karinson", role: "EMPLOYEE", email: "andan.k@vistaengg.com", passHash: "c07c82ebc68205f46dcdb0db1eff47588f3853bbb1379dd2db80108d11fd963c", candidateId: "VISTA-2026-8699" },
+      { id: "USR-04", name: "Mohan D", role: "EMPLOYEE", email: "mohan.d@gmail.com", passHash: "c07c82ebc68205f46dcdb0db1eff47588f3853bbb1379dd2db80108d11fd963c", candidateId: "VISTA-2026-5371", corporateEmail: "mohan.d@vistaes.com" }
     ];
 
     // LocalStorage Persistent Stores
@@ -1630,7 +1633,7 @@
       const targetDOJ = document.getElementById("cand-new-doj")?.value || "2026-11-01";
       const rand = Math.floor(1000 + Math.random() * 9000);
       const candId = `VISTA-2026-${rand}`;
-      const tempPass = "Vista@2026";
+      const tempPass = "";
 
       const newCand = {
         id: candId, firstName: fn, lastName: ln, name: `${fn} ${ln}`,
@@ -1805,9 +1808,9 @@
 
         const matchDirect = (uEmail === rawInput || uCorpEmail === rawInput || uCandId === rawInput || uEmpCode === rawInput);
         const matchPrefix = (uPrefix === userPrefix && userPrefix.length >= 3);
-        const matchAlias = (rawInput.includes("mohan.d") && (uEmail.includes("mohan.d") || uCorpEmail.includes("mohan.d")));
+        const matchAlias = false;
 
-        return (matchDirect || matchPrefix || matchAlias) && u.pass === pass;
+        return (matchDirect || matchPrefix || matchAlias) && u.passHash === DEMO_PASSWORD_HASH;
       });
 
       if (!user) {
@@ -1835,7 +1838,7 @@
             <span class="bg-slate-100 px-2 py-0.5 rounded border border-slate-200">${c.email}</span>
           </td>
           <td class="py-3 px-4 font-mono font-bold text-blue-900">
-            <span class="bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200">${c.tempPass || 'Vista@2026'}</span>
+            <span class="bg-blue-50 px-2.5 py-1 rounded-md border border-blue-200">${c.tempPass || 'Not issued'}</span>
           </td>
           <td class="py-3 px-4">
             <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-emerald-800">
@@ -1851,7 +1854,7 @@
             <button onclick="openWelcomeEmailModal('${c.id}')" class="px-2.5 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 rounded-lg font-bold text-xs">
               ✉ View Email
             </button>
-            <button onclick="copyCredentials('${c.name}', '${c.email}', '${c.tempPass || 'Vista@2026'}')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 rounded-lg font-bold text-xs">
+            <button onclick="copyCredentials('${c.name}', '${c.email}', '${c.tempPass || 'Not issued'}')" class="px-2.5 py-1 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-300 rounded-lg font-bold text-xs">
               📋 Copy Info
             </button>
             <button onclick="resetCandidatePasswordDirectly('${c.id}')" class="px-2.5 py-1 bg-amber-50 hover:bg-amber-100 text-amber-800 border border-amber-300 rounded-lg font-bold text-xs">
@@ -1895,15 +1898,17 @@
                 ${doc.frontFile ? `<span class="text-[10px] text-blue-600 font-mono">• F: ${doc.frontFile}</span>` : '<span class="text-[10px] text-slate-400 italic">• No upload yet</span>'}
                 ${doc.backFile ? `<span class="text-[10px] text-cyan-600 font-mono">• B: ${doc.backFile}</span>` : ''}
               </div>
-              ${doc.remarks ? `<p class="text-[10px] text-slate-600 mt-1 font-medium bg-slate-100 px-2 py-0.5 rounded w-fit">Auditor Notes: ${doc.remarks}</p>` : ''}
+              ${doc.remarks ? `<p class="text-[10px] text-slate-600 mt-1 font-medium bg-slate-100 px-2 py-0.5 rounded w-fit">Auditor Notes: ${esc(doc.remarks)}</p>` : ''}
             </div>
           </div>
-          <div class="flex items-center gap-2.5">
+          <div class="flex items-center gap-2 flex-wrap justify-end">
             <span class="px-2.5 py-0.5 rounded-full text-[10px] font-bold ${
               doc.status === 'VERIFIED' ? 'bg-emerald-100 text-emerald-800' : 
               doc.status === 'REJECTED' ? 'bg-rose-100 text-rose-800' :
               doc.status === 'PENDING_REVIEW' ? 'bg-blue-100 text-blue-800' : 'bg-slate-100 text-slate-500'
             }">${doc.status}</span>
+            ${doc.frontFile ? `<button type="button" onclick="downloadCandidateDocument('${cand.id}','${doc.id}','front')" class="px-3 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 rounded-lg font-semibold text-xs transition-colors" title="Download uploaded front document">↓ Front</button>` : ''}
+            ${doc.isDual && doc.backFile ? `<button type="button" onclick="downloadCandidateDocument('${cand.id}','${doc.id}','back')" class="px-3 py-1 bg-cyan-50 hover:bg-cyan-100 text-cyan-700 border border-cyan-200 rounded-lg font-semibold text-xs transition-colors" title="Download uploaded back document">↓ Back</button>` : ''}
             <button onclick="openDocAuditModal('${cand.id}', '${doc.id}')" class="px-3 py-1 bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 rounded-lg font-semibold text-xs transition-colors">
               Inspect & Decide
             </button>
@@ -1922,9 +1927,12 @@
       document.getElementById("audit-modal-title").innerText = `Audit: ${doc.name}`;
       document.getElementById("audit-modal-candidate").innerText = `Candidate: ${cand.name} (${cand.id})`;
       document.getElementById("audit-modal-files").innerHTML = `
-        <p><strong>Front Scan:</strong> ${doc.frontFile || 'None uploaded'}</p>
-        ${doc.isDual ? `<p><strong>Back Scan:</strong> ${doc.backFile || 'None uploaded'}</p>` : ''}
-        <p class="text-slate-500 text-[10px]">Current Status: ${doc.status}</p>
+        <div class="flex items-center justify-between gap-3 py-1">
+          <p><strong>Front Scan:</strong> ${esc(doc.frontFile || 'None uploaded')}</p>
+          ${doc.frontFile ? `<button type="button" onclick="downloadCandidateDocument('${cand.id}','${doc.id}','front')" class="px-3 py-1 bg-blue-50 hover:bg-blue-100 text-blue-700 border border-blue-200 rounded-lg font-bold text-[11px]">↓ Download Front</button>` : ''}
+        </div>
+        ${doc.isDual ? `<div class="flex items-center justify-between gap-3 py-1"><p><strong>Back Scan:</strong> ${esc(doc.backFile || 'None uploaded')}</p>${doc.backFile ? `<button type="button" onclick="downloadCandidateDocument('${cand.id}','${doc.id}','back')" class="px-3 py-1 bg-cyan-50 hover:bg-cyan-100 text-cyan-700 border border-cyan-200 rounded-lg font-bold text-[11px]">↓ Download Back</button>` : ''}</div>` : ''}
+        <p class="text-slate-500 text-[10px]">Current Status: ${esc(doc.status)}</p>
       `;
       document.getElementById("audit-modal-remarks").value = doc.remarks || "";
       document.getElementById("doc-audit-modal").classList.remove("hidden");
@@ -1950,9 +1958,6 @@
       doc.status = decision;
       doc.remarks = remarks || (decision === 'VERIFIED' ? "Verified & Authenticated" : "Rejected");
       doc.updateDate = new Date().toISOString().split("T")[0];
-      if (decision === 'VERIFIED' && !doc.frontFile) {
-        doc.frontFile = `${docId.toUpperCase()}_Attested.pdf`;
-      }
 
       const cand = candidates.find(c => c.id === candId);
       const verifiedCount = list.filter(d => d.status === "VERIFIED").length;
@@ -2622,12 +2627,12 @@
       if (btn) btn.innerHTML = `<span class="animate-spin inline-block mr-1">↻</span> Writing S3 Snapshot...`;
       setTimeout(() => {
         if (btn) btn.innerHTML = `✓ Snapshot Verified Today`;
-        showToast("Point-in-time snapshot committed to GovCloud.");
+        showToast("Demo snapshot completed locally; no cloud backup was performed.");
       }, 1200);
     }
 
     function downloadComplianceAuditReport() {
-      showToast("TISAX Security Rating Certificate dispatched.");
+      showToast("Demo report generated locally; no TISAX certificate was dispatched.");
     }
 
     function refreshAllViews() {
@@ -2661,5 +2666,579 @@
       refreshAllViews();
     };
   </script>
+
+<script>
+/* =====================================================================
+   VISTA PORTAL — CONSOLIDATED FRONTEND SAFETY / WORKFLOW PATCH
+   This remains a single-file demo. A real deployment MUST move auth,
+   secrets, documents, BGV, audit logs and employee data to a backend.
+   ===================================================================== */
+(function () {
+  "use strict";
+
+  const DEMO_PASSWORD_HASH = "c07c82ebc68205f46dcdb0db1eff47588f3853bbb1379dd2db80108d11fd963c";
+  const SESSION_TTL_MS = 30 * 60 * 1000;
+  const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
+  const ALLOWED_EXT = ["pdf", "jpg", "jpeg", "png"];
+
+  const esc = (value) => String(value ?? "")
+    .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+
+  const csvCell = (value) => {
+    const s = String(value ?? "");
+    return `"${s.replace(/"/g, '""')}"`;
+  };
+
+  async function sha256(text) {
+    if (window.crypto?.subtle) {
+      const bytes = new TextEncoder().encode(text);
+      const digest = await crypto.subtle.digest("SHA-256", bytes);
+      return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, "0")).join("");
+    }
+    // Demo fallback only; production must use server-side password hashing.
+    let h = 2166136261;
+    for (let i = 0; i < text.length; i++) h = Math.imul(h ^ text.charCodeAt(i), 16777619);
+    return (h >>> 0).toString(16);
+  }
+
+  function today() { return new Date().toISOString().slice(0, 10); }
+  function nowISO() { return new Date().toISOString(); }
+  function currentCandidate() {
+    return candidates.find(c => c.id === currentUser?.candidateId) ||
+      candidates.find(c => c.email?.toLowerCase() === currentUser?.email?.toLowerCase()) || null;
+  }
+
+  function ensureCandidateState(c) {
+    if (!c) return;
+    c.workflow = c.workflow || {};
+    c.workflow.createdAt = c.workflow.createdAt || nowISO();
+    c.workflow.inviteSent = !!c.workflow.inviteSent;
+    c.workflow.profileCompleted = !!c.workflow.profileCompleted;
+    c.workflow.hrFinalApproved = !!c.workflow.hrFinalApproved;
+    c.workflow.history = Array.isArray(c.workflow.history) ? c.workflow.history : [];
+    c.bgvStatus = c.bgvStatus || "NOT_STARTED";
+    c.policyAcknowledgements = c.policyAcknowledgements || {};
+    c.accessState = c.accessState || "ACTIVE";
+  }
+
+  function logCandidate(c, status, note) {
+    ensureCandidateState(c);
+    const last = c.workflow.history[c.workflow.history.length - 1];
+    if (!last || last.status !== status || last.note !== note) {
+      c.workflow.history.push({ status, note: note || "", at: nowISO(), by: currentUser?.name || "SYSTEM" });
+    }
+  }
+
+  function isDocsVerified(c) {
+    const list = getCandidateChecklist(c.id);
+    return list.length > 0 && list.every(d => d.status === "VERIFIED" && d.frontFile);
+  }
+
+  function syncCandidateDerivedState(c) {
+    if (!c) return;
+    ensureCandidateState(c);
+    const list = getCandidateChecklist(c.id);
+    const verified = list.filter(d => d.status === "VERIFIED" && d.frontFile).length;
+    c.progress = list.length ? Math.round((verified / list.length) * 100) : 0;
+    c.allDocsVerified = isDocsVerified(c);
+    if (c.allDocsVerified && c.bgvStatus === "Verification In Progress") c.bgvStatus = "BGV Initiated";
+    if (c.allDocsVerified && c.bgvStatus === "BGV Initiated") logCandidate(c, "DOCUMENTS_VERIFIED", "All required documents verified");
+    if (c.bgvStatus === "CLEARED" && !c.workflow.hrFinalApproved) logCandidate(c, "BGV_CLEARED", "Background verification cleared");
+    if (c.workflow.hrFinalApproved) logCandidate(c, "HR_FINAL_APPROVED", "Final HR onboarding approval completed");
+  }
+
+  function migrateState() {
+    candidates.forEach(ensureCandidateState);
+    candidates.forEach(syncCandidateDerivedState);
+    systemUsers.forEach(u => {
+      // Never persist a plaintext password from older demo versions.
+      delete u.pass;
+      if (!u.passHash) u.passHash = DEMO_PASSWORD_HASH;
+      u.accessState = u.accessState || "ACTIVE";
+    });
+    activeEmployees.forEach(e => { e.tenureStatus = e.tenureStatus || "Active Tenure"; e.accessState = e.accessState || "ACTIVE"; });
+    saveState();
+  }
+
+  // ---------- Missing modal / email functions ----------
+  window.openForgotPasswordModal = function () {
+    const el = document.getElementById("forgot-password-modal");
+    if (el) { el.classList.remove("hidden"); el.style.display = "flex"; }
+    const input = document.getElementById("forgot-id-input");
+    if (input) input.value = document.getElementById("login-email")?.value || "";
+  };
+  window.closeForgotPasswordModal = function () {
+    const el = document.getElementById("forgot-password-modal");
+    if (el) { el.classList.add("hidden"); el.style.display = "none"; }
+  };
+  window.openWelcomeEmailModal = function (candId) {
+    const cand = candidates.find(c => c.id === candId);
+    if (!cand) return;
+    ensureCandidateState(cand);
+    const modal = document.getElementById("welcome-email-preview-modal");
+    const label = document.getElementById("email-preview-recipient-label");
+    const body = document.getElementById("email-preview-rendered-body");
+    if (!modal || !body) return;
+    const loginId = cand.email || cand.officialEmail || cand.id;
+    const target = cand.targetDOJ || "To be confirmed";
+    if (label) label.textContent = `To: ${loginId}`;
+    body.innerHTML = `
+      <div class="border-b border-slate-200 pb-3"><strong>Subject:</strong> Welcome to VISTA Engg Solutions — Onboarding Invitation</div>
+      <p>Dear ${esc(cand.firstName || cand.name)},</p>
+      <p>Your VISTA onboarding workspace has been created.</p>
+      <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+        <div><strong>Candidate ID:</strong> ${esc(cand.id)}</div>
+        <div><strong>Login:</strong> ${esc(loginId)}</div>
+        <div><strong>Target DOJ:</strong> ${esc(target)}</div>
+        <div><strong>Current status:</strong> ${esc(cand.status)}</div>
+      </div>
+      <p>Please use the onboarding link provided by HR. Do not share passwords or identity documents over unsecured channels.</p>
+      <p>Regards,<br><strong>VISTA HR Team</strong></p>`;
+    window.__activeWelcomeCandidateId = cand.id;
+    modal.classList.remove("hidden"); modal.style.display = "flex";
+  };
+  window.closeWelcomeEmailModal = function () {
+    const el = document.getElementById("welcome-email-preview-modal");
+    if (el) { el.classList.add("hidden"); el.style.display = "none"; }
+    window.__activeWelcomeCandidateId = null;
+  };
+  window.copyEmailPreviewText = async function () {
+    const body = document.getElementById("email-preview-rendered-body");
+    if (!body) return;
+    const text = body.innerText || "";
+    try { await navigator.clipboard.writeText(text); showToast("Email body copied."); }
+    catch { alert("Clipboard access is unavailable. Select and copy the email text manually."); }
+  };
+  window.triggerNativeMailClient = function () {
+    const cand = candidates.find(c => c.id === window.__activeWelcomeCandidateId);
+    if (!cand) return;
+    const subject = encodeURIComponent("Welcome to VISTA Engg Solutions — Onboarding Invitation");
+    const body = encodeURIComponent(document.getElementById("email-preview-rendered-body")?.innerText || "Welcome to VISTA.");
+    const to = encodeURIComponent(cand.email || cand.officialEmail || "");
+    window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
+    cand.workflow = cand.workflow || {};
+    cand.workflow.inviteSent = true;
+    cand.status = cand.status === "NOT_STARTED" ? "INVITE_SENT" : cand.status;
+    logCandidate(cand, "INVITE_SENT", "Onboarding invitation prepared via mail client");
+    saveState(); refreshAllViews();
+  };
+  window.triggerOfficialPasswordReset = function () {
+    const raw = (document.getElementById("forgot-id-input")?.value || "").trim().toLowerCase();
+    if (!raw) return alert("Enter your registered email or Employee ID.");
+    const user = systemUsers.find(u => u.email?.toLowerCase() === raw || u.id?.toLowerCase() === raw || u.corporateEmail?.toLowerCase() === raw);
+    if (!user) return alert("No matching demo account was found.");
+    const token = crypto.getRandomValues ? Array.from(crypto.getRandomValues(new Uint8Array(12))).map(x => x.toString(16).padStart(2, "0")).join("") : Math.random().toString(36).slice(2);
+    sessionStorage.setItem("vista_demo_reset_token", token);
+    closeForgotPasswordModal();
+    alert("DEMO MODE: A password-reset request was generated. No email is actually sent by this standalone HTML file. Connect a backend mail service for production.");
+  };
+
+  // ---------- Authentication ----------
+  window.handleLoginSubmit = async function (e) {
+    e.preventDefault();
+    const rawInput = (document.getElementById("login-email")?.value || "").trim().toLowerCase();
+    const pass = document.getElementById("login-pass")?.value || "";
+    if (!rawInput || !pass) return;
+    const hash = await sha256(pass);
+    const user = systemUsers.find(u =>
+      u.accessState !== "REVOKED" &&
+      (u.email?.toLowerCase() === rawInput || u.corporateEmail?.toLowerCase() === rawInput || u.id?.toLowerCase() === rawInput)
+    );
+    if (!user || user.passHash !== hash) {
+      const key = "vista_login_attempts";
+      const attempts = Number(sessionStorage.getItem(key) || 0) + 1;
+      sessionStorage.setItem(key, String(attempts));
+      if (attempts >= 5) {
+        document.getElementById("login-pass").disabled = true;
+        setTimeout(() => { document.getElementById("login-pass").disabled = false; sessionStorage.removeItem(key); }, 30000);
+        alert("Too many failed attempts. Demo login is temporarily locked for 30 seconds.");
+      } else alert("Invalid credentials.");
+      return;
+    }
+    sessionStorage.removeItem("vista_login_attempts");
+    localStorage.setItem("vista_session_user", user.id);
+    localStorage.setItem("vista_session_meta", JSON.stringify({ createdAt: Date.now(), lastActivity: Date.now() }));
+    setupUserSession(user);
+  };
+
+  window.handleSignOut = function () {
+    currentUser = null;
+    localStorage.removeItem("vista_session_user");
+    localStorage.removeItem("vista_session_meta");
+    document.getElementById("auth-screen")?.classList.remove("hidden");
+    if (document.getElementById("login-email")) document.getElementById("login-email").value = "";
+    if (document.getElementById("login-pass")) document.getElementById("login-pass").value = "";
+    showToast("Signed out safely.");
+  };
+
+  // ---------- Candidate creation ----------
+  window.submitNewCandidate = function () {
+    const fn = (document.getElementById("cand-new-fn")?.value || "").trim();
+    const ln = (document.getElementById("cand-new-ln")?.value || "").trim();
+    const email = (document.getElementById("cand-new-email")?.value || "").trim().toLowerCase();
+    if (!fn || !ln || !/^\S+@\S+\.\S+$/.test(email)) return alert("Enter a valid first name, last name and email.");
+    if (candidates.some(c => c.email?.toLowerCase() === email)) return alert("A candidate already exists with this email.");
+    const bu = document.getElementById("cand-new-bu")?.value || "Engineering";
+    const cohort = document.getElementById("cand-new-cohort")?.value || "EXPERIENCED";
+    const targetDOJ = document.getElementById("cand-new-doj")?.value || "";
+    const rand = crypto.getRandomValues ? (1000 + (crypto.getRandomValues(new Uint32Array(1))[0] % 9000)) : Math.floor(1000 + Math.random() * 9000);
+    const candId = `VISTA-2026-${rand}`;
+    const officialEmail = `${fn.toLowerCase().replace(/[^a-z0-9]+/g, ".")}.${ln.toLowerCase().replace(/[^a-z0-9]+/g, ".")}@vistaengg.com`.replace(/\.{2,}/g, ".");
+    const newCand = {
+      id: candId, firstName: fn, lastName: ln, name: `${fn} ${ln}`, role: "Associate Engineer", bu,
+      location: "Coimbatore, TN, India", progress: 0, type: cohort, status: "CREATED", targetDOJ,
+      noticeDays: 90, doj: targetDOJ, email, phone: "", empCode: "", officialEmail,
+      bgvStatus: "NOT_STARTED", allDocsVerified: false, tempPass: "", onboardingData: { dob: "", panNumber: "" },
+      workflow: { createdAt: nowISO(), inviteSent: false, profileCompleted: false, hrFinalApproved: false, history: [] },
+      policyAcknowledgements: {}, accessState: "ACTIVE"
+    };
+    logCandidate(newCand, "CREATED", "Candidate profile created");
+    candidates.unshift(newCand);
+    candidateDossiers[candId] = JSON.parse(JSON.stringify(standardChecklistTemplate));
+    systemUsers.push({ id: `USR-${Date.now()}`, name: newCand.name, role: "EMPLOYEE", email, candidateId: candId, passHash: DEMO_PASSWORD_HASH, accessState: "ACTIVE" });
+    saveState(); closeCreateCandidateModal(); refreshAllViews(); openWelcomeEmailModal(candId);
+    showToast("Candidate created. Review and dispatch the invitation when ready.");
+  };
+
+  // ---------- Credentials: no plaintext password storage ----------
+  window.resetCandidatePasswordDirectly = async function (candId) {
+    const cand = candidates.find(c => c.id === candId);
+    if (!cand) return;
+    const user = systemUsers.find(u => u.candidateId === candId);
+    if (!user) return alert("No login account is linked to this candidate.");
+    const generated = `V!${Math.floor(100000 + Math.random() * 900000)}aA`;
+    user.passHash = await sha256(generated);
+    delete user.pass;
+    cand.tempPass = "ONE-TIME PASSWORD GENERATED";
+    saveState(); refreshAllViews();
+    alert(`DEMO MODE — one-time password generated for ${cand.name}: ${generated}\n\nIn production this must be delivered through a secure password-reset service and never stored in browser storage.`);
+  };
+
+  // ---------- Document upload / audit ----------
+  // ---------- Candidate document storage: IndexedDB (browser-side demo) ----------
+  const DOC_DB_NAME = "VISTA_Candidate_Document_Store";
+  const DOC_DB_VERSION = 1;
+  const DOC_STORE_NAME = "uploaded_documents";
+
+  function openDocumentDB() {
+    return new Promise((resolve, reject) => {
+      if (!window.indexedDB) return reject(new Error("IndexedDB is not supported by this browser."));
+      const req = indexedDB.open(DOC_DB_NAME, DOC_DB_VERSION);
+      req.onupgradeneeded = () => {
+        const db = req.result;
+        if (!db.objectStoreNames.contains(DOC_STORE_NAME)) db.createObjectStore(DOC_STORE_NAME, { keyPath: "key" });
+      };
+      req.onsuccess = () => resolve(req.result);
+      req.onerror = () => reject(req.error || new Error("Could not open document storage."));
+    });
+  }
+
+  async function saveCandidateFile(candId, docId, side, file) {
+    const db = await openDocumentDB();
+    const key = `${candId}::${docId}::${side}`;
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(DOC_STORE_NAME, "readwrite");
+      tx.objectStore(DOC_STORE_NAME).put({ key, candidateId: candId, docId, side, name: file.name, type: file.type || "application/octet-stream", size: file.size, uploadedAt: new Date().toISOString(), blob: file });
+      tx.oncomplete = () => { db.close(); resolve(); };
+      tx.onerror = () => { db.close(); reject(tx.error || new Error("Could not save uploaded document.")); };
+    });
+  }
+
+  async function getCandidateFile(candId, docId, side) {
+    const db = await openDocumentDB();
+    const key = `${candId}::${docId}::${side}`;
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(DOC_STORE_NAME, "readonly");
+      const req = tx.objectStore(DOC_STORE_NAME).get(key);
+      req.onsuccess = () => { db.close(); resolve(req.result || null); };
+      req.onerror = () => { db.close(); reject(req.error || new Error("Could not read uploaded document.")); };
+    });
+  }
+
+  async function removeCandidateFile(candId, docId, side) {
+    const db = await openDocumentDB();
+    const key = `${candId}::${docId}::${side}`;
+    return new Promise((resolve, reject) => {
+      const tx = db.transaction(DOC_STORE_NAME, "readwrite");
+      tx.objectStore(DOC_STORE_NAME).delete(key);
+      tx.oncomplete = () => { db.close(); resolve(); };
+      tx.onerror = () => { db.close(); reject(tx.error || new Error("Could not remove uploaded document.")); };
+    });
+  }
+
+  window.downloadCandidateDocument = async function (candId, docId, side) {
+    try {
+      const record = await getCandidateFile(candId, docId, side);
+      if (!record || !record.blob) {
+        alert("The document filename is recorded, but the actual file is not available in this browser's document store. This can happen with the pre-loaded demo records. Please ask the candidate to upload the document again.");
+        return;
+      }
+      const url = URL.createObjectURL(record.blob);
+      const a = document.createElement("a");
+      a.href = url; a.download = record.name || `${docId}_${side}`;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      showToast(`Downloaded ${record.name}`);
+    } catch (err) {
+      console.error(err);
+      alert("Unable to download the document. Please try again in the same browser where it was uploaded.");
+    }
+  };
+
+  window.mockCandidateUpload = function (candId, docId) {
+    if (!areAllPoliciesSigned()) {
+      alert("Compliance Gate: sign all required corporate policies before uploading documents.");
+      switchTab("employee-portal"); return;
+    }
+    const item = getCandidateChecklist(candId).find(d => d.id === docId);
+    if (!item) return;
+    const input = document.createElement("input");
+    input.type = "file"; input.accept = ".pdf,.jpg,.jpeg,.png"; input.multiple = !!item.isDual; input.style.display = "none";
+    document.body.appendChild(input);
+    input.onchange = async () => {
+      const files = Array.from(input.files || []); input.remove();
+      if (!files.length) return;
+      if (files.length > (item.isDual ? 2 : 1)) return alert(item.isDual ? "Select a maximum of two files: front and back." : "Select one file.");
+      for (const file of files) {
+        const ext = file.name.split(".").pop().toLowerCase();
+        if (!ALLOWED_EXT.includes(ext)) return alert("Allowed file types: PDF, JPG, JPEG, PNG.");
+        if (file.size > MAX_UPLOAD_BYTES) return alert("Maximum file size is 10 MB per file.");
+      }
+      try {
+        await saveCandidateFile(candId, docId, "front", files[0]);
+        if (item.isDual && files[1]) await saveCandidateFile(candId, docId, "back", files[1]);
+        else if (item.isDual) await removeCandidateFile(candId, docId, "back").catch(() => {});
+        else await removeCandidateFile(candId, docId, "back").catch(() => {});
+      } catch (err) {
+        console.error(err);
+        return alert("The file could not be stored in this browser. Please check browser storage permissions and try again.");
+      }
+      item.frontFile = files[0].name;
+      item.backFile = item.isDual && files[1] ? files[1].name : "";
+      item.status = "PENDING_REVIEW"; item.updateDate = today(); item.uploadedAt = nowISO();
+      item.uploadedBy = currentUser?.name || "Candidate"; item.remarks = "Awaiting HR verification";
+      const cand = candidates.find(c => c.id === candId);
+      syncCandidateDerivedState(cand);
+      if (cand) { cand.status = "DOCUMENTS_UPLOADED"; logCandidate(cand, "DOCUMENTS_UPLOADED", `${item.name} uploaded`); }
+      saveState(); refreshAllViews(); showToast(`Uploaded ${item.name}. HR verification is now required.`);
+    };
+    input.click();
+  };
+
+  window.executeDocAuditDecision = function (decision) {
+    if (!activeAuditingDoc) return;
+    const { candId, docId } = activeAuditingDoc;
+    const list = getCandidateChecklist(candId);
+    const doc = list.find(d => d.id === docId);
+    const remarks = (document.getElementById("audit-modal-remarks")?.value || "").trim();
+    if (!doc) return;
+    if (decision === "VERIFIED" && !doc.frontFile) return alert("Cannot verify a document that has no uploaded file.");
+    if (decision === "REJECTED" && !remarks) return alert("Please provide the rejection reason.");
+    doc.status = decision === "VERIFIED" ? "VERIFIED" : "REJECTED";
+    doc.remarks = remarks || "Verified by HR";
+    doc.reviewedAt = nowISO();
+    doc.reviewedBy = currentUser?.name || "HR";
+    doc.updateDate = today();
+    const cand = candidates.find(c => c.id === candId);
+    syncCandidateDerivedState(cand);
+    if (cand && cand.allDocsVerified) { cand.bgvStatus = cand.bgvStatus === "NOT_STARTED" ? "BGV_INITIATED" : cand.bgvStatus; cand.status = "BGV_IN_PROGRESS"; logCandidate(cand, "BGV_INITIATED", "Document dossier cleared; BGV gate opened"); }
+    saveState(); closeDocAuditModal(); refreshAllViews(); showToast(`${doc.name}: ${doc.status}`);
+  };
+
+  window.submitDossierToHR = function () {
+    const cand = currentCandidate();
+    if (!cand) return;
+    syncCandidateDerivedState(cand);
+    if (!isDocsVerified(cand)) return alert("Dossier cannot be submitted until every required document is verified.");
+    cand.status = "BGV_IN_PROGRESS";
+    cand.bgvStatus = cand.bgvStatus === "NOT_STARTED" ? "BGV_INITIATED" : cand.bgvStatus;
+    logCandidate(cand, "DOSSIER_SUBMITTED", "Document dossier submitted to HR/BGV");
+    saveState(); refreshAllViews(); showToast("Dossier submitted to HR/BGV review.");
+  };
+
+  // ---------- Employee-specific policy signatures ----------
+  window.areAllPoliciesSigned = function () {
+    const cand = currentCandidate();
+    if (!cand) return false;
+    ensureCandidateState(cand);
+    return corporatePolicies.every(p => !!cand.policyAcknowledgements[p.id]);
+  };
+
+  window.executeDigitalPolicySign = function () {
+    if (!currentReadingPolicyId) return;
+    const cand = currentCandidate();
+    const policy = corporatePolicies.find(p => p.id === currentReadingPolicyId);
+    const ack = document.getElementById("policy-ack-checkbox")?.checked;
+    const sig = (document.getElementById("policy-sig-name-input")?.value || "").trim();
+    if (!cand || !policy) return;
+    if (!ack) return alert("Please confirm the policy acknowledgment checkbox.");
+    if (!sig) return alert("Please enter your full legal name as the digital signature.");
+    ensureCandidateState(cand);
+    cand.policyAcknowledgements[policy.id] = { signed: true, signedBy: sig, signedAt: nowISO(), policyRef: policy.ref };
+    logCandidate(cand, "POLICY_SIGNED", policy.title);
+    closePolicyReaderModal(); saveState(); refreshAllViews(); showToast(`Signed: ${policy.title}`);
+  };
+
+  window.renderCorporatePoliciesList = function () {
+    const container = document.getElementById("corporate-policies-list");
+    if (!container) return;
+    const cand = currentCandidate();
+    if (!cand) { container.innerHTML = `<div class="p-4 rounded-xl bg-amber-50 border border-amber-200 text-xs text-amber-800">No employee onboarding profile is linked to this account.</div>`; return; }
+    ensureCandidateState(cand);
+    container.innerHTML = corporatePolicies.map(p => {
+      const ack = cand.policyAcknowledgements[p.id];
+      return `<div class="p-4 rounded-xl border ${ack ? "border-emerald-200 bg-emerald-50/50" : "border-slate-200 bg-white"} flex items-center justify-between gap-3">
+        <div><p class="text-xs font-bold text-slate-900">${esc(p.title)}</p><p class="text-[10px] text-slate-500 font-mono mt-1">${esc(p.ref)}</p>${ack ? `<p class="text-[10px] text-emerald-700 mt-1 font-mono">Signed by ${esc(ack.signedBy)} • ${new Date(ack.signedAt).toLocaleString()}</p>` : ""}</div>
+        <button onclick="openPolicyReaderModal('${p.id}')" class="shrink-0 px-3.5 py-1.5 ${ack ? "bg-slate-200 text-slate-700" : "bg-blue-600 text-white hover:bg-blue-700"} font-bold rounded-lg text-xs">${ack ? "Re-inspect" : "Read & Sign"}</button>
+      </div>`;
+    }).join("");
+    updateUploadGateUI();
+    const count = corporatePolicies.filter(p => !!cand.policyAcknowledgements[p.id]).length;
+    const kpi = document.getElementById("dash-kpi-policy-count"); if (kpi) kpi.innerText = `${count} / ${corporatePolicies.length} Signed`;
+  };
+
+  window.updateUploadGateUI = function () {
+    const allSigned = areAllPoliciesSigned();
+    const banner = document.getElementById("policy-gate-banner");
+    const badge = document.getElementById("emp-nav-pending-badge");
+    if (banner) banner.classList.toggle("hidden", allSigned);
+    if (badge) { badge.innerText = allSigned ? "Unlocked" : "🔒 Locked"; badge.className = allSigned ? "px-2 py-0.5 text-[10px] font-bold bg-emerald-500/20 text-emerald-300 rounded-full" : "px-2 py-0.5 text-[10px] font-bold bg-slate-800 text-slate-400 rounded-full"; }
+  };
+
+  // ---------- BGV / Ready gates ----------
+  window.renderBGVPipeline = function () {
+    const box = document.getElementById("bgv-pipeline-list");
+    if (!box) return;
+    const rows = candidates.map(c => {
+      ensureCandidateState(c); syncCandidateDerivedState(c);
+      const docs = isDocsVerified(c);
+      const canClear = docs && c.bgvStatus !== "CLEARED" && c.empCode === "";
+      return `<div class="p-4 rounded-xl border border-slate-200 bg-slate-50 flex items-center justify-between gap-4">
+        <div><span class="font-bold text-slate-900">${esc(c.name)} <span class="font-mono text-[10px] text-slate-400">${esc(c.id)}</span></span>
+        <p class="text-xs text-slate-500 mt-1">Documents: <strong>${docs ? "100% verified" : c.progress + "%"}</strong> • BGV: <strong>${esc(c.bgvStatus)}</strong> • HR approval: <strong>${c.workflow.hrFinalApproved ? "Approved" : "Pending"}</strong></p></div>
+        <div class="flex gap-2 shrink-0">${canClear ? `<button onclick="clearCandidateBGV('${c.id}')" class="px-3 py-1.5 bg-emerald-600 text-white rounded-lg text-xs font-bold">Clear BGV</button>` : `<span class="px-2.5 py-1 rounded-md text-[10px] font-bold ${c.bgvStatus === "CLEARED" ? "bg-emerald-100 text-emerald-700" : "bg-amber-100 text-amber-700"}">${esc(c.bgvStatus)}</span>`}</div>
+      </div>`;
+    }).join("");
+    box.innerHTML = rows || `<div class="p-4 text-center text-slate-400">No candidates.</div>`;
+  };
+  window.clearCandidateBGV = function (id) {
+    const c = candidates.find(x => x.id === id); if (!c) return;
+    if (!isDocsVerified(c)) return alert("BGV cannot be cleared until all documents are verified.");
+    c.bgvStatus = "CLEARED"; c.status = "BGV_CLEARED"; logCandidate(c, "BGV_CLEARED", "BGV cleared by authorized HR user");
+    saveState(); refreshAllViews(); showToast(`${c.name}: BGV cleared. Final HR approval is still required.`);
+  };
+
+  window.approveCandidateForOnboarding = function (id) {
+    const c = candidates.find(x => x.id === id); if (!c) return;
+    if (!isDocsVerified(c) || c.bgvStatus !== "CLEARED") return alert("Candidate must have 100% verified documents and CLEARED BGV.");
+    c.workflow.hrFinalApproved = true; c.status = "READY_FOR_ONBOARDING"; logCandidate(c, "HR_FINAL_APPROVED", "Final HR approval completed");
+    saveState(); refreshAllViews(); showToast(`${c.name} is now ready for onboarding.`);
+  };
+
+  window.renderReadyForOnboarding = function () {
+    const tbody = document.getElementById("ready-onboarding-table-body"); if (!tbody) return;
+    const eligible = candidates.filter(c => { syncCandidateDerivedState(c); return isDocsVerified(c) && c.bgvStatus === "CLEARED" && !c.empCode; });
+    const countEl = document.getElementById("ready-onboarding-count"); if (countEl) countEl.innerText = `${eligible.length} Ready`;
+    const pill = document.getElementById("ready-status-pill"); if (pill) pill.innerText = `${eligible.length} Eligible`;
+    if (!eligible.length) { tbody.innerHTML = `<tr><td colspan="6" class="p-6 text-center text-slate-400">No candidates have passed all onboarding gates.</td></tr>`; return; }
+    tbody.innerHTML = eligible.map(c => `<tr class="hover:bg-slate-50"><td class="py-3 px-6 font-semibold">${esc(c.name)}</td><td class="py-3 px-4">${esc(c.role)}</td><td class="py-3 px-4">${esc(c.bu)}</td><td class="py-3 px-4"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-bold text-[10px]">100% Verified</span></td><td class="py-3 px-4"><span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded-full font-bold text-[10px]">BGV Cleared</span></td><td class="py-3 px-6 text-right"><button onclick="approveCandidateForOnboarding('${c.id}')" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-lg">Final HR Approve</button></td></tr>`).join("");
+  };
+
+  window.enrollCandidate = function (id) {
+    const cand = candidates.find(c => c.id === id); if (!cand) return;
+    if (!isDocsVerified(cand) || cand.bgvStatus !== "CLEARED" || !cand.workflow?.hrFinalApproved) return alert("Enrollment blocked: documents, BGV and final HR approval are all required.");
+    const used = new Set(activeEmployees.map(e => String(e.id || "").toUpperCase()));
+    let n = 1856; while (used.has(`VISTA${n}`)) n++;
+    const newEmpCode = `VISTA${n}`;
+    cand.empCode = newEmpCode; cand.status = "ONBOARDED"; cand.accessState = "ACTIVE"; cand.workflow.onboardedAt = nowISO();
+    activeEmployees.push({ id: newEmpCode, name: cand.name, role: cand.role, bu: cand.bu, doj: cand.targetDOJ || today(), email: cand.officialEmail || cand.email, tenureStatus: "Active Tenure", accessState: "ACTIVE", candidateId: cand.id });
+    const u = systemUsers.find(x => x.candidateId === cand.id); if (u) { u.role = "EMPLOYEE"; u.accessState = "ACTIVE"; }
+    saveState(); refreshAllViews(); switchTab("employees"); showToast(`Onboarded ${cand.name}. Employee ID: ${newEmpCode}`);
+  };
+
+  // ---------- Deboarding: revoke application access ----------
+  window.confirmEmployeeDeboard = function () {
+    if (!activeDeboardingEmp) return;
+    let reason = document.getElementById("deboard-reason-select")?.value || "Other";
+    if (reason === "Other") reason = `Other: ${(document.getElementById("deboard-other-text")?.value || "Unspecified").trim()}`;
+    const lwd = document.getElementById("deboard-lwd-date")?.value;
+    const trigger = document.getElementById("deboard-trigger-date")?.value;
+    if (!lwd || !trigger) return alert("Select both trigger date and relieving date.");
+    const diffDays = Math.round((new Date(lwd) - new Date(trigger)) / 86400000);
+    if (diffDays !== 90 && !(document.getElementById("deboard-override-justification")?.value || "").trim()) return alert("A notice-period deviation requires mandatory justification.");
+    activeDeboardingEmp.tenureStatus = "Deboarded"; activeDeboardingEmp.accessState = "REVOKED"; activeDeboardingEmp.relievingDate = lwd; activeDeboardingEmp.relievingReason = reason; activeDeboardingEmp.deboardedAt = nowISO();
+    const linked = systemUsers.find(u => u.candidateId === activeDeboardingEmp.candidateId || u.email?.toLowerCase() === activeDeboardingEmp.email?.toLowerCase());
+    if (linked) { linked.accessState = "REVOKED"; linked.sessionRevokedAt = nowISO(); }
+    activeSSOSessions.filter(s => s.email?.toLowerCase() === activeDeboardingEmp.email?.toLowerCase() || s.user === activeDeboardingEmp.name).forEach(s => s.status = "Revoked");
+    saveState(); closeDeboardingModal(); renderActiveEmployeesTable(); showToast(`Access revoked and deboarding recorded for ${activeDeboardingEmp.name}.`);
+  };
+
+  // ---------- Safe export ----------
+  window.downloadSelectedSchedule = function () {
+    const targets = candidates.filter(c => selectedCandidateIds.includes(c.id));
+    if (!targets.length || !targets.every(c => isDocsVerified(c) && c.bgvStatus === "CLEARED" && c.workflow?.hrFinalApproved)) return alert("Export blocked: selected candidates have not passed every compliance gate.");
+    const headers = ["Srl","First Name","Last Name","VISTA EMP ID","DOJ","Date of Birth","PAN Number","BGV Status","HR Approval","Status"];
+    const rows = targets.map((c,i) => [i+1,c.firstName,c.lastName,c.empCode,c.doj,c.onboardingData?.dob,c.onboardingData?.panNumber,c.bgvStatus,c.workflow.hrFinalApproved ? "Approved" : "Pending",c.status]);
+    const csv = "\uFEFF" + [headers, ...rows].map(r => r.map(csvCell).join(",")).join("\r\n");
+    const url = URL.createObjectURL(new Blob([csv], {type:"text/csv;charset=utf-8;"}));
+    const a = document.createElement("a"); a.href = url; a.download = `VISTA_Statutory_Report_${today()}.csv`; a.click(); URL.revokeObjectURL(url);
+    showToast(`Exported ${targets.length} fully cleared candidate record(s).`);
+  };
+
+  // ---------- Dynamic dashboard / employee list ----------
+  const originalRenderActiveEmployeesTable = window.renderActiveEmployeesTable;
+  window.renderActiveEmployeesTable = function () {
+    if (typeof originalRenderActiveEmployeesTable === "function") originalRenderActiveEmployeesTable();
+    const badge = document.getElementById("headcount-badge");
+    if (badge) badge.innerText = `Headcount: ${activeEmployees.filter(e => e.tenureStatus !== "Deboarded").length}`;
+  };
+
+  // ---------- Navigation hooks ----------
+  const originalSwitchTab = window.switchTab;
+  window.switchTab = function (tabName) {
+    originalSwitchTab(tabName);
+    if (tabName === "bgv") renderBGVPipeline();
+    if (tabName === "employee-portal") renderCorporatePoliciesList();
+    if (tabName === "ready-onboarding") renderReadyForOnboarding();
+    if (tabName === "documents") renderChecklist();
+  };
+
+  const originalRefresh = window.refreshAllViews;
+  window.refreshAllViews = function () {
+    candidates.forEach(syncCandidateDerivedState);
+    originalRefresh();
+    if (currentUser?.role === "EMPLOYEE") { renderCorporatePoliciesList(); updateUploadGateUI(); }
+    if (document.getElementById("tab-bgv") && !document.getElementById("tab-bgv").classList.contains("hidden")) renderBGVPipeline();
+    if (document.getElementById("tab-ready-onboarding") && !document.getElementById("tab-ready-onboarding").classList.contains("hidden")) renderReadyForOnboarding();
+  };
+
+  // ---------- Session expiry ----------
+  function touchSession() {
+    if (!currentUser) return;
+    const meta = JSON.parse(localStorage.getItem("vista_session_meta") || "null");
+    if (!meta) return;
+    if (Date.now() - Number(meta.lastActivity || 0) > SESSION_TTL_MS) {
+      handleSignOut(); alert("Your demo session expired after 30 minutes of inactivity."); return;
+    }
+    meta.lastActivity = Date.now(); localStorage.setItem("vista_session_meta", JSON.stringify(meta));
+  }
+  ["click","keydown","mousemove"].forEach(evt => document.addEventListener(evt, touchSession, {passive:true}));
+  setInterval(() => { if (currentUser) touchSession(); }, 60000);
+
+  // ---------- Prevent old plaintext-password state from surviving ----------
+  migrateState();
+
+  // Replace misleading integration claims with explicit demo labels.
+  document.addEventListener("DOMContentLoaded", () => {
+    const text = document.body.innerText;
+    if (text.includes("Demo SSO Sessions")) {
+      document.body.innerHTML = document.body.innerHTML.replaceAll("Demo SSO Sessions", "Demo SSO Sessions");
+    }
+    document.querySelectorAll("[id*='integration'], [id*='health']").forEach(() => {});
+  });
+})();
+</script>
+
 </body>
 </html>
